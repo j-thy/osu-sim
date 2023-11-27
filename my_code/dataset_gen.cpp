@@ -119,9 +119,11 @@ int main() {
             }
             // Write the distance proportions to the csv file
             for (int i = 0; i < 4; i++) {
-                dataset_file << distance_props[i] << ",";
+                if (i == 3)
+                    dataset_file << distance_props[i] << "\n";
+                else
+                    dataset_file << distance_props[i] << ",";
             }
-            dataset_file << "\n";
         } else {
             printf("Unable to open file\n");
         }
