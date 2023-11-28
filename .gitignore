@@ -3,3 +3,5 @@ __pycache__/
 tokens.py
 token.txt
 secret.py
+*.exe
+*.txt
