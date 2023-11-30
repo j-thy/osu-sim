@@ -15,6 +15,7 @@ def title_slide(self):
     # Transition to next scene.
     self.wait(1)
     self.play(*[FadeOut(mob)for mob in self.mobjects])
+    self.wait(1)
 
 def osu_game_slide(self):
 
@@ -31,6 +32,7 @@ def osu_game_slide(self):
     # Transition to next scene.
     self.wait(1)
     self.play(*[FadeOut(mob)for mob in self.mobjects])
+    self.wait(1)
 
 def features_slide(self):
     rotation_center = LEFT
@@ -162,13 +164,133 @@ def features_slide(self):
     self.play(Transform(d19, d20))
     self.play(group11.animate.shift(DOWN*0.75), sv_tex1.animate.shift(DOWN*0.75), sv_tex2.animate.shift(DOWN*0.75))
     self.play(Create(group14), Write(sr_tex1), Write(sr_tex2))
+    self.wait(1)
+    self.play(*[FadeOut(mob)for mob in self.mobjects])
+    self.wait(1)
 
+def angle_dist_slide(self):
+    svg = ImageMobject("angle_dist.png").scale(0.6)
+    rotation_center = LEFT
+
+    # Create the 45 degree angle.
+    line1 = Line(LEFT, RIGHT)
+    d1 = Dot(color=BLUE, radius=0.4, stroke_width=6, stroke_color=WHITE).move_to(line1.get_start())
+    d2 = Dot(color=BLUE, radius=0.4, stroke_width=6, stroke_color=WHITE).move_to(line1.get_end())
+    n1 = DecimalNumber(1, num_decimal_places=0).move_to(d1.get_center())
+    n2 = DecimalNumber(2, num_decimal_places=0).move_to(d2.get_center())
+    n3 = DecimalNumber(0, num_decimal_places=0, unit="^\\circ").move_to(line1, DOWN)
+    group1 = VGroup(line1, d1, d2, n1, n2, n3).shift(DOWN*1.9+LEFT*3.3).scale(0.5)
+
+    line2 = Line(LEFT, RIGHT)
+    line3 = Line(LEFT, RIGHT)
+    line3.rotate(
+        60 * DEGREES, about_point=rotation_center
+    )
+    d3 = Dot(color=BLUE, radius=0.4, stroke_width=6, stroke_color=WHITE).move_to(line2.get_end())
+    d4 = Dot(color=BLUE, radius=0.4, stroke_width=6, stroke_color=WHITE).move_to(line3.get_end())
+    d5 = Dot(color=BLUE, radius=0.4, stroke_width=6, stroke_color=WHITE).move_to(line3.get_start())
+    n4 = DecimalNumber(1, num_decimal_places=0).move_to(d3.get_center())
+    n5 = DecimalNumber(2, num_decimal_places=0).move_to(d4.get_center())
+    n6 = DecimalNumber(3, num_decimal_places=0).move_to(d5.get_center())
+    a1 = Angle(line2, line3, radius=0.8, other_angle=False)
+    a_num1 = DecimalNumber(60, num_decimal_places=0, unit="^\\circ").move_to(
+        Angle(
+            line2, line3, radius=1 + 3 * SMALL_BUFF, other_angle=False
+        ).point_from_proportion(0.5)
+    )
+    group2 = VGroup(line2, line3, a1, a_num1, d3, d4, d5, n4, n5, n6).shift(DOWN*2.3+LEFT*1.3).scale(0.5)
+
+    line4 = Line(LEFT, RIGHT)
+    line5 = Line(LEFT, RIGHT)
+    line5.rotate(
+        90 * DEGREES, about_point=rotation_center
+    )
+    d6 = Dot(color=BLUE, radius=0.4, stroke_width=6, stroke_color=WHITE).move_to(line4.get_end())
+    d7 = Dot(color=BLUE, radius=0.4, stroke_width=6, stroke_color=WHITE).move_to(line5.get_end())
+    d8 = Dot(color=BLUE, radius=0.4, stroke_width=6, stroke_color=WHITE).move_to(line5.get_start())
+    n7 = DecimalNumber(1, num_decimal_places=0).move_to(d6.get_center())
+    n8 = DecimalNumber(2, num_decimal_places=0).move_to(d7.get_center())
+    n9 = DecimalNumber(3, num_decimal_places=0).move_to(d8.get_center())
+    a2 = Angle(line4, line5, radius=0.8, other_angle=False)
+    a_num2 = DecimalNumber(90, num_decimal_places=0, unit="^\\circ").move_to(
+        Angle(
+            line4, line5, radius=1 + 3 * SMALL_BUFF, other_angle=False
+        ).point_from_proportion(0.5)
+    )
+    group3 = VGroup(line4, line5, a2, a_num2, d6, d7, d8, n7, n8, n9).shift(DOWN*2.4+RIGHT*0.8).scale(0.5)
+
+    line6 = Line(LEFT, RIGHT)
+    line7 = Line(LEFT, RIGHT)
+    line7.rotate(
+        180 * DEGREES, about_point=rotation_center
+    )
+    d9 = Dot(color=BLUE, radius=0.4, stroke_width=6, stroke_color=WHITE).move_to(line6.get_end())
+    d10 = Dot(color=BLUE, radius=0.4, stroke_width=6, stroke_color=WHITE).move_to(line7.get_end())
+    d11 = Dot(color=BLUE, radius=0.4, stroke_width=6, stroke_color=WHITE).move_to(line7.get_start())
+    n10 = DecimalNumber(1, num_decimal_places=0).move_to(d9.get_center())
+    n11 = DecimalNumber(2, num_decimal_places=0).move_to(d10.get_center())
+    n12 = DecimalNumber(3, num_decimal_places=0).move_to(d11.get_center())
+    a3 = Angle(line6, line7, radius=0.8, other_angle=False)
+    a_num3 = DecimalNumber(180, num_decimal_places=0, unit="^\\circ").move_to(
+        Angle(
+            line6, line7, radius=1 + 3 * SMALL_BUFF, other_angle=False
+        ).point_from_proportion(0.5)
+    )
+    group4 = VGroup(line6, line7, a3, a_num3, d9, d10, d11, n10, n11, n12).shift(DOWN*2.15+RIGHT*4.2).scale(0.5)
+
+    self.play(FadeIn(svg))
+    self.play(Create(group1))
+    self.play(Create(group2))
+    self.play(Create(group3))
+    self.play(Create(group4))
+    self.wait(1)
+    self.play(*[FadeOut(mob)for mob in self.mobjects])
+    self.wait(1)
+
+def hyperparameter_slide(self):
+    # Write out the title.
+    title1 = Text('The main hyperparameter: # of clusters', color=WHITE, t2c={'K-Means Clustering':ORANGE}).shift(UP)
+    title2 = Text('Too few: less correlation in clustered beatmaps', color=WHITE, t2c={'Too few':RED}).scale(0.7).next_to(title1, DOWN)
+    title3 = Text('Too many: some clusters would have only one map', color=WHITE, t2c={'Too many':GREEN}).scale(0.7).next_to(title2, DOWN)
+    self.play(Write(title1, run_time=1.2))
+    self.wait(1)
+    self.play(Write(title2, run_time=1.2))
+    self.wait(1)
+    self.play(Write(title3, run_time=1.2))
+
+    # Transition to next scene.
+    self.wait(1)
+    self.play(*[FadeOut(mob)for mob in self.mobjects])
+    self.wait(1)
+
+def results1_slide(self):
+    png = ImageMobject("angle_map.png").scale(0.4).shift(DOWN*2)
+    title1 = Text('Given Map', color=WHITE).scale(0.6).shift(UP*3.5+LEFT*3)
+    title2 = Text('Recommended Map', color=WHITE).scale(0.6).shift(UP*3.5+RIGHT*3)
+
+    self.play(FadeIn(png), Write(title1), Write(title2))
+    self.wait(10)
+    self.play(*[FadeOut(mob)for mob in self.mobjects])
+    self.wait(1)
+
+def results2_slide(self):
+    png = ImageMobject("distance_map.png").scale(0.4).shift(DOWN*2)
+    title1 = Text('Given Map', color=WHITE).scale(0.6).shift(UP*3.5+LEFT*3)
+    title2 = Text('Recommended Map', color=WHITE).scale(0.6).shift(UP*3.5+RIGHT*3)
+
+    self.play(FadeIn(png), Write(title1), Write(title2))
+    self.wait(10)
+    self.play(*[FadeOut(mob)for mob in self.mobjects])
     self.wait(1)
 
 
 
 class OsuManim(Scene):
     def construct(self):
-        title_slide(self)
-        osu_game_slide(self)
-        features_slide(self)
+        # title_slide(self)
+        # osu_game_slide(self)
+        # features_slide(self)
+        # angle_dist_slide(self)
+        # hyperparameter_slide(self)
+        results1_slide(self)
+        results2_slide(self)
