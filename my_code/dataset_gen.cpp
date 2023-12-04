@@ -20,11 +20,11 @@ int main()
     vector<double> time_bucket_bounds = {128.0, 275.0, 424.0};
     vector<double> distance_bucket_bounds = {7.0, 67.0, 117.0};
 
-    // Create an output csv file
+    // Create an output CSV file
     ofstream dataset_file;
     dataset_file.open("dataset.csv");
 
-    // Get the number of total files in the directory
+    // Get the number of files in the directory
     int num_files = 0;
     for (const auto &entry : filesystem::directory_iterator(path))
     {
@@ -149,9 +149,9 @@ int main()
                 distance_props[i] = (double)distance_buckets[i] / distance_total;
             }
 
-            // Write the beatmap ID to the csv file
+            // Write the beatmap ID to the CSV file
             dataset_file << entry.path().stem() << ",";
-            // Write the angle, time, and distance proportions to the csv file
+            // Write the angle, time, and distance proportions to the CSV file
             for (int i = 0; i < 4; i++)
             {
                 dataset_file << angle_props[i] << ",";
