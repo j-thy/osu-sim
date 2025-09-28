@@ -1,3 +1,4 @@
 py-cord==2.6.1
 numpy==2.3.3
 requests==2.32.5
+tqdm==4.66.4

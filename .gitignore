@@ -48,6 +48,8 @@ htmlcov/
 tokens.py
 token.txt
 secret.py
+failed_map_downloads.txt
+beatmap_ids_progress.json
 
 # Jupyter Notebook
 .ipynb_checkpoints
