@@ -1,33 +1,41 @@
 import os
+from tqdm import tqdm
 
 import calc
 
 songs_dir = r'maps'
 
-cnt = 0
-# Iterate through all files in the "maps" directory
-# Subdir is the path to the song folder
-# Dirs is a list of subdirectories in the song folder (unused)
-# Files is a list of beatmap files in the song folder
-for subdir, dirs, files in os.walk(songs_dir):
-    # For each beatmap...
-    for filename in files:
-        # Get the full path to the beatmap file
-        path = os.path.join(subdir, filename)
-        # If the file is an .osu file...
-        if path.endswith(".osu"):
-            try:
-                # Create a .sldr file for the beatmap
-                sldr_output = os.path.join('sliders', filename[:-4] + '.sldr')
-                # If the .sldr file doesn't already exist...
-                if not os.path.exists(sldr_output):
-                    # Calculate the slider lengths, velocity, and total ratio
-                    # Create a .sldr file for the beatmap
-                    calc.get_sliders(path, sldr_output)
-            except:
-                pass
+print("Scanning for .osu files...")
 
-            # Print the number of beatmaps processed so far
-            cnt += 1
-            if cnt % 100 == 0:
-                print(cnt)
+# First, collect all .osu files that need processing
+osu_files_to_process = []
+for subdir, dirs, files in os.walk(songs_dir):
+    for filename in files:
+        if filename.endswith(".osu"):
+            path = os.path.join(subdir, filename)
+            sldr_output = os.path.join('sliders', filename[:-4] + '.sldr')
+            # Only add files that don't already have a .sldr file
+            if not os.path.exists(sldr_output):
+                osu_files_to_process.append((path, sldr_output))
+
+if not osu_files_to_process:
+    print("All .osu files already have slider data. Nothing to process.")
+else:
+    print(f"Found {len(osu_files_to_process)} beatmap files to process")
+
+    failed_files = []
+    # Process all files with progress bar
+    with tqdm(total=len(osu_files_to_process), desc="Extracting sliders", unit="map") as pbar:
+        for path, sldr_output in osu_files_to_process:
+            try:
+                # Calculate the slider lengths, velocity, and total ratio
+                # Create a .sldr file for the beatmap
+                calc.get_sliders(path, sldr_output)
+            except Exception as e:
+                failed_files.append(path)
+            pbar.update(1)
+
+    print(f"\nSuccessfully processed: {len(osu_files_to_process) - len(failed_files)} beatmaps")
+    if failed_files:
+        print(f"Failed to process: {len(failed_files)} beatmaps")
+    print(f"Slider files saved to: sliders/")

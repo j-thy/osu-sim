@@ -1,5 +1,6 @@
 import math
 import os
+from tqdm import tqdm
 
 def avg(lst):
     if not lst:
@@ -33,22 +34,42 @@ def get_all_sliders():
     sliders = {}
 
     sldr_dir = 'sliders'
-    counter = 0
-    for entry in os.scandir(sldr_dir):
-        if entry.is_file():
+
+    print("Scanning for .sldr files...")
+
+    # First, collect all .sldr files to know the total count
+    sldr_files = [entry for entry in os.scandir(sldr_dir) if entry.is_file() and entry.name.endswith('.sldr')]
+
+    if not sldr_files:
+        print("No .sldr files found in sliders/ directory.")
+        return sliders
+
+    print(f"Found {len(sldr_files)} slider files to process")
+
+    # Process all files with progress bar
+    with tqdm(total=len(sldr_files), desc="Loading slider data", unit="file") as pbar:
+        for entry in sldr_files:
             tmp_sldr, ratio = get_sliders(entry.path)
             sliders[entry.name] = (tmp_sldr, ratio)
-            counter += 1
-            if counter % 1000 == 0:
-                print(counter)
+            pbar.update(1)
 
     return sliders
 
 all_sliders = get_all_sliders()
 
-with open('sliderstats.txt', 'w', encoding='utf8') as f:
-    for file in all_sliders:
-        avg_slider = avg(all_sliders[file][0])
-        std_slider = std(all_sliders[file][0])
-        ratio = all_sliders[file][1]
-        f.write(f'{file}\n{avg_slider[0]},{avg_slider[1]},{std_slider[0]},{std_slider[1]},{ratio}\n')
+if all_sliders:
+    print(f"\nCalculating statistics for {len(all_sliders)} slider files...")
+
+    with open('sliderstats.txt', 'w', encoding='utf8') as f:
+        with tqdm(total=len(all_sliders), desc="Computing statistics", unit="file") as pbar:
+            for file in all_sliders:
+                avg_slider = avg(all_sliders[file][0])
+                std_slider = std(all_sliders[file][0])
+                ratio = all_sliders[file][1]
+                f.write(f'{file}\n{avg_slider[0]},{avg_slider[1]},{std_slider[0]},{std_slider[1]},{ratio}\n')
+                pbar.update(1)
+
+    print(f"\nSuccessfully processed: {len(all_sliders)} slider files")
+    print(f"Statistics saved to: sliderstats.txt")
+else:
+    print("No slider data to process.")
