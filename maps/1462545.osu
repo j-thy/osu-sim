@@ -1,0 +1,98 @@
+osu file format v14
+
+[General]
+AudioFilename: audio.mp3
+AudioLeadIn: 1000
+PreviewTime: 803
+Countdown: 1
+SampleSet: Soft
+StackLeniency: 0.5
+Mode: 0
+LetterboxInBreaks: 0
+WidescreenStoryboard: 1
+
+[Editor]
+Bookmarks: 1053,2053,14053,18053,30053,34053,37553
+DistanceSpacing: 1
+BeatDivisor: 4
+GridSize: 4
+TimelineZoom: 0.9999998
+
+[Metadata]
+Title:Equilibrium (Music Box Ver.)
+TitleUnicode:Equilibrium (Music Box Ver.)
+Artist:Lemon Hakurei
+ArtistUnicode:白丽柠檬
+Creator:Lan wings
+Version:Easy
+Source:FINAL FANTASY XIV: Heavensward
+Tags:FFXIV FF14 女神 ～女神ソフィア討滅戦～ Megami Sophia Toumetsusen 平衡 八音盒 祖堅正慶 Masayoshi Soken SQUARE ENIX Ayumi Murata 村田あゆみ Bilibili Douga THE FAR EDGE OF FATE: FINAL FANTASY XIV Original Soundtrack Video Game Instrumental
+BeatmapID:1462545
+BeatmapSetID:691101
+
+[Difficulty]
+HPDrainRate:2
+CircleSize:2
+OverallDifficulty:2
+ApproachRate:3
+SliderMultiplier:1
+SliderTickRate:1
+
+[Events]
+//Background and Video events
+0,0,"bg.jpg",0,0
+//Break Periods
+//Storyboard Layer 0 (Background)
+//Storyboard Layer 1 (Fail)
+//Storyboard Layer 2 (Pass)
+//Storyboard Layer 3 (Foreground)
+//Storyboard Layer 4 (Overlay)
+//Storyboard Sound Samples
+
+[TimingPoints]
+2053,500,4,2,1,20,1,0
+
+
+[Colours]
+Combo1 : 176,255,255
+Combo2 : 255,128,128
+Combo3 : 255,255,128
+Combo4 : 192,192,192
+
+[HitObjects]
+476,284,2053,6,0,P|388:324|300:284,1,200,2|4,3:2|0:0,0:0:0:0:
+256,192,3553,1,2,0:0:0:0:
+212,100,4053,2,0,P|123:59|35:99,1,200,2|4,0:0|0:0,0:0:0:0:
+0,188,5553,5,2,0:0:0:0:
+48,276,6053,2,0,P|95:291|148:280,1,100,2|0,3:2|0:0,0:0:0:0:
+216,212,7053,2,0,P|264:203|311:219,1,100,6|2,0:0|0:0,0:0:0:0:
+396,276,8053,2,0,P|460:205|436:112,1,200,2|4,3:2|0:0,0:0:0:0:
+352,60,9553,5,2,0:0:0:0:
+263,112,10053,2,0,P|169:122|112:45,1,200,2|4,3:2|0:0,0:0:0:0:
+212,28,11553,1,2,0:0:0:0:
+311,31,12053,2,0,P|346:67|359:115,1,100,2|0,0:0|0:0,0:0:0:0:
+336,212,13053,2,0,P|300:246|252:259,1,100,4|0,0:0|0:0,0:0:0:0:
+156,236,14053,5,2,3:2:0:0:
+164,36,15053,1,6,0:0:0:0:
+360,96,16053,1,2,3:2:0:0:
+88,224,17553,5,2,0:0:0:0:
+88,224,18053,2,0,P|180:255|248:180,1,200,2|4,3:2|0:0,0:0:0:0:
+232,92,19553,1,2,0:0:0:0:
+320,136,20053,2,0,P|415:116|436:17,1,200,2|4,0:0|0:0,0:0:0:0:
+340,40,21553,5,2,0:0:0:0:
+243,68,22053,2,0,P|223:113|222:163,1,100,2|0,3:2|0:0,0:0:0:0:
+124,164,23053,2,0,P|75:173|27:160,1,100,6|0,0:0|0:0,0:0:0:0:
+16,152,24053,2,0,P|89:237|37:312,1,200,2|4,3:2|0:0,0:0:0:0:
+156,352,25553,5,2,0:0:0:0:
+248,312,26053,2,0,B|320:284|320:284|400:288|440:328,1,200,2|4,3:2|0:0,0:0:0:0:
+480,232,27553,1,2,0:0:0:0:
+392,188,28053,2,0,P|338:180|298:153,1,100,2|0,0:0|0:0,0:0:0:0:
+215,211,29053,2,0,P|166:215|126:243,1,100,4|0,0:0|0:0,0:0:0:0:
+36,200,30053,5,2,0:0:0:0:
+208,300,31053,1,6,0:0:0:0:
+272,112,32053,1,2,0:0:0:0:
+488,320,33553,5,2,0:0:0:0:
+488,320,34053,1,2,0:0:0:0:
+344,184,35053,1,6,0:0:0:0:
+164,272,36053,2,0,L|140:360,1,75,2|0,0:0|3:0,0:0:0:0:
+96,286,36803,2,0,L|76:358,2,75,2|2|6,0:0|0:0|0:0,0:0:0:0:

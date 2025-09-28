@@ -1,0 +1,156 @@
+osu file format v14
+
+[General]
+AudioFilename: Diffraction.mp3
+AudioLeadIn: 0
+PreviewTime: 39896
+Countdown: 0
+SampleSet: None
+StackLeniency: 0
+Mode: 0
+LetterboxInBreaks: 0
+WidescreenStoryboard: 0
+
+[Editor]
+Bookmarks: 450,544,1209,15639,16019,18677,19057,21715,22095,24753,25133,27791,27981,28171,30829,31019,31209,33867,34247,36905,37095,37285,39943,40513,41082,41652,42222,42981,43551,44120,44690,44880,46019,46589,47158,47728,48298,49057,49627,50196,50766,50956,52095,52475,52665,53234,53804,54374,55133,55513,55703,56272,56842,57032,58171,58551,58741,59310,59880,60450,61209,61589,61779,62348,62918,63108,64247,64627,67285,67665,70323,70703,72981,73171,73361,73741,82475,82855,83234,85513,85893,88551,88931,89310,91589,100323
+DistanceSpacing: 2.9
+BeatDivisor: 4
+GridSize: 16
+TimelineZoom: 0.6017599
+
+[Metadata]
+Title:Various BGM 2
+TitleUnicode:Various BGM 2
+Artist:Wizet, Nexon
+ArtistUnicode:Wizet, Nexon
+Creator:ExGon
+Version:Diffraction (STD)
+Source:MapleStory
+Tags:LedZeper CODASOUND Studio EIM NECORD ASTERIA M2U xka Eunto Yoo Jongho Lee Jonghyuk Kim Hansol Chae Hana Sung Sangmin Maple World Victoria Island Fairy Academy Ellinel Arcane River Sea of Beginnings Origin Esfera Will Ellinia Luminous Lacheln Lachelein the Dreaming Dream City Lucid Rien Undersea Tower Oz Seed PQ Party Quest Grandis Ossyria Aqua Road Minar Forest Taipei 101 Kerning Square Ereb Ereve Nihal Desert Magatia Temple Time Cannoneer Cannon Shooter Sanctuary Asylum Sakura Ninja FriendStory Eluna Masteria New Leaf Calm Village Ludus Lake Ludibrium Path ClockTower Bottom Lower Lowest Floor Cernium Holy Burning Gods Fallen Convergence Barrier Between Contest Ristonia Emile Emil 100010 Headset Black Heaven Lotus Theme Grand Athenaeum Dimension Library Floras Illium Skill Sleepywood Barlogs Down Cave Ant Tunnel Demian Damian True Heroes Spot Differences El Nath Mts. Orbis Ship Henesys Archer Dungeon Boss Event Enjuxx
+BeatmapID:4085664
+BeatmapSetID:592397
+
+[Difficulty]
+HPDrainRate:10
+CircleSize:0
+OverallDifficulty:0
+ApproachRate:6.8
+SliderMultiplier:1.2
+SliderTickRate:1
+
+[Events]
+//Background and Video events
+0,0,"diffraction.jpg",0,0
+//Break Periods
+2,78677,80956
+//Storyboard Layer 0 (Background)
+//Storyboard Layer 1 (Fail)
+//Storyboard Layer 2 (Pass)
+//Storyboard Layer 3 (Foreground)
+//Storyboard Layer 4 (Overlay)
+//Storyboard Sound Samples
+
+[TimingPoints]
+450,379.746835443038,4,2,0,10,1,0
+450,-1000,4,2,0,10,0,0
+15544,-1000,4,2,0,0,0,0
+15639,-1000,4,2,0,10,0,0
+100228,-1000,4,2,0,0,0,0
+100323,-100,4,2,0,60,0,1
+100324,-100,4,2,0,60,0,0
+
+
+[Colours]
+Combo1 : 183,224,255
+Combo2 : 255,255,255
+Combo3 : 172,168,255
+Combo4 : 98,70,253
+
+[HitObjects]
+256,0,450,6,0,B|257:2,1,3,0|0,1:1|1:1,0:0:0:0:
+256,195,1209,5,4,3:2:0:0:
+256,192,1589,12,0,15544,0:0:0:0:
+128,237,15639,5,0,0:0:0:0:
+160,244,16019,5,4,0:0:0:0:
+432,245,18677,5,0,0:0:0:0:
+400,252,19057,5,4,0:0:0:0:
+144,253,21715,5,0,0:0:0:0:
+112,260,22095,5,4,0:0:0:0:
+352,261,24753,5,0,0:0:0:0:
+384,268,25133,5,4,0:0:0:0:
+176,269,27791,5,0,0:0:0:0:
+112,270,27981,5,0,0:0:0:0:
+48,277,28171,5,4,0:0:0:0:
+336,278,30829,5,0,0:0:0:0:
+400,279,31019,5,0,0:0:0:0:
+464,281,31209,5,4,0:0:0:0:
+48,283,33867,5,0,0:0:0:0:
+176,290,34247,5,4,0:0:0:0:
+464,291,36905,5,0,0:0:0:0:
+400,292,37095,5,0,0:0:0:0:
+336,299,37285,5,4,0:0:0:0:
+0,301,39943,5,0,1:0:0:0:
+0,303,40513,5,0,1:0:0:0:
+0,305,41082,5,0,1:0:0:0:
+0,307,41652,5,0,1:0:0:0:
+0,309,42222,5,0,1:0:0:0:
+512,311,42981,5,0,1:0:0:0:
+512,313,43551,5,0,1:0:0:0:
+512,315,44120,5,0,1:0:0:0:
+512,316,44690,5,0,1:0:0:0:
+0,319,44880,5,8,1:2:0:0:
+512,321,46019,5,0,1:0:0:0:
+512,323,46589,5,0,1:0:0:0:
+512,325,47158,5,0,1:0:0:0:
+512,327,47728,5,0,1:0:0:0:
+512,329,48298,5,0,1:0:0:0:
+0,331,49057,5,0,1:0:0:0:
+0,333,49627,5,0,1:0:0:0:
+0,335,50196,5,0,1:0:0:0:
+0,337,50766,5,0,1:0:0:0:
+512,338,50956,5,8,1:2:0:0:
+0,341,52095,5,0,0:0:0:0:
+112,343,52475,5,4,0:0:0:0:
+512,344,52665,5,0,1:0:0:0:
+512,346,53234,5,0,1:0:0:0:
+512,348,53804,5,0,1:0:0:0:
+512,350,54374,5,0,1:0:0:0:
+512,353,55133,5,0,0:0:0:0:
+400,354,55513,5,4,0:0:0:0:
+0,355,55703,5,0,1:0:0:0:
+0,357,56272,5,0,1:0:0:0:
+0,359,56842,5,0,1:0:0:0:
+512,360,57032,5,8,1:2:0:0:
+512,364,58171,5,0,0:0:0:0:
+400,365,58551,5,4,0:0:0:0:
+0,366,58741,5,0,1:0:0:0:
+0,368,59310,5,0,1:0:0:0:
+0,370,59880,5,0,1:0:0:0:
+0,372,60450,5,0,1:0:0:0:
+0,374,61209,5,0,0:0:0:0:
+112,375,61589,5,4,0:0:0:0:
+512,376,61779,5,0,1:0:0:0:
+512,378,62348,5,0,1:0:0:0:
+512,380,62918,5,0,1:0:0:0:
+0,381,63108,5,8,1:2:0:0:
+464,385,64247,5,0,0:0:0:0:
+432,386,64627,5,4,0:0:0:0:
+48,388,67285,5,0,0:0:0:0:
+80,389,67665,5,4,0:0:0:0:
+432,396,70323,5,0,0:0:0:0:
+464,397,70703,5,4,0:0:0:0:
+0,403,72981,5,0,1:0:0:0:
+16,404,73171,5,0,1:0:0:0:
+32,405,73361,5,0,0:0:0:0:
+512,406,73741,5,4,0:0:0:0:
+64,431,82475,5,0,0:0:0:0:
+256,432,82855,5,0,0:0:0:0:
+448,434,83234,5,4,0:0:0:0:
+448,435,85513,5,0,0:0:0:0:
+64,436,85893,5,4,0:0:0:0:
+448,443,88551,5,0,0:0:0:0:
+256,444,88931,5,0,0:0:0:0:
+64,446,89310,5,4,0:0:0:0:
+496,452,91589,5,4,0:0:0:0:
+256,192,94627,12,0,100228,0:0:0:0:
+256,477,100323,5,0,3:3:0:0:

@@ -1,0 +1,87 @@
+osu file format v14
+
+[General]
+AudioFilename: audio.mp3
+AudioLeadIn: 0
+PreviewTime:6048
+Countdown: 0
+SampleSet: None
+StackLeniency: 0.7
+Mode: 0
+LetterboxInBreaks: 0
+WidescreenStoryboard: 1
+
+[Editor]
+DistanceSpacing: 1.1
+BeatDivisor: 4
+GridSize: 4
+TimelineZoom: 1.8
+
+[Metadata]
+Title:Quiet Water
+TitleUnicode:Quiet Water
+Artist:toby fox
+ArtistUnicode:toby fox
+Creator:Herta
+Version:Krfawy's Quiet
+Tags:Sadu carpihat krfawy vincus marcialus matthewwwwww utiba xytoper kyrian andreychomik video game music vgm instrumental ost original soundtrack calm calming slow piano ambient radiation waterfall easy
+BeatmapSetID:2324447
+Source:UNDERTALE
+BeatmapID:4982052
+
+[Difficulty]
+HPDrainRate:2
+CircleSize:2
+OverallDifficulty:2
+ApproachRate:2.5
+SliderMultiplier:1.4
+SliderTickRate:1
+
+[Events]
+//Background and Video events
+0,0,"duh-veed_devianart.jpg",0,0
+//Break Periods
+//Storyboard Layer 0 (Background)
+//Storyboard Layer 1 (Fail)
+//Storyboard Layer 2 (Pass)
+//Storyboard Layer 3 (Foreground)
+//Storyboard Layer 4 (Overlay)
+//Storyboard Sound Samples
+
+[TimingPoints]
+173,1000,3,2,1,15,1,0
+177,-100,3,2,1,15,0,0
+1173,-100,3,2,1,10,0,0
+2173,-100,3,2,1,5,0,0
+3173,-100,3,2,1,15,0,0
+4173,-100,3,2,1,10,0,0
+5173,-100,3,2,1,5,0,0
+6173,-100,3,2,1,15,0,0
+29173,-100,3,2,1,10,0,0
+31173,-100,3,2,1,5,0,0
+32173,-100,3,2,7,0,0,0
+
+
+[Colours]
+Combo1 : 20,90,140
+Combo2 : 30,30,130
+SliderBorder : 255,255,255
+SliderTrackOverride : 40,240,240
+
+[HitObjects]
+424,222,173,6,0,B|424:322|320:394|64:394|24:130|256:-47|488:130|448:394|192:394|88:322|88:222,1,840,0|2,0:0|0:0,0:0:0:0:
+46,72,7173,6,0,P|100:86|204:50,1,140,8|8,0:0|0:0,0:0:0:0:
+321,5,9173,1,2,0:0:0:0:
+382,145,10173,2,0,P|379:174|359:235,1,70,8|8,0:0|0:0,0:0:0:0:
+320,280,11173,2,0,P|349:283|410:303,1,70,2|8,0:0|0:0,0:0:0:0:
+451,346,12173,5,2,0:0:0:0:
+61,38,15173,1,8,0:0:0:0:
+27,188,16173,2,0,P|24:217|32:280,1,70,2|8,0:0|0:0,0:0:0:0:
+64,331,17173,1,2,0:0:0:0:
+140,361,17673,1,2,0:0:0:0:
+216,331,18173,6,0,P|286:331|351:308,1,140,8|8,0:0|0:0,0:0:0:0:
+453,192,20173,1,2,0:0:0:0:
+352,76,21173,2,0,P|281:71|212:64,1,140,8|2,0:0|0:0,0:0:0:0:
+58,52,23173,1,8,0:0:0:0:
+45,206,24173,5,2,0:0:0:0:
+467,178,27173,2,0,B|457:281|341:313|246:240|275:141|275:141|269:199|204:301|82:266|82:266|139:257|167:214,1,700,2|0,0:0|0:0,0:0:0:0:

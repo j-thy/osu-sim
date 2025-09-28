@@ -1,0 +1,110 @@
+osu file format v14
+
+[General]
+AudioFilename: audio.ogg
+AudioLeadIn: 0
+PreviewTime: 11845
+Countdown: 0
+SampleSet: Soft
+StackLeniency: 0.7
+Mode: 0
+LetterboxInBreaks: 0
+WidescreenStoryboard: 1
+
+[Editor]
+DistanceSpacing: 1
+BeatDivisor: 4
+GridSize: 16
+TimelineZoom: 1
+
+[Metadata]
+Title:Jingle Bells
+TitleUnicode:ジングルベル
+Artist:Hayase Yuuka (CV: Haruka Ran), Ushio Noa (CV: Suzushiro Sayumi)
+ArtistUnicode:早瀬ユウカ (CV: 春花らん)、生塩ノア (CV: 鈴代紗弓)
+Creator:nik
+Version:edbones' Easy
+Tags:ブルーアーカイブ -Blue Archive- japanese folk blue archive mobile videogame video game jpop pop j-pop cover カバー クリスマスなので！ christmas xmas ブルアカ buruaka buru aka yostar nat games nexon Millennium ミレニアム Seminar セミナー Sensei, Chotto ojikan Itadakemasu Ka? May I Have A Moment of Your Time? shorts 宮澤章二 Shōji Shouji Miyazawa hashire sori yo kaze no you ni tsukimihara wo padoru nikolomara edbones -maruk- maruk
+BeatmapSetID:2288241
+Source:先生、ちょっとお時間いただけますか？
+BeatmapID:4889285
+
+[Difficulty]
+HPDrainRate:3
+CircleSize:3
+OverallDifficulty:3
+ApproachRate:4
+SliderMultiplier:1
+SliderTickRate:1
+
+[Events]
+//Background and Video events
+0,0,"bg.jpg",0,0
+//Break Periods
+//Storyboard Layer 0 (Background)
+//Storyboard Layer 1 (Fail)
+//Storyboard Layer 2 (Pass)
+//Storyboard Layer 3 (Foreground)
+//Storyboard Layer 4 (Overlay)
+//Storyboard Sound Samples
+
+[TimingPoints]
+4580,468.75,4,2,1,60,1,0
+10439,-100,4,2,2,60,0,0
+10673,-100,4,2,1,60,0,0
+10908,-100,4,2,2,60,0,0
+11025,-100,4,2,1,60,0,0
+12080,-100,4,2,1,50,0,0
+25205,-100,4,2,1,60,0,0
+26376,-100,4,2,3,60,0,0
+26845,-100,4,2,1,60,0,0
+27080,-100,4,2,1,70,0,0
+41845,-100,4,2,3,70,0,0
+41962,-100,4,2,1,70,0,0
+48642,-100,4,2,1,5,0,0
+
+
+[Colours]
+Combo1 : 128,255,255
+Combo2 : 255,128,128
+Combo3 : 255,255,128
+Combo4 : 128,255,128
+
+[HitObjects]
+0,351,12080,6,0,P|66:326|134:327,1,100,6|10,1:2|1:2,0:0:0:0:
+171,370,13017,1,2,1:2:0:0:
+346,329,13955,2,0,P|352:274|374:224,1,100,2|10,1:2|1:2,0:0:0:0:
+443,183,14892,1,2,1:2:0:0:
+364,20,15830,2,0,B|327:17|327:17|305:31|305:31|261:29,1,100,2|10,1:2|1:2,0:0:0:0:
+179,16,16767,1,2,1:2:0:0:
+154,194,17705,5,2,1:2:0:0:
+243,183,18173,1,10,1:2:0:0:
+273,98,18642,1,2,1:2:0:0:
+453,103,19580,6,0,P|454:152|442:201,1,100,6|10,1:2|1:2,0:0:0:0:
+373,259,20517,1,2,1:2:0:0:
+195,287,21455,2,0,P|193:237|205:188,1,100,2|10,1:2|1:2,0:0:0:0:
+281,142,22392,1,2,1:2:0:0:
+378,293,23330,2,0,B|344:290|344:290|320:307|320:307|276:304,1,100,2|10,1:2|1:2,0:0:0:0:
+202,343,24267,2,0,L|179:228,1,100,2|10,1:2|1:2,0:0:0:0:
+95,220,25205,5,10,1:2:0:0:
+77,131,25673,1,10,1:2:0:0:
+146,73,26142,1,10,1:2:0:0:
+328,155,27080,6,0,L|426:138,2,100,6|10|2,1:1|1:2|1:2,0:0:0:0:
+260,229,28486,1,10,1:2:0:0:
+183,164,28955,2,0,L|85:147,1,100,2|10,1:2|1:2,0:0:0:0:
+4,207,29892,1,2,1:2:0:0:
+112,372,30830,6,0,P|163:359|167:295,1,100,2|10,1:2|1:2,0:0:0:0:
+262,267,31767,2,0,P|279:221|278:171,1,100,2|10,1:2|1:2,0:0:0:0:
+238,78,32705,1,2,1:2:0:0:
+307,6,33173,2,0,P|355:17|405:23,1,100,10|2,1:2|1:2,0:0:0:0:
+434,119,34111,1,10,1:2:0:0:
+376,201,34580,6,0,L|278:184,2,100,2|10|2,1:2|1:2|1:2,0:0:0:0:
+437,280,35986,1,10,1:2:0:0:
+380,362,36455,2,0,L|282:379,1,100,2|10,1:2|1:2,0:0:0:0:
+201,319,37392,1,2,1:2:0:0:
+21,381,38330,6,0,P|12:331|0:283,1,100,2|10,1:2|1:2,0:0:0:0:
+49,197,39267,2,0,P|93:218|143:217,1,100,2|10,1:2|1:2,0:0:0:0:
+231,264,40205,1,6,1:2:0:0:
+328,243,40673,1,10,1:2:0:0:
+408,302,41142,1,6,1:2:0:0:
+256,192,42080,12,0,48642,0:0:0:0:

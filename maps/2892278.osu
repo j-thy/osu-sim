@@ -1,0 +1,56 @@
+osu file format v14
+
+[General]
+AudioFilename: 15.ogg
+AudioLeadIn: 0
+PreviewTime: -1
+Countdown: 0
+SampleSet: Normal
+StackLeniency: 0.7
+Mode: 0
+LetterboxInBreaks: 0
+WidescreenStoryboard: 1
+
+[Editor]
+DistanceSpacing: 1
+BeatDivisor: 4
+GridSize: 32
+TimelineZoom: 0.1
+
+[Metadata]
+Title:7_7 Appreciation Mapset
+TitleUnicode:7_7 Appreciation Mapset
+Artist:7_7
+ArtistUnicode:7_7
+Creator:X a v y
+Version:do_not_play
+Source:
+Tags:なななな featured artist fa osu! original electronic japanese swedish anime rock jrock j-rock pop jpop j-pop jazz woob tech ファンタスティック★通りゃんせ！ fantastic*toryanse! iosys はなかっぱからマリファナが咲いた回 ス・マ・イ・ル スマイル smile opening 上白石萌歌 kamishiraishi moka うっせぇわ アド syudou 丸の内サディスティック 椎名林檎 sheena ringo shiina tokyo jihen incidents 東京事変 caramella girls ウッーウッーウマウマ(゜∀゜) caramell 鹿乃 say it. 神名 shinmei coch ヨルシカ yorushika mahoro kano n-buna μ's u's muse love live school idol project ラブライブ！スクールアイドルプロジェクト i want to dance in kaguya's castle vicetone & tony igy astronomia coffin meme クソデカヒバナ deco*27 hatsune miku 草 似顔絵ﾑﾝﾍﾞチャンネル mii plaza nintendo wii わが名はゴロリ みつどもえ 増量中! waga na wa shougakusei galaxy collapse kiero niconico 顔始まった 綾瀬理恵 非実在系女子達はどうすりゃいいですか？ 抜きゲーみたいな島に住んでる貧乳（わたし）はどうすりゃいいですか？ is the island utopia or dystopia? joshitachi dou surya ii desu ka? u.n.オーエンは彼女なのか？ owen kanojo nanoka? was her? ziki_7 ιゃ＜ね⊃？≠ｬ･/㌦ﾏｽ勺─？ー⊂もιぃ 灼熱?キャンドルマスター?ともしぃ すさまじい殺気！！！！ xavy
+BeatmapID:2892278
+BeatmapSetID:1401944
+
+[Difficulty]
+HPDrainRate:7.7
+CircleSize:7.7
+OverallDifficulty:7.7
+ApproachRate:7.7
+SliderMultiplier:1.4
+SliderTickRate:1
+
+[Events]
+//Background and Video events
+//Break Periods
+//Storyboard Layer 0 (Background)
+//Storyboard Layer 1 (Fail)
+//Storyboard Layer 2 (Pass)
+//Storyboard Layer 3 (Foreground)
+//Storyboard Layer 4 (Overlay)
+//Storyboard Sound Samples
+
+[TimingPoints]
+0,4000,8,1,0,20,1,0
+
+
+[HitObjects]
+256,192,0,5,12,0:0:0:0:
+256,192,4000,12,0,896000,0:0:0:0:

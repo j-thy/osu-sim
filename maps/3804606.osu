@@ -1,0 +1,66 @@
+osu file format v14
+
+[General]
+AudioFilename: 10msilence.mp3
+AudioLeadIn: 0
+PreviewTime: 139702
+Countdown: 0
+SampleSet: Soft
+StackLeniency: 0.3
+Mode: 0
+LetterboxInBreaks: 0
+WidescreenStoryboard: 1
+
+[Editor]
+Bookmarks: 26761,39310,51859,76957,102055,127153,133427,139702,164800,189898,214996
+DistanceSpacing: 0.1
+BeatDivisor: 4
+GridSize: 16
+TimelineZoom: 0.1
+
+[Metadata]
+Title:Midorigo Queen Bee (Cut Ver.)
+TitleUnicode:嬰児クインビー (Cut Ver.)
+Artist:-45
+ArtistUnicode:-45
+Creator:Kastellan
+Version:uploadlimit
+Source:mr. bean
+Tags:video game instrumental featured artist fa 07th Expansion stamina practice fingercontrol training stream Umineko no Naku Koro ni Chiru when they cry ep6 vgm bgm ost answer arc visual novel infant Eiji Kuin bii kuinbii D'va Dva yoshikawa45
+BeatmapID:3804606
+BeatmapSetID:1036855
+
+[Difficulty]
+HPDrainRate:5
+CircleSize:4
+OverallDifficulty:8
+ApproachRate:8
+SliderMultiplier:0.400000005960464
+SliderTickRate:1
+
+[Events]
+//Background and Video events
+0,0,"eijikuinbii.jpg",0,0
+//Break Periods
+2,1862,592912
+//Storyboard Layer 0 (Background)
+//Storyboard Layer 1 (Fail)
+//Storyboard Layer 2 (Pass)
+//Storyboard Layer 3 (Foreground)
+//Storyboard Layer 4 (Overlay)
+//Storyboard Sound Samples
+
+[TimingPoints]
+1662,4000,4,2,1,35,1,0
+1662,-1000,4,2,1,35,0,0
+
+
+[Colours]
+Combo1 : 152,196,222
+Combo2 : 217,81,95
+Combo3 : 243,236,194
+Combo4 : 109,91,208
+
+[HitObjects]
+176,214,1662,5,0,0:2:0:0:
+251,177,593662,5,0,0:0:0:0:

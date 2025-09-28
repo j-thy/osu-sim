@@ -1,0 +1,106 @@
+osu file format v14
+
+[General]
+AudioFilename: MoleKingRises.mp3
+AudioLeadIn: 0
+PreviewTime: 24671
+Countdown: 0
+SampleSet: None
+StackLeniency: 0
+Mode: 0
+LetterboxInBreaks: 0
+WidescreenStoryboard: 0
+
+[Editor]
+DistanceSpacing: 1.5
+BeatDivisor: 8
+GridSize: 32
+TimelineZoom: 0.647245
+
+[Metadata]
+Title:Various BGM 2
+TitleUnicode:Various BGM 2
+Artist:Wizet, Nexon
+ArtistUnicode:Wizet, Nexon
+Creator:ExGon
+Version:Mole King Rises
+Source:MapleStory
+Tags:LedZeper CODASOUND Studio EIM NECORD ASTERIA M2U xka Eunto Yoo Jongho Lee Jonghyuk Kim Hansol Chae Hana Sung Sangmin Maple World Victoria Island Fairy Academy Ellinel Arcane River Sea of Beginnings Origin Esfera Will Ellinia Luminous Lacheln Lachelein the Dreaming Dream City Lucid Rien Undersea Tower Oz Seed PQ Party Quest Grandis Ossyria Aqua Road Minar Forest Taipei 101 Kerning Square Ereb Ereve Nihal Desert Magatia Temple Time Cannoneer Cannon Shooter Sanctuary Asylum Sakura Ninja FriendStory Eluna Masteria New Leaf Calm Village Ludus Lake Ludibrium Path ClockTower Bottom Lower Lowest Floor Cernium Holy Burning Gods Fallen Convergence Barrier Between Contest Ristonia Emile Emil 100010 Headset Black Heaven Lotus Theme Grand Athenaeum Dimension Library Floras Illium Skill Sleepywood Barlogs Down Cave Ant Tunnel Demian Damian True Heroes Spot Differences El Nath Mts. Orbis Ship Henesys Archer Dungeon Boss Event Enjuxx
+BeatmapID:4085678
+BeatmapSetID:592397
+
+[Difficulty]
+HPDrainRate:0
+CircleSize:0
+OverallDifficulty:0
+ApproachRate:0
+SliderMultiplier:0.4
+SliderTickRate:1
+
+[Events]
+//Background and Video events
+0,0,"molekingrises.jpg",0,0
+//Break Periods
+//Storyboard Layer 0 (Background)
+//Storyboard Layer 1 (Fail)
+//Storyboard Layer 2 (Pass)
+//Storyboard Layer 3 (Foreground)
+//Storyboard Layer 4 (Overlay)
+//Storyboard Sound Samples
+
+[TimingPoints]
+2172,352.941176470588,4,1,0,35,1,0
+
+
+[HitObjects]
+256,192,2172,12,4,13466,0:0:0:0:
+86,95,14877,5,0,0:0:0:0:
+171,180,15583,1,0,0:0:0:0:
+256,96,16289,1,0,0:0:0:0:
+426,95,17701,5,0,0:0:0:0:
+341,180,18407,1,0,0:0:0:0:
+256,96,19113,1,0,0:0:0:0:
+256,266,20524,5,0,0:0:0:0:
+171,181,21230,1,0,0:0:0:0:
+86,96,21936,1,0,0:0:0:0:
+256,266,23348,5,0,0:0:0:0:
+341,181,24054,1,0,0:0:0:0:
+426,96,24760,6,0,B|397:67|397:67|369:96|369:96|341:67|341:67|313:96,3,160
+227,181,29701,1,0,0:0:0:0:
+132,255,30407,6,0,B|164:287|164:287|230:287|230:287|263:255,3,160
+170,180,35348,1,0,0:0:0:0:
+86,96,36054,6,2,B|114:67|114:67|142:96|142:96|170:67|170:67|198:96,3,160
+285,181,40995,1,0,0:0:0:0:
+380,255,41701,6,2,B|347:287|347:287|281:287|281:287|248:255,3,160
+342,180,46642,1,0,0:0:0:0:
+296,68,47348,6,2,L|216:68,3,80
+132,152,50171,2,2,L|132:232,3,80
+216,316,52995,6,2,L|296:316,3,80
+380,232,55819,2,2,L|380:152,3,80
+256,192,58995,6,0,L|256:212,5,20
+256,192,61642,6,0,L|256:172,6,20
+256,192,64642,6,0,L|256:212,5,20
+256,192,67289,6,0,L|256:172,6,20
+256,192,69936,6,0,B|256:288|256:288|256:320|288:320|288:320|384:320,1,240
+465,235,72760,2,0,B|465:139|465:139|465:107|433:107|433:107|337:107,1,240
+256,192,75583,6,0,B|256:96|256:96|256:64|224:64|224:64|128:64,1,240
+47,149,78407,2,0,B|47:245|47:245|47:277|79:277|79:277|175:277,1,240
+256,192,81230,1,0,0:0:0:0:
+86,22,82642,5,0,0:0:0:0:
+206,22,83348,1,0,0:0:0:0:
+206,142,84054,1,0,0:0:0:0:
+446,142,85466,5,0,0:0:0:0:
+326,142,86171,1,0,0:0:0:0:
+241,226,86877,1,0,0:0:0:0:
+426,362,88289,5,0,0:0:0:0:
+306,362,88995,1,0,0:0:0:0:
+306,242,89701,1,0,0:0:0:0:
+66,242,91113,5,0,0:0:0:0:
+186,242,91819,1,0,0:0:0:0:
+271,158,92524,1,0,0:0:0:0:
+194,65,93230,6,0,P|66:192|194:319,1,400
+306,276,97466,1,0,0:0:0:0:
+256,167,98171,1,0,0:0:0:0:
+318,65,98877,6,0,P|445:192|318:319,1,400
+206,276,103113,1,0,0:0:0:0:
+256,192,103819,12,4,115113,0:0:0:0:

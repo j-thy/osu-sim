@@ -1,0 +1,2193 @@
+osu file format v14
+
+[General]
+AudioFilename: audio.mp3
+AudioLeadIn: 0
+PreviewTime: 62052
+Countdown: 0
+SampleSet: Soft
+StackLeniency: 0.4
+Mode: 0
+LetterboxInBreaks: 0
+EpilepsyWarning: 1
+WidescreenStoryboard: 1
+
+[Editor]
+Bookmarks: 11969,22636,33302,37802,38469,65302,75969,86636,97302,107136,107802
+DistanceSpacing: 0.8
+BeatDivisor: 4
+GridSize: 4
+TimelineZoom: 2.2
+
+[Metadata]
+Title:Lavis Moon
+TitleUnicode:Lavis Moon
+Artist:cygnus
+ArtistUnicode:cygnus
+Creator:August
+Version:SB's Another
+Source:
+Tags:icekalt superbox lp9 fa featured artist instrumental electronic matrix the evolution of war レミリア・スカーレット remilia scarlet mpg mappers' guild heaven punisher gothic trance
+BeatmapID:4868725
+BeatmapSetID:2224399
+
+[Difficulty]
+HPDrainRate:5
+CircleSize:4
+OverallDifficulty:7.5
+ApproachRate:9
+SliderMultiplier:1.4
+SliderTickRate:1
+
+[Events]
+//Background and Video events
+0,0,"moon2.jpg",0,0
+//Break Periods
+//Storyboard Layer 0 (Background)
+//Storyboard Layer 1 (Fail)
+//Storyboard Layer 2 (Pass)
+//Storyboard Layer 3 (Foreground)
+Sprite,Foreground,Centre,"sb/ring.png",447,439
+ P,0,13302,14134,A
+ C,0,13302,,172,129,254
+ S,7,13302,14052,0.2,0.6
+ F,7,13302,14052,0.7,0
+Sprite,Foreground,Centre,"sb/ring.png",79,303
+ P,0,14302,14968,A
+ C,0,14302,,172,129,254
+ S,7,14302,15219,0.2,0.6
+ F,7,14302,15219,0.7,0
+Sprite,Foreground,Centre,"sb/ring.png",147,315
+ P,0,14469,15135,A
+ C,0,14469,,172,129,254
+ S,7,14469,15219,0.2,0.6
+ F,7,14469,15219,0.7,0
+Sprite,Foreground,Centre,"sb/ring.png",64,68
+ P,0,15969,16801,A
+ C,0,15969,,214,1,6
+ S,7,15969,16718,0.2,0.6
+ F,7,15969,16718,0.7,0
+Sprite,Foreground,Centre,"sb/ring.png",576,110
+ P,0,16969,17635,A
+ C,0,16969,,214,1,6
+ S,7,16969,17885,0.2,0.6
+ F,7,16969,17885,0.7,0
+Sprite,Foreground,Centre,"sb/ring.png",534,166
+ P,0,17136,17802,A
+ C,0,17136,,214,1,6
+ S,7,17136,17885,0.2,0.6
+ F,7,17136,17885,0.7,0
+Sprite,Foreground,Centre,"sb/ring.png",517,259
+ P,0,18635,19467,A
+ C,0,18635,,247,138,141
+ S,7,18635,19385,0.2,0.6
+ F,7,18635,19385,0.7,0
+Sprite,Foreground,Centre,"sb/ring.png",64,372
+ P,0,19635,20301,A
+ C,0,19635,,247,138,141
+ S,7,19635,20552,0.2,0.6
+ F,7,19635,20552,0.7,0
+Sprite,Foreground,Centre,"sb/ring.png",80,303
+ P,0,19802,20468,A
+ C,0,19802,,247,138,141
+ S,7,19802,20552,0.2,0.6
+ F,7,19802,20552,0.7,0
+Sprite,Foreground,Centre,"sb/ring.png",221,76
+ P,0,21302,22134,A
+ C,0,21302,,244,244,244
+ S,7,21302,22218,0.2,0.6
+ F,7,21302,22218,0.7,0
+Sprite,Foreground,Centre,"sb/ring.png",271,218
+ P,0,21969,22885,A
+ C,0,21969,,244,244,244
+ S,7,21969,22718,0.2,0.6
+ F,7,21969,22718,0.7,0
+Sprite,Foreground,Centre,"sb/ring.png",320,371
+ P,0,22636,23969,A
+ C,0,22636,,214,1,6
+ S,7,22636,24135,0.4,1
+ F,7,22636,24135,0.7,0
+Sprite,Foreground,Centre,"sb/ring.png",344,419
+ P,0,33302,34635,A
+ C,0,33302,,244,244,244
+ S,7,33302,34969,0.3,1.5
+ F,7,33302,34969,0.7,0
+Sprite,Foreground,Centre,"sb/ring.png",149,272
+ P,0,35969,37302,A
+ C,0,35969,,214,1,6
+ S,7,35969,37636,0.3,1.3
+ F,7,35969,37636,0.7,0
+Sprite,Foreground,Centre,"sb/ring.png",149,272
+ P,0,38636,39969,A
+ C,0,38636,,214,1,6
+ S,7,38636,40302,0.3,1.3
+ F,7,38636,40302,0.7,0
+Sprite,Foreground,Centre,"sb/ring.png",491,224
+ P,0,41302,42635,A
+ C,0,41302,,99,0,232
+ S,7,41302,42969,0.3,1.3
+ F,7,41302,42969,0.7,0
+Sprite,Foreground,Centre,"sb/ring.png",188,344
+ P,0,43969,44885,A
+ C,0,43969,,247,138,141
+ S,7,43969,44886,0.2,0.8
+ F,7,43969,44886,0.7,0
+Sprite,Foreground,Centre,"sb/ring.png",452,344
+ P,0,46636,47552,A
+ C,0,46636,,214,1,6
+ S,7,46636,47553,0.2,0.8
+ F,7,46636,47553,0.7,0
+Sprite,Foreground,Centre,"sb/ring.png",163,170
+ P,0,49302,50218,A
+ C,0,49302,,172,129,254
+ S,7,49302,50219,0.2,0.8
+ F,7,49302,50219,0.7,0
+Sprite,Foreground,Centre,"sb/ring.png",256,250
+ P,0,51969,52885,A
+ C,0,51969,,99,0,232
+ S,7,51969,52803,0.2,0.8
+ F,7,51969,52803,0.7,0
+Sprite,Foreground,Centre,"sb/ring.png",418,263
+ P,0,52636,53886,A
+ C,0,52636,,247,138,141
+ S,7,52636,53469,0.2,0.8
+ F,7,52636,53469,0.7,0
+Sprite,Foreground,Centre,"sb/ring.png",325,125
+ P,0,53302,54801,A
+ C,0,53302,,247,138,141
+ S,7,53302,54719,0.2,0.8
+ F,7,53302,54719,0.7,0
+Sprite,Foreground,Centre,"sb/ring.png",492,271
+ P,0,54636,56802,A
+ C,0,54636,,244,244,244
+ S,7,54636,56635,0.4,1.5
+ F,7,54636,56635,0.7,0
+Sprite,Foreground,Centre,"sb/ring.png",124,94
+ P,0,57302,59468,A
+ C,0,57302,,99,0,232
+ S,7,57302,59302,0.4,1.5
+ F,7,57302,59302,0.7,0
+Sprite,Foreground,Centre,"sb/ring.png",335,355
+ P,0,59969,62135,A
+ C,0,59969,,172,129,254
+ S,7,59969,61969,0.4,1.5
+ F,7,59969,61969,0.7,0
+Sprite,Foreground,Centre,"sb/ring.png",421,280
+ P,0,62635,64801,A
+ C,0,62635,,214,1,6
+ S,7,62635,65635,0.4,1.8
+ F,7,62635,65635,0.7,0
+Sprite,Foreground,Centre,"sb/ring.png",136,410
+ P,0,65302,66134,A
+ C,0,65302,,247,138,141
+ S,7,65302,66052,0.1,0.7
+ F,7,65302,66052,0.7,0
+Sprite,Foreground,Centre,"sb/ring.png",229,178
+ P,0,66636,67302,A
+ C,0,66636,,172,129,254
+ S,7,66636,67385,0.1,0.7
+ F,7,66636,67385,0.7,0
+Sprite,Foreground,Centre,"sb/ring.png",198,97
+ P,0,67636,67969,A
+ C,0,67636,,172,129,254
+ S,7,67636,68052,0.1,0.6
+ F,7,67636,68052,0.7,0
+Sprite,Foreground,Centre,"sb/ring.png",198,97
+ P,0,67802,68135,A
+ C,0,67802,,172,129,254
+ S,7,67802,68219,0.1,0.6
+ F,7,67802,68219,0.7,0
+Sprite,Foreground,Centre,"sb/ring.png",113,157
+ P,0,67969,68635,A
+ C,0,67969,,244,244,244
+ S,7,67969,68719,0.1,0.7
+ F,7,67969,68719,0.7,0
+Sprite,Foreground,Centre,"sb/ring.png",400,252
+ P,0,69303,69969,A
+ C,0,69303,,214,1,6
+ S,7,69303,70052,0.1,0.7
+ F,7,69303,70052,0.7,0
+Sprite,Foreground,Centre,"sb/ring.png",538,69
+ P,0,70303,70636,A
+ C,0,70303,,214,1,6
+ S,7,70303,70719,0.1,0.6
+ F,7,70303,70719,0.7,0
+Sprite,Foreground,Centre,"sb/ring.png",538,69
+ P,0,70469,70802,A
+ C,0,70469,,214,1,6
+ S,7,70469,70886,0.1,0.6
+ F,7,70469,70886,0.7,0
+Sprite,Foreground,Centre,"sb/ring.png",571,192
+ P,0,70636,71468,A
+ C,0,70636,,99,0,232
+ S,7,70636,71385,0.1,0.7
+ F,7,70636,71385,0.7,0
+Sprite,Foreground,Centre,"sb/ring.png",411,318
+ P,0,71970,72636,A
+ C,0,71970,,247,138,141
+ S,7,71970,72719,0.1,0.7
+ F,7,71970,72719,0.7,0
+Sprite,Foreground,Centre,"sb/ring.png",442,399
+ P,0,72970,73303,A
+ C,0,72970,,247,138,141
+ S,7,72970,73386,0.1,0.6
+ F,7,72970,73386,0.7,0
+Sprite,Foreground,Centre,"sb/ring.png",442,399
+ P,0,73136,73469,A
+ C,0,73136,,247,138,141
+ S,7,73136,73552,0.1,0.6
+ F,7,73136,73552,0.7,0
+Sprite,Foreground,Centre,"sb/ring.png",527,339
+ P,0,73303,73969,A
+ C,0,73303,,172,129,254
+ S,7,73303,74052,0.1,0.7
+ F,7,73303,74052,0.7,0
+Sprite,Foreground,Centre,"sb/ring.png",291,105
+ P,0,74637,75303,A
+ C,0,74637,,244,244,244
+ S,7,74637,75385,0.1,0.7
+ F,7,74637,75385,0.7,0
+Sprite,Foreground,Centre,"sb/ring.png",131,63
+ P,0,74970,75802,A
+ C,0,74970,,214,1,6
+ S,7,74970,75719,0.1,0.7
+ F,7,74970,75719,0.7,0
+Sprite,Foreground,Centre,"sb/ring.png",334,257
+ P,0,75302,76134,A
+ C,0,75302,,214,1,6
+ S,7,75302,76052,0.1,0.7
+ F,7,75302,76052,0.7,0
+Sprite,Foreground,Centre,"sb/ring.png",93,331
+ P,0,75636,76302,A
+ C,0,75636,,214,1,6
+ S,7,75636,76385,0.1,0.6
+ F,7,75636,76385,0.7,0
+Sprite,Foreground,Centre,"sb/ring.png",206,310
+ P,0,75802,76468,A
+ C,0,75802,,214,1,6
+ S,7,75802,76552,0.1,0.6
+ F,7,75802,76552,0.7,0
+Sprite,Foreground,Centre,"sb/ring.png",131,214
+ P,0,75969,76635,A
+ C,0,75969,,99,0,232
+ S,7,75969,76719,0.1,0.7
+ F,7,75969,76719,0.7,0
+Sprite,Foreground,Centre,"sb/ring.png",274,265
+ P,0,77302,77968,A
+ C,0,77302,,247,138,141
+ S,7,77302,78052,0.1,0.7
+ F,7,77302,78052,0.7,0
+Sprite,Foreground,Centre,"sb/ring.png",423,300
+ P,0,78302,78635,A
+ C,0,78302,,247,138,141
+ S,7,78302,78719,0.1,0.6
+ F,7,78302,78719,0.7,0
+Sprite,Foreground,Centre,"sb/ring.png",433,407
+ P,0,78469,78802,A
+ C,0,78469,,247,138,141
+ S,7,78469,78886,0.1,0.6
+ F,7,78469,78886,0.7,0
+Sprite,Foreground,Centre,"sb/ring.png",548,370
+ P,0,78636,79302,A
+ C,0,78636,,172,129,254
+ S,7,78636,79385,0.1,0.7
+ F,7,78636,79385,0.7,0
+Sprite,Foreground,Centre,"sb/ring.png",214,418
+ P,0,79969,80635,A
+ C,0,79969,,244,244,244
+ S,7,79969,80719,0.1,0.7
+ F,7,79969,80719,0.7,0
+Sprite,Foreground,Centre,"sb/ring.png",243,85
+ P,0,80969,81302,A
+ C,0,80969,,244,244,244
+ S,7,80969,81386,0.1,0.6
+ F,7,80969,81386,0.7,0
+Sprite,Foreground,Centre,"sb/ring.png",136,75
+ P,0,81136,81469,A
+ C,0,81136,,244,244,244
+ S,7,81136,81552,0.1,0.6
+ F,7,81136,81552,0.7,0
+Sprite,Foreground,Centre,"sb/ring.png",70,172
+ P,0,81302,81968,A
+ C,0,81302,,214,1,6
+ S,7,81302,82052,0.1,0.7
+ F,7,81302,82052,0.7,0
+Sprite,Foreground,Centre,"sb/ring.png",555,151
+ P,0,82636,83302,A
+ C,0,82636,,99,0,232
+ S,7,82636,83385,0.1,0.7
+ F,7,82636,83385,0.7,0
+Sprite,Foreground,Centre,"sb/ring.png",370,111
+ P,0,83302,83968,A
+ C,0,83302,,99,0,232
+ S,7,83302,84052,0.1,0.7
+ F,7,83302,84052,0.7,0
+Sprite,Foreground,Centre,"sb/ring.png",245,195
+ P,0,83636,83969,A
+ C,0,83636,,99,0,232
+ S,7,83636,84052,0.1,0.6
+ F,7,83636,84052,0.7,0
+Sprite,Foreground,Centre,"sb/ring.png",250,206
+ P,0,83803,84136,A
+ C,0,83803,,99,0,232
+ S,7,83803,84219,0.1,0.6
+ F,7,83803,84219,0.7,0
+Sprite,Foreground,Centre,"sb/ring.png",115,132
+ P,0,83969,84635,A
+ C,0,83969,,247,138,141
+ S,7,83969,84719,0.1,0.7
+ F,7,83969,84719,0.7,0
+Sprite,Foreground,Centre,"sb/ring.png",212,279
+ P,0,84636,85468,A
+ C,0,84636,,247,138,141
+ S,7,84636,85385,0.1,0.7
+ F,7,84636,85385,0.7,0
+Sprite,Foreground,Centre,"sb/ring.png",281,259
+ P,0,85302,85635,A
+ C,0,85302,,172,129,254
+ S,7,85302,85719,0.1,0.5
+ F,7,85302,85719,0.7,0
+Sprite,Foreground,Centre,"sb/ring.png",351,436
+ P,0,85635,85968,A
+ C,0,85635,,172,129,254
+ S,7,85635,86052,0.1,0.5
+ F,7,85635,86052,0.7,0
+Sprite,Foreground,Centre,"sb/ring.png",444,380
+ P,0,85969,86302,A
+ C,0,85969,,172,129,254
+ S,7,85969,86386,0.1,0.5
+ F,7,85969,86386,0.7,0
+Sprite,Foreground,Centre,"sb/ring.png",503,331
+ P,0,86302,86718,A
+ C,0,86302,,172,129,254
+ S,7,86302,86719,0.1,0.5
+ F,7,86302,86719,0.7,0
+Sprite,Foreground,Centre,"sb/ring.png",500,94
+ P,0,86636,86969,A
+ C,0,86636,,244,244,244
+ S,7,86636,87052,0.1,0.7
+ F,7,86636,87052,0.7,0
+Sprite,Foreground,Centre,"sb/ring.png",271,94
+ P,0,87302,87718,A
+ C,0,87302,,244,244,244
+ S,7,87302,87719,0.1,0.7
+ F,7,87302,87719,0.7,0
+Sprite,Foreground,Centre,"sb/ring.png",134,252
+ P,0,87969,88385,A
+ C,0,87969,,214,1,6
+ S,7,87969,88386,0.1,0.7
+ F,7,87969,88386,0.7,0
+Sprite,Foreground,Centre,"sb/ring.png",437,183
+ P,0,88969,89635,A
+ C,0,88969,,214,1,6
+ S,7,88969,89719,0.1,1
+ F,7,88969,89719,0.7,0
+Sprite,Foreground,Centre,"sb/ring.png",501,138
+ P,0,89302,89635,A
+ C,0,89302,,99,0,232
+ S,7,89302,89719,0.1,0.7
+ F,7,89302,89719,0.7,0
+Sprite,Foreground,Centre,"sb/ring.png",134,252
+ P,0,90635,91051,A
+ C,0,90635,,247,138,141
+ S,7,90635,91052,0.1,0.7
+ F,7,90635,91052,0.7,0
+Sprite,Foreground,Centre,"sb/ring.png",270,210
+ P,0,91302,91635,A
+ C,0,91302,,247,138,141
+ S,7,91302,91719,0.1,0.7
+ F,7,91302,91719,0.7,0
+Sprite,Foreground,Centre,"sb/ring.png",436,234
+ P,0,91635,92301,A
+ C,0,91635,,247,138,141
+ S,7,91635,92385,0.1,1
+ F,7,91635,92385,0.7,0
+Sprite,Foreground,Centre,"sb/ring.png",550,200
+ P,0,91969,92302,A
+ C,0,91969,,172,129,254
+ S,7,91969,92386,0.1,0.7
+ F,7,91969,92386,0.7,0
+Sprite,Foreground,Centre,"sb/ring.png",293,245
+ P,0,92635,93051,A
+ C,0,92635,,172,129,254
+ S,7,92635,93052,0.1,0.7
+ F,7,92635,93052,0.7,0
+Sprite,Foreground,Centre,"sb/ring.png",224,266
+ P,0,92969,93468,A
+ C,0,92969,,172,129,254
+ S,7,92969,93386,0.1,0.7
+ F,7,92969,93386,0.7,0
+Sprite,Foreground,Centre,"sb/ring.png",156,403
+ P,0,93302,94051,A
+ C,0,93302,,244,244,244
+ S,7,93302,94052,0.1,1
+ F,7,93302,94052,0.7,0
+Sprite,Foreground,Centre,"sb/ring.png",469,304
+ P,0,94636,95969,A
+ C,0,94636,,214,1,6
+ S,7,94636,96052,0.1,1
+ F,7,94636,96052,0.7,0
+Sprite,Foreground,Centre,"sb/ring.png",575,360
+ P,0,97302,98968,A
+ C,0,97302,,172,129,254
+ S,7,97302,99052,0.1,1.2
+ F,7,97302,99052,0.7,0
+Sprite,Foreground,Centre,"sb/particle.png",576,188
+ P,0,11969,,A
+ C,0,11969,,247,138,141
+ S,7,11969,12719,0.5,1
+ F,7,11969,12719,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",560,256
+ P,0,12136,,A
+ C,0,12136,,247,138,141
+ S,7,12136,12886,0.5,1
+ F,7,12136,12886,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",523,315
+ P,0,12302,,A
+ C,0,12302,,247,138,141
+ S,7,12302,13052,0.5,1
+ F,7,12302,13052,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",505,382
+ P,0,12469,,A
+ C,0,12469,,247,138,141
+ S,7,12469,13219,0.5,1
+ F,7,12469,13219,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",573,367
+ P,0,12636,,A
+ C,0,12636,,247,138,141
+ S,7,12636,13386,0.5,1
+ F,7,12636,13386,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",508,339
+ P,0,12802,,A
+ C,0,12802,,247,138,141
+ S,7,12802,13552,0.5,1
+ F,7,12802,13552,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",518,408
+ P,0,12969,,A
+ C,0,12969,,247,138,141
+ S,7,12969,13719,0.5,1
+ F,7,12969,13719,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",560,352
+ P,0,13136,,A
+ C,0,13136,,247,138,141
+ S,7,13136,13886,0.5,1
+ F,7,13136,13886,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",447,439
+ P,0,13302,13468,A
+ C,0,13302,,172,129,254
+ S,7,13302,14218,0.5,1
+ F,7,13302,14218,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",319,297
+ P,0,13636,,A
+ C,0,13636,,172,129,254
+ S,7,13636,14386,0.5,1
+ F,7,13636,14386,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",251,281
+ P,0,13802,,A
+ C,0,13802,,172,129,254
+ S,7,13802,14552,0.5,1
+ F,7,13802,14552,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",231,212
+ P,0,13969,14135,A
+ C,0,13969,,172,129,254
+ S,7,13969,14885,0.5,1
+ F,7,13969,14885,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",79,303
+ P,0,14302,,A
+ C,0,14302,,172,129,254
+ S,7,14302,15052,0.5,1
+ F,7,14302,15052,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",147,315
+ P,0,14469,,A
+ C,0,14469,,172,129,254
+ S,7,14469,15219,0.5,1
+ F,7,14469,15219,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",113,413
+ P,0,14636,,A
+ C,0,14636,,244,244,244
+ S,7,14636,15386,0.5,1
+ F,7,14636,15386,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",129,345
+ P,0,14803,,A
+ C,0,14803,,244,244,244
+ S,7,14803,15553,0.5,1
+ F,7,14803,15553,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",172,290
+ P,0,14969,,A
+ C,0,14969,,244,244,244
+ S,7,14969,15719,0.5,1
+ F,7,14969,15719,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",190,223
+ P,0,15136,,A
+ C,0,15136,,244,244,244
+ S,7,15136,15886,0.5,1
+ F,7,15136,15886,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",120,230
+ P,0,15303,,A
+ C,0,15303,,244,244,244
+ S,7,15303,16053,0.5,1
+ F,7,15303,16053,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",166,178
+ P,0,15469,,A
+ C,0,15469,,244,244,244
+ S,7,15469,16219,0.5,1
+ F,7,15469,16219,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",233,159
+ P,0,15636,,A
+ C,0,15636,,244,244,244
+ S,7,15636,16386,0.5,1
+ F,7,15636,16386,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",165,139
+ P,0,15803,,A
+ C,0,15803,,244,244,244
+ S,7,15803,16553,0.5,1
+ F,7,15803,16553,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",64,68
+ P,0,15969,16135,A
+ C,0,15969,,214,1,6
+ S,7,15969,16885,0.5,1
+ F,7,15969,16885,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",272,226
+ P,0,16303,,A
+ C,0,16303,,214,1,6
+ S,7,16303,17053,0.5,1
+ F,7,16303,17053,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",322,175
+ P,0,16469,,A
+ C,0,16469,,214,1,6
+ S,7,16469,17219,0.5,1
+ F,7,16469,17219,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",314,98
+ P,0,16636,16802,A
+ C,0,16636,,214,1,6
+ S,7,16636,17552,0.5,1
+ F,7,16636,17552,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",576,110
+ P,0,16969,,A
+ C,0,16969,,214,1,6
+ S,7,16969,17719,0.5,1
+ F,7,16969,17719,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",534,166
+ P,0,17136,,A
+ C,0,17136,,214,1,6
+ S,7,17136,17886,0.5,1
+ F,7,17136,17886,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",435,171
+ P,0,17302,,A
+ C,0,17302,,99,0,232
+ S,7,17302,18052,0.5,1
+ F,7,17302,18052,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",456,237
+ P,0,17469,,A
+ C,0,17469,,99,0,232
+ S,7,17469,18219,0.5,1
+ F,7,17469,18219,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",493,295
+ P,0,17635,,A
+ C,0,17635,,99,0,232
+ S,7,17635,18385,0.5,1
+ F,7,17635,18385,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",512,362
+ P,0,17802,,A
+ C,0,17802,,99,0,232
+ S,7,17802,18552,0.5,1
+ F,7,17802,18552,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",576,335
+ P,0,17969,,A
+ C,0,17969,,99,0,232
+ S,7,17969,18719,0.5,1
+ F,7,17969,18719,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",517,373
+ P,0,18135,,A
+ C,0,18135,,99,0,232
+ S,7,18135,18885,0.5,1
+ F,7,18135,18885,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",459,411
+ P,0,18302,,A
+ C,0,18302,,99,0,232
+ S,7,18302,19052,0.5,1
+ F,7,18302,19052,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",523,384
+ P,0,18469,,A
+ C,0,18469,,99,0,232
+ S,7,18469,19219,0.5,1
+ F,7,18469,19219,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",517,259
+ P,0,18635,18801,A
+ C,0,18635,,247,138,141
+ S,7,18635,19551,0.5,1
+ F,7,18635,19551,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",378,417
+ P,0,18969,,A
+ C,0,18969,,247,138,141
+ S,7,18969,19719,0.5,1
+ F,7,18969,19719,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",309,402
+ P,0,19135,,A
+ C,0,19135,,247,138,141
+ S,7,19135,19885,0.5,1
+ F,7,19135,19885,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",244,434
+ P,0,19302,19468,A
+ C,0,19302,,247,138,141
+ S,7,19302,20218,0.5,1
+ F,7,19302,20218,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",64,372
+ P,0,19635,,A
+ C,0,19635,,247,138,141
+ S,7,19635,20385,0.5,1
+ F,7,19635,20385,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",80,303
+ P,0,19802,,A
+ C,0,19802,,247,138,141
+ S,7,19802,20552,0.5,1
+ F,7,19802,20552,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",179,276
+ P,0,19969,,A
+ C,0,19969,,172,129,254
+ S,7,19969,20719,0.5,1
+ F,7,19969,20719,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",163,208
+ P,0,20136,,A
+ C,0,20136,,172,129,254
+ S,7,20136,20886,0.5,1
+ F,7,20136,20886,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",125,149
+ P,0,20302,,A
+ C,0,20302,,172,129,254
+ S,7,20302,21052,0.5,1
+ F,7,20302,21052,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",101,82
+ P,0,20469,,A
+ C,0,20469,,172,129,254
+ S,7,20469,21219,0.5,1
+ F,7,20469,21219,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",83,149
+ P,0,20636,,A
+ C,0,20636,,172,129,254
+ S,7,20636,21386,0.5,1
+ F,7,20636,21386,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",138,106
+ P,0,20802,,A
+ C,0,20802,,172,129,254
+ S,7,20802,21552,0.5,1
+ F,7,20802,21552,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",67,108
+ P,0,20969,,A
+ C,0,20969,,172,129,254
+ S,7,20969,21719,0.5,1
+ F,7,20969,21719,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",125,149
+ P,0,21136,,A
+ C,0,21136,,172,129,254
+ S,7,21136,21886,0.5,1
+ F,7,21136,21886,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",221,76
+ P,0,21302,21468,A
+ C,0,21302,,244,244,244
+ S,7,21302,22218,0.5,1
+ F,7,21302,22218,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",463,178
+ P,0,21636,,A
+ C,0,21636,,244,244,244
+ S,7,21636,22386,0.5,1
+ F,7,21636,22386,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",388,168
+ P,0,21802,,A
+ C,0,21802,,244,244,244
+ S,7,21802,22552,0.5,1
+ F,7,21802,22552,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",271,218
+ P,0,21969,22219,A
+ C,0,21969,,244,244,244
+ S,7,21969,22969,0.5,1
+ F,7,21969,22969,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",345,291
+ P,0,22302,22552,A
+ C,0,22302,,244,244,244
+ S,7,22302,23302,0.5,1
+ F,7,22302,23302,0.5,0
+Sprite,Foreground,Centre,"sb/Light2.png",0,0
+ P,0,27969,28219,A
+ C,0,27969,,99,0,232
+ S,7,27969,28969,0.4,0.5
+ F,7,27969,28969,0.5,0
+ M,0,27969,28219,129,216,131.17995,242.15933
+Sprite,Foreground,Centre,"sb/Light2.png",0,0
+ P,0,28302,28385,A
+ C,0,28302,,99,0,232
+ S,7,28302,29135,0.4,0.5
+ F,7,28302,29135,0.5,0
+ M,0,28302,28385,101,263,107.021454,288.5124
+Sprite,Foreground,Centre,"sb/Light2.png",0,0
+ P,0,28469,28885,A
+ C,0,28469,,99,0,232
+ S,7,28469,29635,0.4,0.5
+ F,7,28469,29635,0.5,0
+ M,0,28469,28802,132,315
+ M,0,28802,28885,132,315,129.97,340.96
+Sprite,Foreground,Centre,"sb/Light2.png",0,0
+ P,0,28969,29219,A
+ C,0,28969,,247,138,141
+ S,7,28969,29969,0.4,0.5
+ F,7,28969,29969,0.5,0
+ M,0,28969,29219,199,392,198.44162,418.24405
+Sprite,Foreground,Centre,"sb/Light2.png",0,0
+ P,0,29302,29552,A
+ C,0,29302,,247,138,141
+ S,7,29302,30302,0.4,0.5
+ F,7,29302,30302,0.5,0
+ M,0,29302,29552,274,362,274.55838,335.75595
+Sprite,Foreground,Centre,"sb/Light2.png",0,0
+ P,0,29636,29719,A
+ C,0,29636,,247,138,141
+ S,7,29636,30469,0.4,0.5
+ F,7,29636,30469,0.5,0
+ M,0,29636,29719,299,309,292.97855,283.4876
+Sprite,Foreground,Centre,"sb/Light2.png",0,0
+ P,0,29803,30219,A
+ C,0,29803,,247,138,141
+ S,7,29803,30969,0.4,0.5
+ F,7,29803,30969,0.5,0
+ M,0,29803,30136,268,257
+ M,0,30136,30219,268,257,270.03,231.04
+Sprite,Foreground,Centre,"sb/Light2.png",0,0
+ P,0,30302,30385,A
+ C,0,30302,,247,138,141
+ S,7,30302,31135,0.4,0.5
+ F,7,30302,31135,0.5,0
+ M,0,30302,30385,351,216,347.10605,190.04042
+Sprite,Foreground,Centre,"sb/Light2.png",0,0
+ P,0,30469,30552,A
+ C,0,30469,,247,138,141
+ S,7,30469,31302,0.4,0.5
+ F,7,30469,31302,0.5,0
+ M,0,30469,30552,419,265,422.99152,290.94476
+Sprite,Foreground,Centre,"sb/Light2.png",0,0
+ P,0,30636,30886,A
+ C,0,30636,,172,129,254
+ S,7,30636,31636,0.4,0.5
+ F,7,30636,31636,0.5,0
+ M,0,30636,30886,511,280,508.82007,253.84067
+Sprite,Foreground,Centre,"sb/Light2.png",0,0
+ P,0,30969,31052,A
+ C,0,30969,,172,129,254
+ S,7,30969,31802,0.4,0.5
+ F,7,30969,31802,0.5,0
+ M,0,30969,31052,539,233,532.9785,207.4876
+Sprite,Foreground,Centre,"sb/Light2.png",0,0
+ P,0,31136,31552,A
+ C,0,31136,,172,129,254
+ S,7,31136,32302,0.4,0.5
+ F,7,31136,32302,0.5,0
+ M,0,31136,31469,508,181
+ M,0,31469,31552,508,181,510.03,155.04001
+Sprite,Foreground,Centre,"sb/Light2.png",0,0
+ P,0,31636,31719,A
+ C,0,31636,,172,129,254
+ S,7,31636,32469,0.4,0.5
+ F,7,31636,32469,0.5,0
+ M,0,31636,31719,445,106,445.55838,79.755936
+Sprite,Foreground,Centre,"sb/Light2.png",0,0
+ P,0,31802,31885,A
+ C,0,31802,,172,129,254
+ S,7,31802,32635,0.4,0.5
+ F,7,31802,32635,0.5,0
+ M,0,31802,31885,368,134,367.02844,160.23203
+Sprite,Foreground,Centre,"sb/Light2.png",296,77
+ P,0,31969,,A
+ C,0,31969,,244,244,244
+ S,7,31969,32719,0.4,0.5
+ F,7,31969,32719,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",136,410
+ P,0,65302,65468,A
+ C,0,65302,,247,138,141
+ S,7,65302,66218,0.5,1
+ F,7,65302,66218,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",297,321
+ P,0,65636,65802,A
+ C,0,65636,,247,138,141
+ S,7,65636,66552,0.5,1
+ F,7,65636,66552,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",134,172
+ P,0,65969,,A
+ C,0,65969,,172,129,254
+ S,7,65969,66719,0.5,1
+ F,7,65969,66719,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",130,155
+ P,0,66136,,A
+ C,0,66136,,172,129,254
+ S,7,66136,66886,0.5,1
+ F,7,66136,66886,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",84,249
+ P,0,66302,66468,A
+ C,0,66302,,172,129,254
+ S,7,66302,67218,0.5,1
+ F,7,66302,67218,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",229,178
+ P,0,66636,,A
+ C,0,66636,,172,129,254
+ S,7,66636,67386,0.5,1
+ F,7,66636,67386,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",113,157
+ P,0,66802,,A
+ C,0,66802,,172,129,254
+ S,7,66802,67552,0.5,1
+ F,7,66802,67552,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",107,81
+ P,0,66969,67135,A
+ C,0,66969,,172,129,254
+ S,7,66969,67885,0.5,1
+ F,7,66969,67885,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",113,206
+ P,0,67302,,A
+ C,0,67302,,172,129,254
+ S,7,67302,68052,0.5,1
+ F,7,67302,68052,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",159,185
+ P,0,67469,,A
+ C,0,67469,,172,129,254
+ S,7,67469,68219,0.5,1
+ F,7,67469,68219,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",198,97
+ P,0,67636,,A
+ C,0,67636,,172,129,254
+ S,7,67636,68386,0.5,1
+ F,7,67636,68386,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",198,97
+ P,0,67802,,A
+ C,0,67802,,172,129,254
+ S,7,67802,68552,0.5,1
+ F,7,67802,68552,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",113,157
+ P,0,67969,,A
+ C,0,67969,,244,244,244
+ S,7,67969,68719,0.5,1
+ F,7,67969,68719,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",203,175
+ P,0,68136,,A
+ C,0,68136,,244,244,244
+ S,7,68136,68886,0.5,1
+ F,7,68136,68886,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",306,164
+ P,0,68302,,A
+ C,0,68302,,244,244,244
+ S,7,68302,69052,0.5,1
+ F,7,68302,69052,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",434,182
+ P,0,68469,,A
+ C,0,68469,,244,244,244
+ S,7,68469,69219,0.5,1
+ F,7,68469,69219,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",526,177
+ P,0,68636,,A
+ C,0,68636,,214,1,6
+ S,7,68636,69386,0.5,1
+ F,7,68636,69386,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",530,194
+ P,0,68803,,A
+ C,0,68803,,214,1,6
+ S,7,68803,69553,0.5,1
+ F,7,68803,69553,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",468,119
+ P,0,68969,69135,A
+ C,0,68969,,214,1,6
+ S,7,68969,69885,0.5,1
+ F,7,68969,69885,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",400,252
+ P,0,69303,,A
+ C,0,69303,,214,1,6
+ S,7,69303,70053,0.5,1
+ F,7,69303,70053,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",512,232
+ P,0,69469,,A
+ C,0,69469,,214,1,6
+ S,7,69469,70219,0.5,1
+ F,7,69469,70219,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",560,294
+ P,0,69636,69802,A
+ C,0,69636,,214,1,6
+ S,7,69636,70552,0.5,1
+ F,7,69636,70552,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",434,164
+ P,0,69969,,A
+ C,0,69969,,214,1,6
+ S,7,69969,70719,0.5,1
+ F,7,69969,70719,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",484,158
+ P,0,70136,,A
+ C,0,70136,,214,1,6
+ S,7,70136,70886,0.5,1
+ F,7,70136,70886,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",538,69
+ P,0,70303,,A
+ C,0,70303,,214,1,6
+ S,7,70303,71053,0.5,1
+ F,7,70303,71053,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",538,69
+ P,0,70469,,A
+ C,0,70469,,214,1,6
+ S,7,70469,71219,0.5,1
+ F,7,70469,71219,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",571,192
+ P,0,70636,70802,A
+ C,0,70636,,99,0,232
+ S,7,70636,71552,0.5,1
+ F,7,70636,71552,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",355,268
+ P,0,70970,71136,A
+ C,0,70970,,99,0,232
+ S,7,70970,71886,0.5,1
+ F,7,70970,71886,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",506,324
+ P,0,71303,,A
+ C,0,71303,,247,138,141
+ S,7,71303,72053,0.5,1
+ F,7,71303,72053,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",510,341
+ P,0,71470,,A
+ C,0,71470,,247,138,141
+ S,7,71470,72220,0.5,1
+ F,7,71470,72220,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",556,247
+ P,0,71636,71802,A
+ C,0,71636,,247,138,141
+ S,7,71636,72552,0.5,1
+ F,7,71636,72552,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",411,318
+ P,0,71970,,A
+ C,0,71970,,247,138,141
+ S,7,71970,72720,0.5,1
+ F,7,71970,72720,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",527,339
+ P,0,72136,,A
+ C,0,72136,,247,138,141
+ S,7,72136,72886,0.5,1
+ F,7,72136,72886,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",533,415
+ P,0,72303,72469,A
+ C,0,72303,,247,138,141
+ S,7,72303,73219,0.5,1
+ F,7,72303,73219,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",527,290
+ P,0,72636,,A
+ C,0,72636,,247,138,141
+ S,7,72636,73386,0.5,1
+ F,7,72636,73386,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",481,311
+ P,0,72803,,A
+ C,0,72803,,247,138,141
+ S,7,72803,73553,0.5,1
+ F,7,72803,73553,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",442,399
+ P,0,72970,,A
+ C,0,72970,,247,138,141
+ S,7,72970,73720,0.5,1
+ F,7,72970,73720,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",442,399
+ P,0,73136,,A
+ C,0,73136,,247,138,141
+ S,7,73136,73886,0.5,1
+ F,7,73136,73886,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",527,339
+ P,0,73303,,A
+ C,0,73303,,172,129,254
+ S,7,73303,74053,0.5,1
+ F,7,73303,74053,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",437,321
+ P,0,73470,,A
+ C,0,73470,,172,129,254
+ S,7,73470,74220,0.5,1
+ F,7,73470,74220,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",378,233
+ P,0,73636,,A
+ C,0,73636,,172,129,254
+ S,7,73636,74386,0.5,1
+ F,7,73636,74386,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",250,215
+ P,0,73803,,A
+ C,0,73803,,172,129,254
+ S,7,73803,74553,0.5,1
+ F,7,73803,74553,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",165,180
+ P,0,73970,,A
+ C,0,73970,,244,244,244
+ S,7,73970,74720,0.5,1
+ F,7,73970,74720,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",161,163
+ P,0,74137,,A
+ C,0,74137,,244,244,244
+ S,7,74137,74887,0.5,1
+ F,7,74137,74887,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",223,238
+ P,0,74303,74469,A
+ C,0,74303,,244,244,244
+ S,7,74303,75219,0.5,1
+ F,7,74303,75219,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",291,105
+ P,0,74637,,A
+ C,0,74637,,244,244,244
+ S,7,74637,75387,0.5,1
+ F,7,74637,75387,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",179,125
+ P,0,74803,,A
+ C,0,74803,,244,244,244
+ S,7,74803,75553,0.5,1
+ F,7,74803,75553,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",131,63
+ P,0,74970,75136,A
+ C,0,74970,,214,1,6
+ S,7,74970,75886,0.5,1
+ F,7,74970,75886,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",334,257
+ P,0,75302,75468,A
+ C,0,75302,,214,1,6
+ S,7,75302,76218,0.5,1
+ F,7,75302,76218,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",93,331
+ P,0,75636,,A
+ C,0,75636,,214,1,6
+ S,7,75636,76386,0.5,1
+ F,7,75636,76386,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",206,310
+ P,0,75802,,A
+ C,0,75802,,214,1,6
+ S,7,75802,76552,0.5,1
+ F,7,75802,76552,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",131,214
+ P,0,75969,,A
+ C,0,75969,,99,0,232
+ S,7,75969,76719,0.5,1
+ F,7,75969,76719,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",92,264
+ P,0,76136,,A
+ C,0,76136,,99,0,232
+ S,7,76136,76886,0.5,1
+ F,7,76136,76886,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",140,304
+ P,0,76302,,A
+ C,0,76302,,99,0,232
+ S,7,76302,77052,0.5,1
+ F,7,76302,77052,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",124,365
+ P,0,76469,,A
+ C,0,76469,,99,0,232
+ S,7,76469,77219,0.5,1
+ F,7,76469,77219,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",221,422
+ P,0,76636,76802,A
+ C,0,76636,,99,0,232
+ S,7,76636,77552,0.5,1
+ F,7,76636,77552,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",369,306
+ P,0,76969,,A
+ C,0,76969,,99,0,232
+ S,7,76969,77719,0.5,1
+ F,7,76969,77719,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",367,294
+ P,0,77136,,A
+ C,0,77136,,99,0,232
+ S,7,77136,77886,0.5,1
+ F,7,77136,77886,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",274,265
+ P,0,77302,,A
+ C,0,77302,,247,138,141
+ S,7,77302,78052,0.5,1
+ F,7,77302,78052,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",240,318
+ P,0,77469,,A
+ C,0,77469,,247,138,141
+ S,7,77469,78219,0.5,1
+ F,7,77469,78219,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",288,358
+ P,0,77636,,A
+ C,0,77636,,247,138,141
+ S,7,77636,78386,0.5,1
+ F,7,77636,78386,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",302,418
+ P,0,77802,,A
+ C,0,77802,,247,138,141
+ S,7,77802,78552,0.5,1
+ F,7,77802,78552,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",390,378
+ P,0,77969,,A
+ C,0,77969,,247,138,141
+ S,7,77969,78719,0.5,1
+ F,7,77969,78719,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",453,382
+ P,0,78136,,A
+ C,0,78136,,247,138,141
+ S,7,78136,78886,0.5,1
+ F,7,78136,78886,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",423,300
+ P,0,78302,,A
+ C,0,78302,,247,138,141
+ S,7,78302,79052,0.5,1
+ F,7,78302,79052,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",433,407
+ P,0,78469,,A
+ C,0,78469,,247,138,141
+ S,7,78469,79219,0.5,1
+ F,7,78469,79219,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",548,370
+ P,0,78636,,A
+ C,0,78636,,172,129,254
+ S,7,78636,79386,0.5,1
+ F,7,78636,79386,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",495,335
+ P,0,78802,,A
+ C,0,78802,,172,129,254
+ S,7,78802,79552,0.5,1
+ F,7,78802,79552,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",453,382
+ P,0,78969,,A
+ C,0,78969,,172,129,254
+ S,7,78969,79719,0.5,1
+ F,7,78969,79719,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",395,355
+ P,0,79136,,A
+ C,0,79136,,172,129,254
+ S,7,79136,79886,0.5,1
+ F,7,79136,79886,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",303,434
+ P,0,79302,79468,A
+ C,0,79302,,172,129,254
+ S,7,79302,80218,0.5,1
+ F,7,79302,80218,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",127,342
+ P,0,79636,,A
+ C,0,79636,,172,129,254
+ S,7,79636,80386,0.5,1
+ F,7,79636,80386,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",131,353
+ P,0,79803,,A
+ C,0,79803,,172,129,254
+ S,7,79803,80553,0.5,1
+ F,7,79803,80553,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",214,418
+ P,0,79969,,A
+ C,0,79969,,244,244,244
+ S,7,79969,80719,0.5,1
+ F,7,79969,80719,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",236,359
+ P,0,80136,,A
+ C,0,80136,,244,244,244
+ S,7,80136,80886,0.5,1
+ F,7,80136,80886,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",197,308
+ P,0,80303,,A
+ C,0,80303,,244,244,244
+ S,7,80303,81053,0.5,1
+ F,7,80303,81053,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",146,270
+ P,0,80469,,A
+ C,0,80469,,244,244,244
+ S,7,80469,81219,0.5,1
+ F,7,80469,81219,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",189,173
+ P,0,80636,,A
+ C,0,80636,,244,244,244
+ S,7,80636,81386,0.5,1
+ F,7,80636,81386,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",165,114
+ P,0,80803,,A
+ C,0,80803,,244,244,244
+ S,7,80803,81553,0.5,1
+ F,7,80803,81553,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",243,85
+ P,0,80969,,A
+ C,0,80969,,244,244,244
+ S,7,80969,81719,0.5,1
+ F,7,80969,81719,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",136,75
+ P,0,81136,,A
+ C,0,81136,,244,244,244
+ S,7,81136,81886,0.5,1
+ F,7,81136,81886,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",70,172
+ P,0,81302,,A
+ C,0,81302,,214,1,6
+ S,7,81302,82052,0.5,1
+ F,7,81302,82052,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",119,208
+ P,0,81468,,A
+ C,0,81468,,214,1,6
+ S,7,81468,82218,0.5,1
+ F,7,81468,82218,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",177,188
+ P,0,81635,,A
+ C,0,81635,,214,1,6
+ S,7,81635,82385,0.5,1
+ F,7,81635,82385,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",211,241
+ P,0,81802,,A
+ C,0,81802,,214,1,6
+ S,7,81802,82552,0.5,1
+ F,7,81802,82552,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",308,195
+ P,0,81968,,A
+ C,0,81968,,214,1,6
+ S,7,81968,82718,0.5,1
+ F,7,81968,82718,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",371,254
+ P,0,82135,,A
+ C,0,82135,,214,1,6
+ S,7,82135,82885,0.5,1
+ F,7,82135,82885,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",445,157
+ P,0,82302,,A
+ C,0,82302,,214,1,6
+ S,7,82302,83052,0.5,1
+ F,7,82302,83052,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",434,161
+ P,0,82469,,A
+ C,0,82469,,214,1,6
+ S,7,82469,83219,0.5,1
+ F,7,82469,83219,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",555,151
+ P,0,82636,,A
+ C,0,82636,,99,0,232
+ S,7,82636,83386,0.5,1
+ F,7,82636,83386,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",520,204
+ P,0,82802,,A
+ C,0,82802,,99,0,232
+ S,7,82802,83552,0.5,1
+ F,7,82802,83552,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",473,247
+ P,0,82969,,A
+ C,0,82969,,99,0,232
+ S,7,82969,83719,0.5,1
+ F,7,82969,83719,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",426,203
+ P,0,83136,,A
+ C,0,83136,,99,0,232
+ S,7,83136,83886,0.5,1
+ F,7,83136,83886,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",370,111
+ P,0,83302,,A
+ C,0,83302,,99,0,232
+ S,7,83302,84052,0.5,1
+ F,7,83302,84052,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",284,101
+ P,0,83469,,A
+ C,0,83469,,99,0,232
+ S,7,83469,84219,0.5,1
+ F,7,83469,84219,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",245,195
+ P,0,83636,,A
+ C,0,83636,,99,0,232
+ S,7,83636,84386,0.5,1
+ F,7,83636,84386,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",250,206
+ P,0,83803,,A
+ C,0,83803,,99,0,232
+ S,7,83803,84553,0.5,1
+ F,7,83803,84553,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",115,132
+ P,0,83969,,A
+ C,0,83969,,247,138,141
+ S,7,83969,84719,0.5,1
+ F,7,83969,84719,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",165,93
+ P,0,84136,,A
+ C,0,84136,,247,138,141
+ S,7,84136,84886,0.5,1
+ F,7,84136,84886,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",205,141
+ P,0,84302,,A
+ C,0,84302,,247,138,141
+ S,7,84302,85052,0.5,1
+ F,7,84302,85052,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",266,125
+ P,0,84469,,A
+ C,0,84469,,247,138,141
+ S,7,84469,85219,0.5,1
+ F,7,84469,85219,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",212,279
+ P,0,84636,84802,A
+ C,0,84636,,247,138,141
+ S,7,84636,85552,0.5,1
+ F,7,84636,85552,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",153,369
+ P,0,84969,,A
+ C,0,84969,,247,138,141
+ S,7,84969,85719,0.5,1
+ F,7,84969,85719,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",146,360
+ P,0,85136,,A
+ C,0,85136,,247,138,141
+ S,7,85136,85886,0.5,1
+ F,7,85136,85886,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",281,259
+ P,0,85302,,A
+ C,0,85302,,172,129,254
+ S,7,85302,86052,0.5,1
+ F,7,85302,86052,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",278,340
+ P,0,85469,,A
+ C,0,85469,,172,129,254
+ S,7,85469,86219,0.5,1
+ F,7,85469,86219,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",351,436
+ P,0,85635,,A
+ C,0,85635,,172,129,254
+ S,7,85635,86385,0.5,1
+ F,7,85635,86385,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",348,359
+ P,0,85802,,A
+ C,0,85802,,172,129,254
+ S,7,85802,86552,0.5,1
+ F,7,85802,86552,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",444,380
+ P,0,85969,,A
+ C,0,85969,,172,129,254
+ S,7,85969,86719,0.5,1
+ F,7,85969,86719,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",464,377
+ P,0,86052,,A
+ C,0,86052,,172,129,254
+ S,7,86052,86802,0.5,1
+ F,7,86052,86802,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",483,368
+ P,0,86136,,A
+ C,0,86136,,172,129,254
+ S,7,86136,86886,0.5,1
+ F,7,86136,86886,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",496,351
+ P,0,86219,,A
+ C,0,86219,,172,129,254
+ S,7,86219,86969,0.5,1
+ F,7,86219,86969,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",503,331
+ P,0,86302,86385,A
+ C,0,86302,,172,129,254
+ S,7,86302,87135,0.5,1
+ F,7,86302,87135,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",547,223
+ P,0,86469,86552,A
+ C,0,86469,,172,129,254
+ S,7,86469,87302,0.5,1
+ F,7,86469,87302,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",500,94
+ P,0,86636,,A
+ C,0,86636,,244,244,244
+ S,7,86636,87386,0.5,1
+ F,7,86636,87386,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",449,173
+ P,0,86802,,A
+ C,0,86802,,244,244,244
+ S,7,86802,87552,0.5,1
+ F,7,86802,87552,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",358,124
+ P,0,86969,,A
+ C,0,86969,,244,244,244
+ S,7,86969,87719,0.5,1
+ F,7,86969,87719,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",296,181
+ P,0,87136,,A
+ C,0,87136,,244,244,244
+ S,7,87136,87886,0.5,1
+ F,7,87136,87886,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",271,94
+ P,0,87302,87385,A
+ C,0,87302,,244,244,244
+ S,7,87302,88135,0.5,1
+ F,7,87302,88135,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",341,211
+ P,0,87469,87552,A
+ C,0,87469,,244,244,244
+ S,7,87469,88302,0.5,1
+ F,7,87469,88302,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",202,115
+ P,0,87636,87802,A
+ C,0,87636,,244,244,244
+ S,7,87636,88552,0.5,1
+ F,7,87636,88552,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",134,252
+ P,0,87969,88052,A
+ C,0,87969,,214,1,6
+ S,7,87969,88802,0.5,1
+ F,7,87969,88802,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",91,123
+ P,0,88136,88219,A
+ C,0,88136,,214,1,6
+ S,7,88136,88969,0.5,1
+ F,7,88136,88969,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",224,254
+ P,0,88302,,A
+ C,0,88302,,214,1,6
+ S,7,88302,89052,0.5,1
+ F,7,88302,89052,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",276,128
+ P,0,88469,,A
+ C,0,88469,,214,1,6
+ S,7,88469,89219,0.5,1
+ F,7,88469,89219,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",303,220
+ P,0,88636,88719,A
+ C,0,88636,,214,1,6
+ S,7,88636,89469,0.5,1
+ F,7,88636,89469,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",391,175
+ P,0,88803,,A
+ C,0,88803,,214,1,6
+ S,7,88803,89553,0.5,1
+ F,7,88803,89553,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",413,183
+ P,0,88886,,A
+ C,0,88886,,214,1,6
+ S,7,88886,89636,0.5,1
+ F,7,88886,89636,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",437,183
+ P,0,88969,,A
+ C,0,88969,,214,1,6
+ S,7,88969,89719,0.5,1
+ F,7,88969,89719,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",542,232
+ P,0,89136,,A
+ C,0,89136,,214,1,6
+ S,7,89136,89886,0.5,1
+ F,7,89136,89886,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",501,138
+ P,0,89302,,A
+ C,0,89302,,99,0,232
+ S,7,89302,90052,0.5,1
+ F,7,89302,90052,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",450,217
+ P,0,89468,,A
+ C,0,89468,,99,0,232
+ S,7,89468,90218,0.5,1
+ F,7,89468,90218,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",391,301
+ P,0,89635,,A
+ C,0,89635,,99,0,232
+ S,7,89635,90385,0.5,1
+ F,7,89635,90385,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",391,301
+ P,0,89802,,A
+ C,0,89802,,99,0,232
+ S,7,89802,90552,0.5,1
+ F,7,89802,90552,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",391,175
+ P,0,89968,90051,A
+ C,0,89968,,99,0,232
+ S,7,89968,90801,0.5,1
+ F,7,89968,90801,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",474,282
+ P,0,90135,90218,A
+ C,0,90135,,99,0,232
+ S,7,90135,90968,0.5,1
+ F,7,90135,90968,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",322,196
+ P,0,90302,90468,A
+ C,0,90302,,99,0,232
+ S,7,90302,91218,0.5,1
+ F,7,90302,91218,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",134,252
+ P,0,90635,90718,A
+ C,0,90635,,247,138,141
+ S,7,90635,91468,0.5,1
+ F,7,90635,91468,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",91,123
+ P,0,90802,90885,A
+ C,0,90802,,247,138,141
+ S,7,90802,91635,0.5,1
+ F,7,90802,91635,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",214,289
+ P,0,90968,,A
+ C,0,90968,,247,138,141
+ S,7,90968,91718,0.5,1
+ F,7,90968,91718,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",266,163
+ P,0,91135,,A
+ C,0,91135,,247,138,141
+ S,7,91135,91885,0.5,1
+ F,7,91135,91885,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",264,187
+ P,0,91219,,A
+ C,0,91219,,247,138,141
+ S,7,91219,91969,0.5,1
+ F,7,91219,91969,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",270,210
+ P,0,91302,,A
+ C,0,91302,,247,138,141
+ S,7,91302,92052,0.5,1
+ F,7,91302,92052,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",347,299
+ P,0,91469,,A
+ C,0,91469,,247,138,141
+ S,7,91469,92219,0.5,1
+ F,7,91469,92219,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",436,234
+ P,0,91635,,A
+ C,0,91635,,247,138,141
+ S,7,91635,92385,0.5,1
+ F,7,91635,92385,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",541,337
+ P,0,91802,,A
+ C,0,91802,,247,138,141
+ S,7,91802,92552,0.5,1
+ F,7,91802,92552,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",550,200
+ P,0,91969,,A
+ C,0,91969,,172,129,254
+ S,7,91969,92719,0.5,1
+ F,7,91969,92719,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",471,324
+ P,0,92135,,A
+ C,0,92135,,172,129,254
+ S,7,92135,92885,0.5,1
+ F,7,92135,92885,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",390,285
+ P,0,92302,,A
+ C,0,92302,,172,129,254
+ S,7,92302,93052,0.5,1
+ F,7,92302,93052,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",282,319
+ P,0,92469,,A
+ C,0,92469,,172,129,254
+ S,7,92469,93219,0.5,1
+ F,7,92469,93219,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",293,245
+ P,0,92635,92718,A
+ C,0,92635,,172,129,254
+ S,7,92635,93468,0.5,1
+ F,7,92635,93468,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",363,362
+ P,0,92802,92885,A
+ C,0,92802,,172,129,254
+ S,7,92802,93635,0.5,1
+ F,7,92802,93635,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",224,266
+ P,0,92969,93135,A
+ C,0,92969,,172,129,254
+ S,7,92969,93885,0.5,1
+ F,7,92969,93885,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",156,403
+ P,0,93302,93385,A
+ C,0,93302,,244,244,244
+ S,7,93302,94135,0.5,1
+ F,7,93302,94135,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",113,274
+ P,0,93469,93552,A
+ C,0,93469,,244,244,244
+ S,7,93469,94302,0.5,1
+ F,7,93469,94302,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",247,376
+ P,0,93635,,A
+ C,0,93635,,244,244,244
+ S,7,93635,94385,0.5,1
+ F,7,93635,94385,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",367,277
+ P,0,93802,,A
+ C,0,93802,,244,244,244
+ S,7,93802,94552,0.5,1
+ F,7,93802,94552,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",320,375
+ P,0,93969,,A
+ C,0,93969,,244,244,244
+ S,7,93969,94719,0.5,1
+ F,7,93969,94719,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",333,394
+ P,0,94052,,A
+ C,0,94052,,244,244,244
+ S,7,94052,94802,0.5,1
+ F,7,94052,94802,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",353,407
+ P,0,94136,,A
+ C,0,94136,,244,244,244
+ S,7,94136,94886,0.5,1
+ F,7,94136,94886,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",377,408
+ P,0,94219,,A
+ C,0,94219,,244,244,244
+ S,7,94219,94969,0.5,1
+ F,7,94219,94969,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",400,401
+ P,0,94302,,A
+ C,0,94302,,244,244,244
+ S,7,94302,95052,0.5,1
+ F,7,94302,95052,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",534,414
+ P,0,94469,,A
+ C,0,94469,,244,244,244
+ S,7,94469,95219,0.5,1
+ F,7,94469,95219,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",274,181
+ P,0,95969,,A
+ C,0,95969,,247,138,141
+ S,7,95969,96719,0.5,1
+ F,7,95969,96719,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",180,232
+ P,0,96136,96302,A
+ C,0,96136,,247,138,141
+ S,7,96136,97052,0.5,1
+ F,7,96136,97052,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",318,256
+ P,0,96386,,A
+ C,0,96386,,247,138,141
+ S,7,96386,97136,0.5,1
+ F,7,96386,97136,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",318,256
+ P,0,96469,,A
+ C,0,96469,,247,138,141
+ S,7,96469,97219,0.5,1
+ F,7,96469,97219,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",329,123
+ P,0,96636,,A
+ C,0,96636,,247,138,141
+ S,7,96636,97386,0.5,1
+ F,7,96636,97386,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",356,129
+ P,0,96719,,A
+ C,0,96719,,247,138,141
+ S,7,96719,97469,0.5,1
+ F,7,96719,97469,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",383,128
+ P,0,96802,,A
+ C,0,96802,,247,138,141
+ S,7,96802,97552,0.5,1
+ F,7,96802,97552,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",411,128
+ P,0,96886,,A
+ C,0,96886,,247,138,141
+ S,7,96886,97636,0.5,1
+ F,7,96886,97636,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",440,127
+ P,0,96969,97052,A
+ C,0,96969,,172,129,254
+ S,7,96969,97802,0.5,1
+ F,7,96969,97802,0.5,0
+Sprite,Foreground,Centre,"sb/particle.png",523,241
+ P,0,97136,97219,A
+ C,0,97136,,172,129,254
+ S,7,97136,97969,0.5,1
+ F,7,97136,97969,0.5,0
+//Storyboard Sound Samples
+
+[TimingPoints]
+1303,333.333333333333,4,2,2,35,1,0
+1303,-166.666666666667,4,2,2,35,0,0
+5302,-166.666666666667,4,2,2,45,0,0
+5469,-166.666666666667,4,2,2,35,0,0
+5636,-166.666666666667,4,2,2,35,0,0
+10969,-166.666666666667,4,2,2,40,0,0
+11136,-166.666666666667,4,2,2,45,0,0
+11302,-166.666666666667,4,2,2,50,0,0
+11969,-100,4,2,2,65,0,0
+14302,-100,4,2,2,75,0,0
+14636,-100,4,2,2,65,0,0
+16969,-100,4,2,2,75,0,0
+17302,-100,4,2,2,65,0,0
+19636,-100,4,2,2,75,0,0
+19969,-100,4,2,2,65,0,0
+21302,-100,4,2,2,75,0,0
+21969,-100,4,2,2,65,0,0
+22302,-100,4,2,2,75,0,0
+22636,-166.666666666667,4,2,2,40,0,0
+27969,-133.333333333333,4,2,2,55,0,0
+31969,-238.095238095238,4,2,2,65,0,0
+33302,-200,4,2,2,75,0,0
+33386,-200,4,2,2,40,0,0
+34802,-200,4,2,2,25,0,0
+34823,-200,4,2,2,40,0,0
+37469,-200,4,2,2,25,0,0
+37490,-200,4,2,2,40,0,0
+38136,-200,4,2,2,44,0,0
+38302,-200,4,2,2,48,0,0
+38469,-200,4,2,2,52,0,0
+38636,-200,4,2,2,62,0,0
+38719,-200,4,2,2,40,0,0
+40136,-200,4,2,2,25,0,0
+40157,-200,4,2,2,40,0,0
+42802,-200,4,2,2,25,0,0
+42823,-200,4,2,2,40,0,0
+43969,-133.333333333333,4,2,2,50,0,0
+48636,-133.333333333333,4,2,2,60,0,0
+49302,-133.333333333333,4,2,2,50,0,0
+53302,-133.333333333333,4,2,2,45,0,0
+53969,-133.333333333333,4,2,2,60,0,0
+54636,-133.333333333333,4,2,2,55,0,0
+62636,-133.333333333333,4,2,2,45,0,0
+64219,-133.333333333333,4,2,2,40,0,0
+64636,-133.333333333333,4,2,2,45,0,0
+64802,-133.333333333333,4,2,2,55,0,0
+64969,-133.333333333333,4,2,2,65,0,0
+65219,-133.333333333333,4,2,2,30,0,0
+65302,-133.333333333333,4,2,2,70,0,0
+74969,-133.333333333333,4,2,2,55,0,0
+75302,-133.333333333333,4,2,2,60,0,0
+75636,-133.333333333333,4,2,2,80,0,0
+75719,-133.333333333333,4,2,2,40,0,0
+75802,-133.333333333333,4,2,2,60,0,0
+75886,-133.333333333333,4,2,2,40,0,0
+75969,-100,4,2,2,75,0,0
+78636,-100,4,2,2,77,0,0
+81302,-100,4,2,2,79,0,0
+83969,-100,4,2,2,82,0,0
+84636,-100,4,2,2,72,0,0
+85302,-100,4,2,2,62,0,0
+85969,-100,4,2,2,70,0,0
+86302,-100,4,2,2,75,0,0
+94636,-100,4,2,2,70,0,0
+94719,-100,4,2,2,50,0,0
+95969,-100,4,2,2,55,0,0
+96636,-100,4,2,2,60,0,0
+96969,-100,4,2,2,65,0,0
+97136,-100,4,2,2,70,0,0
+97302,-100,4,2,2,55,0,0
+97386,-100,4,2,2,45,0,0
+102636,-100,4,2,2,40,0,0
+105302,-100,4,2,2,35,0,0
+107136,-100,4,2,2,40,0,0
+107469,-100,4,2,2,45,0,0
+107636,-100,4,2,2,50,0,0
+107802,-100,4,2,2,55,0,0
+107969,-100,4,2,2,60,0,0
+108052,-100,4,2,2,40,0,0
+109219,-100,4,2,2,20,0,0
+109302,-100,4,2,2,45,0,0
+109469,-100,4,2,2,25,0,0
+110636,-100,4,2,2,60,0,0
+110719,-100,4,2,2,40,0,0
+111886,-100,4,2,2,20,0,0
+111969,-100,4,2,2,45,0,0
+112136,-100,4,2,2,25,0,0
+113302,-100,4,2,2,60,0,0
+113386,-100,4,2,2,40,0,0
+114552,-100,4,2,2,20,0,0
+114636,-100,4,2,2,45,0,0
+114802,-100,4,2,2,25,0,0
+115969,-100,4,2,2,60,0,0
+116052,-100,4,2,2,40,0,0
+117219,-100,4,2,2,20,0,0
+117302,-100,4,2,2,45,0,0
+117469,-100,4,2,2,25,0,0
+118136,-100,4,2,2,35,0,0
+118302,-100,4,2,2,43,0,0
+118469,-100,4,2,2,51,0,0
+118552,-100,4,2,2,5,0,0
+
+
+[Colours]
+Combo1 : 244,244,244
+Combo2 : 214,1,6
+Combo3 : 99,0,232
+Combo4 : 247,138,141
+Combo5 : 172,129,254
+
+[HitObjects]
+122,155,1303,5,2,0:0:0:0:
+203,136,1636,1,2,0:0:0:0:
+218,97,1802,1,2,0:0:0:0:
+414,23,2636,1,2,0:0:0:0:
+372,19,2802,1,0,0:0:0:0:
+330,26,2969,1,2,0:0:0:0:
+297,52,3136,1,0,0:0:0:0:
+270,84,3302,1,2,0:0:0:0:
+186,71,3636,1,2,0:0:0:0:
+261,108,3969,5,2,0:0:0:0:
+273,191,4302,1,2,0:0:0:0:
+313,201,4469,1,2,0:0:0:0:
+453,356,5302,6,0,L|398:350,1,41.9999987182618,4|0,0:1|0:0,0:0:0:0:
+416,278,5636,1,2,0:0:0:0:
+374,280,5802,1,2,0:0:0:0:
+333,289,5969,1,2,0:0:0:0:
+302,367,6302,1,2,0:0:0:0:
+261,354,6469,1,0,0:0:0:0:
+226,329,6636,5,2,1:2:0:0:
+209,246,6969,1,2,0:0:0:0:
+167,237,7136,1,2,0:0:0:0:
+2,367,7969,5,2,1:2:0:0:
+39,347,8136,1,0,0:0:0:0:
+58,310,8302,1,2,0:0:0:0:
+100,307,8469,1,0,0:0:0:0:
+139,291,8636,1,2,0:0:0:0:
+162,210,8969,1,2,0:0:0:0:
+123,198,9136,1,2,1:2:0:0:
+91,173,9302,5,2,1:2:0:0:
+80,89,9636,1,2,0:0:0:0:
+39,78,9802,1,2,0:0:0:0:
+224,41,10636,5,2,1:2:0:0:
+255,68,10802,1,2,0:0:0:0:
+286,39,10969,1,2,0:0:0:0:
+326,23,11136,1,2,0:0:0:0:
+368,22,11302,2,0,L|364:80,1,41.9999987182618,2|0,0:0|0:0,0:0:0:0:
+375,150,11636,1,0,0:0:0:0:
+415,162,11802,1,0,0:0:0:0:
+512,132,11969,5,0,1:0:0:0:
+496,200,12136,1,0,0:0:0:0:
+459,259,12302,1,8,0:0:0:0:
+441,326,12469,1,2,0:0:0:0:
+509,311,12636,1,2,0:0:0:0:
+444,283,12802,1,0,0:0:0:0:
+454,352,12969,1,8,0:0:0:0:
+496,296,13136,1,0,0:0:0:0:
+383,383,13302,6,0,P|342:377|303:379,1,70,4|0,1:2|0:0,0:0:0:0:
+255,241,13636,1,8,0:0:0:0:
+187,225,13802,1,0,0:0:0:0:
+167,156,13969,2,0,P|126:162|87:160,1,70,2|0,0:0|0:0,0:0:0:0:
+15,247,14302,1,4,1:2:0:0:
+83,259,14469,1,0,1:0:0:0:
+49,357,14636,5,4,1:2:0:0:
+65,289,14803,1,0,0:0:0:0:
+108,234,14969,1,8,0:0:0:0:
+126,167,15136,1,2,0:0:0:0:
+56,174,15303,1,2,0:0:0:0:
+102,122,15469,1,0,0:0:0:0:
+169,103,15636,1,8,0:0:0:0:
+101,83,15803,1,0,0:0:0:0:
+0,12,15969,6,0,P|41:18|80:16,1,70,4|0,1:2|0:0,0:0:0:0:
+208,170,16303,1,8,0:0:0:0:
+258,119,16469,1,2,0:0:0:0:
+250,42,16636,2,0,P|284:42|319:48,1,70,2|0,0:0|0:0,0:0:0:0:
+512,54,16969,1,4,1:2:0:0:
+470,110,17136,1,0,1:0:0:0:
+371,115,17302,5,4,1:2:0:0:
+392,181,17469,1,0,0:0:0:0:
+429,239,17635,1,12,0:0:0:0:
+448,306,17802,1,0,0:0:0:0:
+512,279,17969,1,0,1:0:0:0:
+453,317,18135,1,2,0:0:0:0:
+395,355,18302,1,12,0:0:0:0:
+459,328,18469,1,2,0:0:0:0:
+453,203,18635,6,0,P|412:197|373:199,1,70,4|0,1:2|0:0,0:0:0:0:
+314,361,18969,1,8,0:0:0:0:
+245,346,19135,1,0,0:0:0:0:
+180,378,19302,2,0,P|139:384|100:382,1,70,0|0,1:0|0:0,0:0:0:0:
+0,316,19635,1,4,1:2:0:0:
+16,247,19802,1,0,1:0:0:0:
+115,220,19969,5,4,1:2:0:0:
+99,152,20136,1,0,0:0:0:0:
+61,93,20302,1,12,0:0:0:0:
+37,26,20469,1,0,0:0:0:0:
+19,93,20636,1,0,1:0:0:0:
+74,50,20802,1,2,0:0:0:0:
+3,52,20969,1,12,0:0:0:0:
+61,93,21136,1,2,0:0:0:0:
+157,20,21302,6,0,P|198:19|236:27,1,70,4|0,1:2|1:2,0:0:0:0:
+399,122,21636,1,8,0:2:0:0:
+324,112,21802,1,4,1:2:0:0:
+207,162,21969,2,0,P|205:144|202:125,3,35,4|0|0|0,1:2|1:2|1:2|1:2,0:0:0:0:
+281,235,22302,2,0,P|283:217|286:198,3,35,4|0|4|0,1:2|1:2|1:2|1:2,0:0:0:0:
+256,315,22636,5,4,1:2:0:0:
+256,315,22969,1,8,0:0:0:0:
+436,273,23636,2,0,P|441:221|447:181,1,83.9999974365235,10|2,0:0|0:0,0:0:0:0:
+445,189,24302,1,8,0:0:0:0:
+200,309,24969,1,10,0:0:0:0:
+157,318,25136,1,10,0:0:0:0:
+76,273,25302,1,2,0:0:0:0:
+72,269,25636,1,8,0:0:0:0:
+318,101,26302,1,10,0:0:0:0:
+361,110,26469,1,2,0:0:0:0:
+253,42,26636,1,2,0:0:0:0:
+249,46,26969,1,8,0:0:0:0:
+82,277,27636,1,8,0:0:0:0:
+27,225,27802,1,8,0:0:0:0:
+65,160,27969,6,0,L|69:208,3,26.2500010013581,0|0|0|0,1:0|0:0|0:0|0:0,0:0:0:0:
+37,207,28302,2,0,P|42:226|45:245,1,26.2500010013581,8|0,0:0|0:0,0:0:0:0:
+68,259,28469,2,0,B|68:278|68:278|61:302,5,26.2500010013581,0|0|0|0|0|0,0:0|0:0|1:0|0:0|0:0|0:0,0:0:0:0:
+135,336,28969,6,0,L|134:383,3,26.2500010013581,8|0|0|0,0:0|0:0|0:0|0:0,0:0:0:0:
+210,306,29302,2,0,L|211:259,3,26.2500010013581,0|0|0|0,1:0|0:0|0:0|0:0,0:0:0:0:
+235,253,29636,2,0,P|230:234|227:215,1,26.2500010013581,8|0,0:0|0:0,0:0:0:0:
+204,201,29803,2,0,B|204:182|204:182|211:158,5,26.2500010013581,0|0|0|0|0|0,0:0|0:0|1:0|0:0|0:0|0:0,0:0:0:0:
+287,160,30302,2,0,B|281:120,1,26.2500010013581,8|0,0:0|0:0,0:0:0:0:
+355,209,30469,2,0,B|359:235,1,26.2500010013581,8|0,0:0|0:0,0:0:0:0:
+447,224,30636,6,0,L|443:176,3,26.2500010013581,0|0|0|0,1:0|0:0|0:0|0:0,0:0:0:0:
+475,177,30969,2,0,P|470:158|467:139,1,26.2500010013581,8|0,0:0|0:0,0:0:0:0:
+444,125,31136,2,0,B|444:106|444:106|451:82,5,26.2500010013581,0|0|0|0|0|0,0:0|0:0|1:0|0:0|0:0|0:0,0:0:0:0:
+381,50,31636,2,0,L|382:3,1,26.2500010013581,8|0,0:0|0:0,0:0:0:0:
+304,78,31802,2,0,L|303:105,1,26.2500010013581,8|0,0:0|0:0,0:0:0:0:
+232,21,31969,5,2,0:0:0:0:
+280,363,33302,1,4,0:1:0:0:
+85,216,35969,5,4,0:1:0:0:
+308,204,37802,1,2,0:0:0:0:
+297,211,37969,1,2,0:0:0:0:
+259,198,38136,1,2,0:0:0:0:
+231,219,38302,1,2,0:0:0:0:
+170,189,38469,1,2,0:0:0:0:
+85,216,38636,1,4,0:1:0:0:
+427,168,41302,5,4,0:1:0:0:
+124,288,43969,6,0,P|125:248|128:218,1,52.5000020027161,2|0,0:0|0:0,0:0:0:0:
+213,220,44302,1,2,0:0:0:0:
+223,190,44469,1,0,0:0:0:0:
+153,164,44636,5,8,0:0:0:0:
+49,198,44802,2,0,P|52:257|56:322,1,105.000004005432
+122,350,45302,1,2,0:3:0:0:
+153,351,45469,1,0,0:0:0:0:
+181,365,45636,1,2,0:0:0:0:
+212,363,45802,1,0,0:0:0:0:
+267,305,45969,5,8,0:0:0:0:
+320,359,46136,1,0,0:0:0:0:
+340,369,46303,1,0,0:0:0:0:
+362,368,46469,1,0,0:0:0:0:
+388,288,46636,6,0,P|387:248|384:218,1,52.5000020027161,2|0,0:0|0:0,0:0:0:0:
+299,220,46969,1,2,0:0:0:0:
+289,190,47136,1,0,0:0:0:0:
+359,164,47303,5,8,0:0:0:0:
+463,186,47469,2,0,P|460:127|456:62,1,105.000004005432
+390,34,47969,1,2,0:3:0:0:
+359,33,48136,1,0,0:0:0:0:
+331,19,48303,1,0,0:0:0:0:
+300,21,48469,1,0,0:0:0:0:
+256,88,48636,5,8,0:0:0:0:
+323,58,48802,1,2,0:0:0:0:
+256,88,48969,1,2,0:0:0:0:
+189,58,49136,1,2,0:0:0:0:
+99,114,49302,6,0,P|100:154|103:184,1,52.5000020027161,2|0,0:0|0:0,0:0:0:0:
+169,226,49635,1,2,0:0:0:0:
+179,256,49802,1,0,0:0:0:0:
+109,282,49969,5,8,0:0:0:0:
+33,216,50135,2,0,P|17:181|22:115,1,105.000004005432
+76,36,50635,1,2,0:3:0:0:
+107,35,50802,1,0,0:0:0:0:
+135,21,50969,1,2,0:0:0:0:
+166,23,51135,1,0,0:0:0:0:
+241,51,51302,5,8,0:0:0:0:
+188,105,51469,1,0,0:0:0:0:
+168,115,51636,1,0,0:0:0:0:
+146,114,51802,1,0,0:0:0:0:
+192,194,51969,6,0,P|232:195|262:198,1,52.5000020027161,2|0,0:0|0:0,0:0:0:0:
+260,283,52302,1,2,0:0:0:0:
+290,293,52469,1,0,0:0:0:0:
+354,207,52636,6,0,P|351:117|346:38,1,157.500006008148,8|0,0:0|0:0,0:0:0:0:
+261,69,53302,2,0,P|265:110|269:136,1,52.5000020027161,2|0,0:3|0:0,0:0:0:0:
+212,176,53636,1,0,0:0:0:0:
+210,207,53802,1,0,0:0:0:0:
+140,148,53969,5,8,0:0:0:0:
+211,140,54136,1,2,0:0:0:0:
+276,163,54302,1,2,0:0:0:0:
+345,158,54469,1,2,0:0:0:0:
+428,215,54636,6,0,P|480:179|489:82,1,157.500006008148,4|0,0:1|0:0,0:0:0:0:
+435,27,55302,1,8,0:0:0:0:
+354,95,55469,1,0,0:0:0:0:
+354,95,55636,1,0,0:0:0:0:
+354,95,55802,1,0,0:0:0:0:
+283,45,55969,5,2,0:3:0:0:
+270,54,56136,1,0,0:0:0:0:
+203,97,56302,1,2,0:0:0:0:
+187,92,56469,1,0,0:0:0:0:
+115,55,56636,1,10,0:0:0:0:
+99,58,56802,1,0,0:0:0:0:
+83,61,56969,1,0,0:0:0:0:
+12,99,57136,1,0,0:0:0:0:
+60,38,57302,6,0,P|71:106|84:200,1,157.500006008148,4|0,0:1|0:0,0:0:0:0:
+30,255,57968,1,8,0:0:0:0:
+98,336,58135,1,0,0:0:0:0:
+98,336,58302,1,0,0:0:0:0:
+98,336,58468,1,0,0:0:0:0:
+146,254,58635,5,2,0:3:0:0:
+133,263,58802,1,0,0:0:0:0:
+66,306,58968,1,2,0:0:0:0:
+50,301,59135,1,0,0:0:0:0:
+143,310,59302,1,10,0:0:0:0:
+146,326,59468,1,2,0:0:0:0:
+149,342,59635,1,2,0:0:0:0:
+219,384,59802,1,2,0:0:0:0:
+271,299,59969,6,0,B|260:226|215:220|199:153,1,157.500006008148,4|0,0:1|0:0,0:0:0:0:
+247,92,60635,1,8,0:0:0:0:
+335,151,60802,1,0,0:0:0:0:
+335,151,60969,1,0,0:0:0:0:
+335,151,61135,1,0,0:0:0:0:
+370,233,61302,5,2,0:3:0:0:
+357,224,61469,1,0,0:0:0:0:
+290,181,61635,1,2,0:0:0:0:
+274,186,61802,1,0,0:0:0:0:
+364,143,61969,1,10,0:0:0:0:
+380,146,62135,1,0,0:0:0:0:
+396,149,62302,1,0,0:0:0:0:
+467,187,62469,1,0,0:0:0:0:
+357,224,62635,6,0,B|309:196|271:241|195:200,1,157.500006008148,4|0,0:1|0:0,0:0:0:0:
+92,163,63302,2,0,P|109:132|111:96,1,52.5000020027161
+139,21,63636,1,0,0:0:0:0:
+139,21,63802,1,0,0:0:0:0:
+163,108,63968,5,0,1:0:0:0:
+150,99,64135,1,0,3:0:0:0:
+173,179,64301,1,2,0:0:0:0:
+157,184,64468,1,0,0:0:0:0:
+171,259,64635,1,2,0:0:0:0:
+168,275,64802,1,2,0:0:0:0:
+149,348,64968,1,2,0:0:0:0:
+190,383,65135,1,2,0:0:0:0:
+72,354,65302,6,0,P|75:322|75:290,1,52.5000020027161,0|0,1:0|0:0,0:0:0:0:
+233,265,65636,2,0,P|229:236|225:202,1,52.5000020027161,8|0,0:0|0:0,0:0:0:0:
+70,116,65969,5,0,1:0:0:0:
+66,99,66136,1,0,0:0:0:0:
+20,193,66302,2,0,L|55:140,1,52.5000020027161,8|0,0:0|0:0,0:0:0:0:
+165,122,66636,1,0,1:0:0:0:
+49,101,66802,1,2,0:0:0:0:
+43,25,66969,2,0,L|68:92,1,52.5000020027161,8|2,0:0|0:0,0:0:0:0:
+49,150,67302,1,0,1:0:0:0:
+95,129,67469,1,2,0:0:0:0:
+134,41,67636,1,8,0:0:0:0:
+134,41,67802,1,8,0:0:0:0:
+49,101,67969,5,4,1:1:0:0:
+139,119,68136,1,0,0:0:0:0:
+242,108,68302,1,8,0:0:0:0:
+370,126,68469,1,0,0:0:0:0:
+462,121,68636,5,0,1:0:0:0:
+466,138,68803,1,0,0:0:0:0:
+404,63,68969,2,0,L|393:129,1,52.5000020027161,8|0,0:0|0:0,0:0:0:0:
+336,196,69303,1,0,1:0:0:0:
+448,176,69469,1,2,0:0:0:0:
+496,238,69636,2,0,L|486:173,1,52.5000020027161,8|2,0:0|0:0,0:0:0:0:
+370,108,69969,1,0,1:0:0:0:
+420,102,70136,1,2,0:0:0:0:
+474,13,70303,1,8,0:0:0:0:
+474,13,70469,1,8,0:0:0:0:
+507,136,70636,6,0,P|475:133|443:133,1,52.5000020027161,4|0,1:1|0:0,0:0:0:0:
+291,212,70970,2,0,P|320:208|354:204,1,52.5000020027161,8|0,0:0|0:0,0:0:0:0:
+442,268,71303,5,0,1:0:0:0:
+446,285,71470,1,0,0:0:0:0:
+492,191,71636,2,0,L|457:244,1,52.5000020027161,8|0,0:0|0:0,0:0:0:0:
+347,262,71970,1,0,1:0:0:0:
+463,283,72136,1,2,0:0:0:0:
+469,359,72303,2,0,L|444:292,1,52.5000020027161,8|2,0:0|0:0,0:0:0:0:
+463,234,72636,1,0,1:0:0:0:
+417,255,72803,1,2,0:0:0:0:
+378,343,72970,1,8,0:0:0:0:
+378,343,73136,1,8,0:0:0:0:
+463,283,73303,5,4,1:1:0:0:
+373,265,73470,1,2,0:0:0:0:
+314,177,73636,1,8,0:0:0:0:
+186,159,73803,1,2,0:0:0:0:
+101,124,73970,5,0,1:0:0:0:
+97,107,74137,1,2,0:0:0:0:
+159,182,74303,2,0,L|170:116,1,52.5000020027161,8|2,0:0|0:0,0:0:0:0:
+227,49,74637,1,0,1:0:0:0:
+115,69,74803,1,2,0:0:0:0:
+67,7,74970,6,0,L|77:72,1,52.5000020027161,12|0,0:0|0:0,0:0:0:0:
+270,201,75302,2,0,L|258:129,1,52.5000020027161,4|0,1:2|0:0,0:0:0:0:
+29,275,75636,1,12,0:0:0:0:
+142,254,75802,1,12,0:0:0:0:
+67,158,75969,5,4,1:1:0:0:
+28,208,76136,1,2,0:0:0:0:
+76,248,76302,1,8,0:0:0:0:
+60,309,76469,1,2,0:0:0:0:
+157,366,76636,2,0,L|239:354,1,70,0|2,1:0|0:0,0:0:0:0:
+305,250,76969,1,8,0:0:0:0:
+303,238,77136,1,2,0:0:0:0:
+210,209,77302,5,0,1:0:0:0:
+176,262,77469,1,2,0:0:0:0:
+224,302,77636,1,8,0:0:0:0:
+238,362,77802,1,2,0:0:0:0:
+326,322,77969,1,0,1:0:0:0:
+389,326,78136,1,2,0:0:0:0:
+359,244,78302,1,8,0:0:0:0:
+369,351,78469,1,8,0:0:0:0:
+484,314,78636,5,4,1:1:0:0:
+431,279,78802,1,2,0:0:0:0:
+389,326,78969,1,8,0:0:0:0:
+331,299,79136,1,2,0:0:0:0:
+239,378,79302,2,0,L|158:370,1,70,0|2,1:0|0:0,0:0:0:0:
+63,286,79636,1,8,0:0:0:0:
+67,297,79803,1,2,0:0:0:0:
+150,362,79969,5,0,1:0:0:0:
+172,303,80136,1,2,0:0:0:0:
+133,252,80303,1,8,0:0:0:0:
+82,214,80469,1,2,0:0:0:0:
+125,117,80636,1,0,1:0:0:0:
+101,58,80803,1,2,0:0:0:0:
+179,29,80969,1,8,0:0:0:0:
+72,19,81136,1,8,0:0:0:0:
+6,116,81302,5,4,1:1:0:0:
+55,152,81468,1,2,0:0:0:0:
+113,132,81635,1,8,0:0:0:0:
+147,185,81802,1,2,0:0:0:0:
+244,139,81968,1,0,1:0:0:0:
+307,198,82135,1,2,0:0:0:0:
+381,101,82302,1,8,0:0:0:0:
+370,105,82469,1,2,0:0:0:0:
+491,95,82636,5,0,1:0:0:0:
+456,148,82802,1,2,0:0:0:0:
+409,191,82969,1,8,0:0:0:0:
+362,147,83136,1,2,0:0:0:0:
+306,55,83302,1,0,1:0:0:0:
+220,45,83469,1,2,0:0:0:0:
+181,139,83636,1,8,0:0:0:0:
+186,150,83803,1,8,0:0:0:0:
+51,76,83969,5,4,1:1:0:0:
+101,37,84136,1,0,0:0:0:0:
+141,85,84302,1,8,0:0:0:0:
+202,69,84469,1,0,0:0:0:0:
+148,223,84636,2,0,L|136:141,1,70,4|0,1:1|0:0,0:0:0:0:
+89,313,84969,1,8,0:0:0:0:
+82,304,85136,1,0,0:0:0:0:
+217,203,85302,5,4,1:1:0:0:
+214,284,85469,1,0,1:0:0:0:
+287,380,85635,1,4,1:2:0:0:
+284,303,85802,1,0,1:0:0:0:
+380,324,85969,1,4,1:2:0:0:
+400,321,86052,1,0,1:0:0:0:
+419,312,86136,1,0,1:0:0:0:
+432,295,86219,1,0,1:0:0:0:
+439,275,86302,2,0,L|430:226,1,35,4|0,1:2|1:0,0:0:0:0:
+483,167,86469,2,0,L|474:118,1,35,4|0,1:2|1:0,0:0:0:0:
+436,38,86636,5,4,1:2:0:0:
+385,117,86802,1,0,0:0:0:0:
+294,68,86969,1,8,0:0:0:0:
+232,125,87136,1,0,0:0:0:0:
+207,38,87302,2,0,L|215:93,1,35,0|0,1:2|0:0,0:0:0:0:
+277,155,87469,2,0,L|266:99,1,35
+138,59,87636,2,0,L|42:48,1,70,8|0,0:0|0:0,0:0:0:0:
+70,196,87969,6,0,B|74:175|74:175|78:149,1,35,0|0,1:0|0:0,0:0:0:0:
+27,67,88136,2,0,B|29:88|29:88|34:111,1,35,2|0,0:0|0:0,0:0:0:0:
+160,198,88302,1,8,0:0:0:0:
+212,72,88469,1,2,0:0:0:0:
+239,164,88636,2,0,L|290:175,1,35
+327,119,88803,1,2,0:0:0:0:
+349,127,88886,1,0,0:0:0:0:
+373,127,88969,1,12,0:0:0:0:
+478,176,89136,1,8,0:0:0:0:
+437,82,89302,5,4,1:2:0:0:
+386,161,89468,1,0,0:0:0:0:
+327,245,89635,1,8,0:0:0:0:
+327,245,89802,1,0,0:0:0:0:
+327,119,89968,2,0,L|335:174,1,35,0|0,1:0|0:0,0:0:0:0:
+410,226,90135,2,0,L|399:170,1,35
+258,140,90302,2,0,P|215:133|170:123,1,70,8|0,0:0|0:0,0:0:0:0:
+70,196,90635,6,0,B|74:175|74:175|78:149,1,35,0|0,1:0|0:0,0:0:0:0:
+27,67,90802,2,0,B|29:88|29:88|34:111,1,35,2|0,0:0|0:0,0:0:0:0:
+150,233,90968,1,8,0:0:0:0:
+202,107,91135,1,2,0:0:0:0:
+200,131,91219,1,0,0:0:0:0:
+206,154,91302,1,4,1:2:0:0:
+283,243,91469,1,0,0:0:0:0:
+372,178,91635,1,12,0:0:0:0:
+477,281,91802,1,8,0:0:0:0:
+486,144,91969,5,4,1:2:0:0:
+407,268,92135,1,2,0:0:0:0:
+326,229,92302,1,8,0:0:0:0:
+218,263,92469,1,2,0:0:0:0:
+229,189,92635,2,0,L|237:244,1,35,0|0,1:0|0:0,0:0:0:0:
+299,306,92802,2,0,L|288:250,1,35
+160,210,92969,2,0,L|64:199,1,70,8|0,0:0|0:0,0:0:0:0:
+92,347,93302,6,0,B|96:326|96:326|100:300,1,35,0|2,1:0|0:0,0:0:0:0:
+49,218,93469,2,0,B|51:239|51:239|56:262,1,35,2|2,0:0|0:0,0:0:0:0:
+183,320,93635,1,8,0:0:0:0:
+303,221,93802,1,0,0:0:0:0:
+256,319,93969,1,0,1:0:0:0:
+269,338,94052,1,0,0:0:0:0:
+289,351,94136,1,0,0:0:0:0:
+313,352,94219,1,0,0:0:0:0:
+336,345,94302,1,8,0:0:0:0:
+470,358,94469,1,8,0:0:0:0:
+405,248,94636,5,4,0:1:0:0:
+467,133,94802,2,0,P|413:123|386:116,1,70,2|2,0:3|0:3,0:0:0:0:
+316,141,95052,1,2,0:3:0:0:
+316,141,95136,1,2,0:3:0:0:
+341,51,95302,5,2,0:3:0:0:
+209,45,95469,1,2,0:3:0:0:
+279,18,95636,2,0,L|287:61,2,35,2|2|2,0:3|0:3|0:3,0:0:0:0:
+210,125,95969,5,2,0:3:0:0:
+116,176,96136,2,0,P|169:166|207:163,1,70,2|2,0:3|0:3,0:0:0:0:
+254,200,96386,1,2,0:3:0:0:
+254,200,96469,1,2,0:3:0:0:
+265,67,96636,1,2,3:3:0:0:
+292,73,96719,1,2,3:3:0:0:
+319,72,96802,1,2,3:3:0:0:
+347,72,96886,1,2,3:3:0:0:
+376,71,96969,6,0,L|371:129,1,35,2|2,3:3|3:3,0:0:0:0:
+459,185,97136,2,0,L|428:226,1,35,2|2,3:3|3:3,0:0:0:0:
+511,304,97302,1,4,0:1:0:0:

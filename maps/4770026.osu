@@ -1,0 +1,83 @@
+osu file format v14
+
+[General]
+AudioFilename: audio.mp3
+AudioLeadIn: 1000
+PreviewTime: 803
+Countdown: 1
+SampleSet: Soft
+StackLeniency: 0.5
+Mode: 0
+LetterboxInBreaks: 0
+WidescreenStoryboard: 1
+
+[Editor]
+Bookmarks: 1053,2053,4053,14053,18053,30053,34053,37553
+DistanceSpacing: 1
+BeatDivisor: 1
+GridSize: 4
+TimelineZoom: 1.1
+
+[Metadata]
+Title:Equilibrium (Music Box Ver.)
+TitleUnicode:Equilibrium (Music Box Ver.)
+Artist:Lemon Hakurei
+ArtistUnicode:白丽柠檬
+Creator:Lan wings
+Version:Beginner
+Source:FINAL FANTASY XIV: Heavensward
+Tags:FFXIV FF14 女神 ～女神ソフィア討滅戦～ Megami Sophia Toumetsusen 平衡 八音盒 祖堅正慶 Masayoshi Soken SQUARE ENIX Ayumi Murata 村田あゆみ Bilibili Douga THE FAR EDGE OF FATE: FINAL FANTASY XIV Original Soundtrack Video Game Instrumental
+BeatmapID:4770026
+BeatmapSetID:691101
+
+[Difficulty]
+HPDrainRate:0
+CircleSize:2
+OverallDifficulty:0
+ApproachRate:1
+SliderMultiplier:0.8
+SliderTickRate:2
+
+[Events]
+//Background and Video events
+0,0,"bg.jpg",0,0
+//Break Periods
+//Storyboard Layer 0 (Background)
+//Storyboard Layer 1 (Fail)
+//Storyboard Layer 2 (Pass)
+//Storyboard Layer 3 (Foreground)
+//Storyboard Layer 4 (Overlay)
+//Storyboard Sound Samples
+
+[TimingPoints]
+2053,500,4,2,1,20,1,0
+
+
+[Colours]
+Combo1 : 176,255,255
+Combo2 : 255,128,128
+Combo3 : 255,255,128
+Combo4 : 192,192,192
+
+[HitObjects]
+146,281,2053,6,0,P|74:311|4:280,1,160,2|4,3:2|0:0,0:0:0:0:
+113,165,4053,2,0,P|184:133|256:164,1,160,2|4,0:0|0:0,0:0:0:0:
+369,281,6053,2,0,P|441:311|512:280,1,160,2|4,3:2|0:0,0:0:0:0:
+398,165,8053,2,0,P|327:133|256:164,1,160,2|4,3:2|0:0,0:0:0:0:
+144,280,10053,6,0,B|92:208|0:232,1,160,2|4,3:2|0:0,0:0:0:0:
+144,152,12053,2,0,B|216:100|191:8,1,160,2|4,0:0|0:0,0:0:0:0:
+296,136,14053,1,2,3:2:0:0:
+444,200,15053,1,6,0:0:0:0:
+311,288,16053,2,0,P|237:312|161:289,1,160,2|4,3:2|0:0,0:0:0:0:
+79,143,18053,6,0,P|144:103|208:144,1,160,2|4,3:2|0:0,0:0:0:0:
+304,15,20053,2,0,P|344:80|303:144,1,160,2|4,3:2|0:0,0:0:0:0:
+432,240,22053,2,0,P|367:280|303:239,1,160,2|4,3:2|0:0,0:0:0:0:
+207,368,24053,2,0,P|167:303|208:239,1,160,2|4,3:2|0:0,0:0:0:0:
+64,164,26053,6,0,P|133:127|209:145,1,160,2|4,3:2|0:0,0:0:0:0:
+148,292,28053,2,0,P|78:328|2:310,1,160,2|4,0:0|0:0,0:0:0:0:
+64,164,30053,1,2,0:0:0:0:
+192,68,31053,1,6,0:0:0:0:
+352,64,32053,2,0,P|414:109|419:186,1,160,2|4,0:0|0:0,0:0:0:0:
+316,312,34053,5,2,0:0:0:0:
+168,252,35053,1,6,0:0:0:0:
+256,116,36053,1,2,0:0:0:0:

@@ -1,0 +1,104 @@
+osu file format v14
+
+[General]
+AudioFilename: audio.mp3
+AudioLeadIn: 0
+PreviewTime: 11453
+Countdown: 0
+SampleSet: Soft
+StackLeniency: 0.7
+Mode: 0
+LetterboxInBreaks: 0
+EpilepsyWarning: 1
+WidescreenStoryboard: 1
+
+[Editor]
+Bookmarks: 39834,52744
+DistanceSpacing: 1
+BeatDivisor: 2
+GridSize: 16
+TimelineZoom: 0.6999997
+
+[Metadata]
+Title:Gypsy In My Mind (Disco Rave Edit 2022) (Sped Up & Cut Ver.)
+TitleUnicode:Gypsy In My Mind (Disco Rave Edit 2022) (Sped Up & Cut Ver.)
+Artist:Never Dull
+ArtistUnicode:Never Dull
+Creator:Bloxi
+Version:Take & Drestau's Beginner
+Source:
+Tags:english electronic take drestau maikayuii shameimaru the cosmic chef shimni hotdogslurper44 -koyomi stasent burnmyfantasies xochyymeretb adequate melae toumin kayzy honigfna rjsteezz jun maeda freezinganimenz mrrainbowdoge miinr jmp smolship yours- kudou chitose mortem araran -_kali_- mejiro dober o_k_u reenix undead alice fluxie31 firiiu yukenao sakurabakushino meaningoflife tacoyaki5 seiggun leledorf melons -aly buddon andrea my angel shimon ram kieost noob_oni stormeon rickyboi kefrmo yosyo im even _turuuru_ ryxliee gwb elzix tachibana_ roupus mekadon silver tail killian sstoney lurumic touka- bbbprooooo kulerbruh yeyha nemidnight beethow kaoruishi abyssgard fatfan kolek bluirre danilmaz1 beans mccheese xwazz captainbasculin -digital an3 -tynamo isca namirin1 girls kissing dkblaze kojio nlxus chidodou geiboi77 omekyu lettuce nymphe techmaster aspheria lightin azyeu xsie catawba freudeman sh4rq_ limetwist akhaten yumerios theshadowofdark boombox -doge- magitska daskenite
+BeatmapID:5146659
+BeatmapSetID:2377334
+
+[Difficulty]
+HPDrainRate:1
+CircleSize:2
+OverallDifficulty:1
+ApproachRate:2
+SliderMultiplier:0.519999999999999
+SliderTickRate:1
+
+[Events]
+//Background and Video events
+0,0,"bg0.jpg",0,0
+//Break Periods
+//Storyboard Layer 0 (Background)
+//Storyboard Layer 1 (Fail)
+//Storyboard Layer 2 (Pass)
+//Storyboard Layer 3 (Foreground)
+//Storyboard Layer 4 (Overlay)
+//Storyboard Sound Samples
+
+[TimingPoints]
+490,409.836065573771,4,2,1,55,1,0
+7047,-100,4,2,1,60,0,0
+10326,-100,4,2,1,50,0,0
+11965,-100,4,2,1,60,0,0
+12272,-100,4,2,1,60,0,0
+12375,-100,4,2,1,60,0,0
+12682,-100,4,2,1,60,0,0
+12785,-100,4,2,1,60,0,0
+13092,-100,4,2,1,60,0,0
+13194,-100,4,2,1,60,0,0
+13604,-100,4,2,1,70,0,0
+25080,-100,4,2,1,65,0,0
+26719,-100,4,2,1,70,0,0
+38194,-100,4,2,1,65,0,0
+39834,-100,4,2,1,60,0,0
+
+
+[Colours]
+Combo1 : 255,128,255
+Combo2 : 255,255,128
+Combo3 : 128,255,128
+Combo4 : 0,255,128
+Combo5 : 128,255,255
+Combo6 : 0,128,255
+Combo7 : 255,128,192
+SliderBorder : 255,255,255
+SliderTrackOverride : 0,0,0
+
+[HitObjects]
+154,183,13604,6,0,B|269:165|244:220|359:199,1,208,4|0,1:2|1:0,0:0:0:0:
+445,142,16063,1,0,1:0:0:0:
+385,54,16883,2,0,P|288:23|192:57,1,208,0|0,1:2|1:0,0:0:0:0:
+88,55,19342,1,0,1:0:0:0:
+9,122,20162,2,0,B|-9:237|46:212|25:327,1,208,4|0,1:2|1:0,0:0:0:0:
+125,355,22621,2,0,L|178:343,1,51.9999999999999,0|8,1:0|0:0,0:0:0:0:
+225,329,23440,2,0,L|346:349,1,104,4|0,1:2|1:0,0:0:0:0:
+430,364,25080,1,0,1:0:0:0:
+492,165,26719,6,0,B|377:186|402:131|287:149,1,208,4|0,1:2|1:0,0:0:0:0:
+198,201,29178,1,0,1:0:0:0:
+104,247,29998,2,0,P|16:201|17:102,1,208,0|0,1:2|1:0,0:0:0:0:
+96,34,32457,1,0,1:0:0:0:
+192,71,33276,2,0,P|294:51|396:35,1,208,4|0,1:2|1:0,0:0:0:0:
+464,114,35735,2,0,L|455:175,1,51.9999999999999,0|8,1:0|0:0,0:0:0:0:
+446,216,36555,2,0,L|335:198,1,104,4|0,1:2|1:0,0:0:0:0:
+241,176,38194,1,0,1:0:0:0:
+139,151,39014,1,2,1:2:0:0:
+43,109,39834,6,0,L|43:328,1,208,4|0,1:2|1:0,0:0:0:0:
+248,341,43112,2,0,L|370:341,1,104,0|0,1:2|1:0,0:0:0:0:
+456,338,44752,1,0,1:0:0:0:
+448,130,46391,2,0,L|240:130,1,208,4|0,1:2|1:0,0:0:0:0:
+256,192,49670,12,8,52744,0:0:0:0:

@@ -1,0 +1,173 @@
+osu file format v14
+
+[General]
+AudioFilename: audio.mp3
+AudioLeadIn: 0
+PreviewTime: 11453
+Countdown: 0
+SampleSet: Soft
+StackLeniency: 0.7
+Mode: 0
+LetterboxInBreaks: 0
+EpilepsyWarning: 1
+WidescreenStoryboard: 1
+
+[Editor]
+Bookmarks: 13604,26719,39834
+DistanceSpacing: 0.87
+BeatDivisor: 4
+GridSize: 8
+TimelineZoom: 1.7
+
+[Metadata]
+Title:Gypsy In My Mind (Disco Rave Edit 2022) (Sped Up & Cut Ver.)
+TitleUnicode:Gypsy In My Mind (Disco Rave Edit 2022) (Sped Up & Cut Ver.)
+Artist:Never Dull
+ArtistUnicode:Never Dull
+Creator:Bloxi
+Version:Shameimaru's Normal
+Source:
+Tags:english electronic take drestau maikayuii shameimaru the cosmic chef shimni hotdogslurper44 -koyomi stasent burnmyfantasies xochyymeretb adequate melae toumin kayzy honigfna rjsteezz jun maeda freezinganimenz mrrainbowdoge miinr jmp smolship yours- kudou chitose mortem araran -_kali_- mejiro dober o_k_u reenix undead alice fluxie31 firiiu yukenao sakurabakushino meaningoflife tacoyaki5 seiggun leledorf melons -aly buddon andrea my angel shimon ram kieost noob_oni stormeon rickyboi kefrmo yosyo im even _turuuru_ ryxliee gwb elzix tachibana_ roupus mekadon silver tail killian sstoney lurumic touka- bbbprooooo kulerbruh yeyha nemidnight beethow kaoruishi abyssgard fatfan kolek bluirre danilmaz1 beans mccheese xwazz captainbasculin -digital an3 -tynamo isca namirin1 girls kissing dkblaze kojio nlxus chidodou geiboi77 omekyu lettuce nymphe techmaster aspheria lightin azyeu xsie catawba freudeman sh4rq_ limetwist akhaten yumerios theshadowofdark boombox -doge- magitska daskenite
+BeatmapID:5183859
+BeatmapSetID:2377334
+
+[Difficulty]
+HPDrainRate:3
+CircleSize:3
+OverallDifficulty:3
+ApproachRate:3
+SliderMultiplier:1.12
+SliderTickRate:2
+
+[Events]
+//Background and Video events
+0,0,"bg2.jpg",0,0
+//Break Periods
+//Storyboard Layer 0 (Background)
+//Storyboard Layer 1 (Fail)
+//Storyboard Layer 2 (Pass)
+//Storyboard Layer 3 (Foreground)
+//Storyboard Layer 4 (Overlay)
+//Storyboard Sound Samples
+
+[TimingPoints]
+490,409.836065573771,4,2,1,55,1,0
+7047,-100,4,2,1,60,0,0
+10326,-100,4,2,1,50,0,0
+11965,-100,4,2,1,60,0,0
+13604,-100,4,2,1,70,0,0
+25080,-100,4,2,1,65,0,0
+26719,-100,4,2,1,70,0,0
+38194,-100,4,2,1,65,0,0
+39834,-100,4,2,1,60,0,0
+
+
+[Colours]
+Combo1 : 255,128,255
+Combo2 : 255,255,128
+Combo3 : 128,255,128
+Combo4 : 0,255,128
+Combo5 : 128,255,255
+Combo6 : 0,128,255
+Combo7 : 255,128,192
+SliderBorder : 255,255,255
+SliderTrackOverride : 0,0,0
+
+[HitObjects]
+112,48,899,5,8,0:0:0:0:
+208,48,1309,1,0,3:0:0:0:
+304,48,1719,1,8,0:0:0:0:
+404,52,2129,1,0,3:0:0:0:
+404,52,2334,1,2,0:0:0:0:
+400,336,3768,5,0,3:0:0:0:
+400,336,3973,1,2,0:0:0:0:
+208,336,4793,1,2,0:0:0:0:
+208,336,4998,1,8,0:0:0:0:
+112,336,5408,1,0,3:0:0:0:
+112,240,5817,1,8,0:0:0:0:
+400,52,7252,5,2,0:0:0:0:
+400,52,7457,1,8,0:0:0:0:
+304,48,7867,1,0,3:0:0:0:
+208,48,8276,1,8,0:0:0:0:
+112,48,8686,2,0,B|112:192|256:192|256:352,1,336,0|8,3:0|0:0,0:0:0:0:
+159,341,10326,1,2,0:0:0:0:
+352,48,11555,5,2,0:0:0:0:
+312,136,11965,2,0,L|152:136,3,112,0|8|0|8,1:0|0:0|1:0|0:0,0:0:0:0:
+160,48,13604,5,4,1:2:0:0:
+64,48,14014,1,8,0:0:0:0:
+16,128,14424,1,0,1:0:0:0:
+16,128,14629,1,2,3:2:0:0:
+64,208,15039,1,2,3:0:0:0:
+64,208,15244,1,0,1:0:0:0:
+112,128,15653,1,8,0:0:0:0:
+160,208,16063,1,0,1:0:0:0:
+352,336,16883,5,0,1:2:0:0:
+448,336,17293,1,8,0:0:0:0:
+496,256,17703,1,0,1:0:0:0:
+496,256,17908,1,2,3:2:0:0:
+448,176,18317,1,2,3:0:0:0:
+448,176,18522,1,0,1:0:0:0:
+400,256,18932,1,8,0:0:0:0:
+352,176,19342,1,0,1:0:0:0:
+256,336,20162,5,4,1:2:0:0:
+160,336,20571,1,8,0:0:0:0:
+208,256,20981,1,0,1:0:0:0:
+208,256,21186,1,2,3:2:0:0:
+112,256,21596,1,2,3:0:0:0:
+112,256,21801,1,0,1:0:0:0:
+63,176,22211,1,8,0:0:0:0:
+160,176,22621,1,0,1:0:0:0:
+304,48,23440,5,4,1:2:0:0:
+409,52,23850,1,8,0:0:0:0:
+448,80,24055,1,2,3:0:0:0:
+448,128,24260,1,0,1:0:0:0:
+352,128,24670,1,8,0:0:0:0:
+256,128,25080,5,0,1:0:0:0:
+208,224,25490,2,0,L|208:352,2,112,8|0|8,0:0|1:0|0:0,0:0:0:0:
+256,128,26719,5,4,1:2:0:0:
+352,128,27129,1,8,0:0:0:0:
+356,228,27539,1,0,1:0:0:0:
+356,228,27744,1,2,3:2:0:0:
+358,328,28153,1,2,3:0:0:0:
+358,328,28358,1,0,1:0:0:0:
+256,328,28768,1,8,0:0:0:0:
+160,328,29178,1,0,1:0:0:0:
+160,232,29588,1,8,0:0:0:0:
+256,232,29998,5,0,1:2:0:0:
+352,232,30408,1,8,0:0:0:0:
+356,132,30817,1,0,1:0:0:0:
+356,132,31022,1,2,3:2:0:0:
+358,32,31432,1,2,3:0:0:0:
+358,32,31637,1,0,1:0:0:0:
+256,32,32047,1,8,0:0:0:0:
+160,32,32457,1,0,1:0:0:0:
+104,116,32867,1,8,0:0:0:0:
+48,200,33276,5,4,1:2:0:0:
+116,268,33686,1,8,0:0:0:0:
+216,270,34096,1,0,1:0:0:0:
+216,270,34301,1,2,3:2:0:0:
+284,202,34711,1,2,3:0:0:0:
+284,202,34916,1,0,1:0:0:0:
+380,200,35326,1,8,0:0:0:0:
+448,268,35735,1,0,1:0:0:0:
+400,72,36555,5,4,1:2:0:0:
+304,72,36965,1,8,0:0:0:0:
+256,72,37170,1,2,3:0:0:0:
+208,72,37375,1,0,1:0:0:0:
+112,72,37785,1,8,0:0:0:0:
+160,168,38194,5,0,1:0:0:0:
+256,168,38604,2,0,L|384:168,2,112,8|2|10,0:0|1:2|1:2,0:0:0:0:
+160,168,39834,6,0,B|48:168|0:264|48:360|160:360,1,336,4|8,1:2|0:0,0:0:0:0:
+256,360,41473,2,0,L|448:360,2,168,0|2|8,1:0|3:0|0:0,0:0:0:0:
+160,360,43112,6,0,B|48:360|0:264|48:168|160:168,1,336,0|8,1:2|0:0,0:0:0:0:
+256,168,44752,1,0,1:0:0:0:
+352,168,45162,1,8,0:0:0:0:
+304,80,45571,1,0,1:0:0:0:
+400,80,45981,1,8,0:0:0:0:
+448,168,46391,6,0,B|456:296|376:296|376:296|208:296,1,336,4|8,1:2|0:0,0:0:0:0:
+112,296,48030,1,0,1:0:0:0:
+64,208,48440,1,8,0:0:0:0:
+160,208,48850,1,0,1:0:0:0:
+256,208,49260,1,8,0:0:0:0:
+352,208,49670,6,0,B|360:80|280:80|280:80|112:80,1,336,4|8,1:2|0:0,0:0:0:0:
+256,192,51309,12,8,52846,0:0:0:0:

@@ -1,0 +1,97 @@
+osu file format v14
+
+[General]
+AudioFilename: audio.mp3
+AudioLeadIn: 0
+PreviewTime: 2976
+Countdown: 0
+SampleSet: Soft
+StackLeniency: 0.8
+Mode: 0
+LetterboxInBreaks: 0
+WidescreenStoryboard: 1
+
+[Editor]
+Bookmarks: 2976,8976,14976,20976,26976,28476,29976,31476,35601
+DistanceSpacing: 1
+BeatDivisor: 4
+GridSize: 4
+TimelineZoom: 1
+
+[Metadata]
+Title:You're a Winner!
+TitleUnicode:スロット当たり
+Artist:Junichi Masuda, Hitomi Sato
+ArtistUnicode:増田順一, 佐藤仁美
+Creator:Gaz
+Version:Easy!
+Source:ポケットモンスター ダイヤモンド・パール
+Tags:instrumental video game corner casino slots slot atari videogame vgm pokemon pokémon pocket monsters diamond pearl platinum sinnoh gen 4 generation iv four go gō ichinose veilstone tobari city clefairy pippi gamefreak nintendo nds ds lite ost original soundtrack super music collection complete fatfan kolek fatfan_kolek gazza garzah ピッピ プラチナ 任天堂 ニンテンドーDS ポケモン ダイヤモンド＆パール スーパーミュージックコレクション トバリシティ
+BeatmapID:4852524
+BeatmapSetID:2276949
+
+[Difficulty]
+HPDrainRate:3
+CircleSize:3
+OverallDifficulty:4
+ApproachRate:4
+SliderMultiplier:1
+SliderTickRate:1
+
+[Events]
+//Background and Video events
+0,0,"clefairy.jpg",0,0
+//Break Periods
+//Storyboard Layer 0 (Background)
+//Storyboard Layer 1 (Fail)
+//Storyboard Layer 2 (Pass)
+//Storyboard Layer 3 (Foreground)
+//Storyboard Layer 4 (Overlay)
+//Storyboard Sound Samples
+
+[TimingPoints]
+2976,375,4,2,1,65,1,0
+28476,-100,4,2,1,50,0,0
+29976,-100,4,2,1,35,0,0
+31476,-100,4,2,1,20,0,0
+35601,-100,4,2,1,5,0,0
+
+
+[Colours]
+Combo1 : 189,142,179
+Combo2 : 245,153,190
+
+[HitObjects]
+37,217,2976,6,0,B|137:235|85:323|177:342,1,200,6|6,3:0|3:0,0:0:0:0:
+256,280,4101,1,4,3:0:0:0:
+334,342,4476,2,0,B|426:323|374:235|475:217,1,200,6|6,3:0|3:0,0:0:0:0:
+356,56,5976,2,0,P|256:60|156:56,1,200,6|6,3:0|3:0,0:0:0:0:
+58,78,7101,1,4,3:0:0:0:
+25,172,7476,2,0,P|125:168|225:172,1,200,6|6,3:0|3:0,0:0:0:0:
+406,256,8976,6,0,B|534:256,2,100,6|6|6,3:0|3:2|3:0,0:0:0:0:
+337,329,10101,1,6,3:2:0:0:
+256,271,10476,2,0,B|162:239|162:319|64:288,1,200,6|6,3:0|3:0,0:0:0:0:
+81,189,11601,1,6,3:2:0:0:
+99,91,11976,2,0,B|-29:91,2,100,6|6|6,3:0|3:2|3:0,0:0:0:0:
+189,136,13101,1,6,3:2:0:0:
+283,80,13476,2,0,P|291:176|220:242,1,200,6|6,3:0|3:0,0:0:0:0:
+156,319,14601,1,6,3:2:0:0:
+47,313,14976,6,0,B|85:277|74:237|63:200|0:216|18:137,1,200,6|6,3:0|3:0,0:0:0:0:
+11,37,16101,1,2,3:2:0:0:
+109,19,16476,2,0,B|183:-11|178:52|216:56|258:60|285:15,1,200,6|6,3:0|3:0,0:0:0:0:
+494,23,17976,2,0,B|524:64|525:122|495:172|448:193,1,200,6|6,3:0|3:0,0:0:0:0:
+350,212,19101,1,2,3:2:0:0:
+280,140,19476,2,0,B|238:109|180:108|130:138|109:185,1,200,6|6,3:0|3:0,0:0:0:0:
+100,383,20976,6,0,L|-28:383,2,100,6|6|6,3:0|3:2|3:0,0:0:0:0:
+160,300,22101,1,6,3:2:0:0:
+253,336,22476,2,0,B|348:304|348:384|446:353,1,200,6|6,3:0|3:0,0:0:0:0:
+480,259,23601,1,6,3:2:0:0:
+508,163,23976,2,0,L|508:35,2,100,6|6|6,3:0|3:2|3:0,0:0:0:0:
+414,199,25101,1,6,3:2:0:0:
+356,280,25476,2,0,P|258:276|186:201,1,200,6|6,3:0|3:0,0:0:0:0:
+147,116,26601,1,6,3:2:0:0:
+104,14,26976,6,0,L|408:14,1,300,6|4,3:0|3:0,0:0:0:0:
+356,102,28476,2,0,P|256:102|156:102,1,200,6|6,3:2|3:0,0:0:0:0:
+112,298,29976,6,0,B|200:346|208:250|256:314|304:250|312:346|404:298,1,300,6|4,3:2|3:0,0:0:0:0:
+494,257,31476,1,6,3:2:0:0:
+256,192,31851,12,0,35601,0:0:0:0:
