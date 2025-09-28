@@ -71,6 +71,8 @@ if __name__ == '__main__':
 
     print("Writing medians to medians.txt...")
     with open('medians.txt', 'w', encoding='utf8') as f:
-        for name in medians:
-            f.write(name + '\n' + ','.join(str(x) for x in medians[name]) + '\n')
+        # Sort by beatmap ID (extract number from filename like "123456.dist")
+        sorted_medians = sorted(medians.items(), key=lambda x: int(x[0].replace('.dist', '')))
+        for name, median_values in sorted_medians:
+            f.write(name + '\n' + ','.join(str(x) for x in median_values) + '\n')
     print(f"Medians saved to: medians.txt")
