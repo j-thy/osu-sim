@@ -66,6 +66,8 @@ if __name__ == '__main__':
 
     print("Writing means to means.txt...")
     with open('means.txt', 'w', encoding='utf8') as f:
-        for name in means:
-            f.write(name + '\n' + ','.join(str(x) for x in means[name]) + '\n')
+        # Sort by beatmap ID (extract number from filename like "123456.dist")
+        sorted_means = sorted(means.items(), key=lambda x: int(x[0].replace('.dist', '')))
+        for name, mean_values in sorted_means:
+            f.write(name + '\n' + ','.join(str(x) for x in mean_values) + '\n')
     print(f"Means saved to: means.txt")
