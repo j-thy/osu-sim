@@ -11,11 +11,34 @@ def var(lst):
     if not lst:
         return 0, 0
     lst_avg = avg(lst)
-    return sum((p[0] - lst_avg[0]) ** 2 for p in lst) / len(lst), sum((p[1] - lst_avg[1]) ** 2 for p in lst) / len(lst)
+
+    # Use robust calculation to prevent overflow
+    max_diff = 1e5  # Maximum allowed difference to prevent overflow
+
+    def safe_squared_diff(value, mean):
+        diff = value - mean
+        # Cap the difference before squaring
+        if abs(diff) > max_diff:
+            diff = max_diff if diff > 0 else -max_diff
+        return diff ** 2
+
+    try:
+        var_x = sum(safe_squared_diff(p[0], lst_avg[0]) for p in lst) / len(lst)
+        var_y = sum(safe_squared_diff(p[1], lst_avg[1]) for p in lst) / len(lst)
+        return var_x, var_y
+    except (OverflowError, ValueError):
+        # Fallback to simple variance if still overflowing
+        return 0, 0
 
 def std(lst):
     lst_var = var(lst)
-    return math.sqrt(lst_var[0]), math.sqrt(lst_var[1])
+    try:
+        return math.sqrt(lst_var[0]), math.sqrt(lst_var[1])
+    except (OverflowError, ValueError):
+        # Handle overflow or negative values
+        std_x = math.sqrt(min(lst_var[0], 1e10)) if lst_var[0] >= 0 else 0
+        std_y = math.sqrt(min(lst_var[1], 1e10)) if lst_var[1] >= 0 else 0
+        return std_x, std_y
 
 def get_sliders(sliders_file):
     sliders = []
@@ -61,11 +84,14 @@ if all_sliders:
     print(f"\nCalculating statistics for {len(all_sliders)} slider files...")
 
     with open('sliderstats.txt', 'w', encoding='utf8') as f:
+        # Sort by beatmap ID (extract number from filename like "123456.sldr")
+        sorted_sliders = sorted(all_sliders.items(), key=lambda x: int(x[0].replace('.sldr', '')))
+
         with tqdm(total=len(all_sliders), desc="Computing statistics", unit="file") as pbar:
-            for file in all_sliders:
-                avg_slider = avg(all_sliders[file][0])
-                std_slider = std(all_sliders[file][0])
-                ratio = all_sliders[file][1]
+            for file, slider_data in sorted_sliders:
+                avg_slider = avg(slider_data[0])
+                std_slider = std(slider_data[0])
+                ratio = slider_data[1]
                 f.write(f'{file}\n{avg_slider[0]},{avg_slider[1]},{std_slider[0]},{std_slider[1]},{ratio}\n')
                 pbar.update(1)
 
