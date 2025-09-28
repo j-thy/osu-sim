@@ -112,8 +112,124 @@ osu-sim/
 ├── buckets/              # Bucket analysis data
 ├── sliders/              # Slider pattern data
 ├── dists/                # Distribution data
+├── osu-tools/            # osu-tools submodule for star rating calculations
 └── various similarity_*.py files  # Analysis modules
 ```
+
+## Data Updates
+
+To update the beatmap data and analysis files, run these scripts in order:
+
+### Main Data Update Scripts:
+
+1. **`python3 getmapids.py`** - Fetches beatmap IDs from osu! API
+   - Outputs: `mapids_nodup.txt`
+   - Use `--fast` flag for incremental updates (only new maps)
+
+2. **`python3 getmaps.py`** - Downloads .osu beatmap files
+   - Reads: `mapids_nodup.txt`
+   - Outputs: `.osu` files in `maps/` directory
+   - Use `--retry-failed` to retry failed downloads
+
+3. **`python3 getstats.py`** - Extracts statistics from beatmap files
+   - Reads: `.osu` files from `maps/`
+   - Outputs: `stats.json`
+
+4. **`python3 getdists.py`** - Calculates distance distributions
+   - Reads: `.osu` files from `maps/`
+   - Outputs: `.dist` files in `dists/` directory
+
+### Optional Analysis Scripts:
+
+- **`python3 getbuckets.py`** - Generate bucket analysis data
+- **`python3 getmeans.py`** - Calculate mean values from distributions
+- **`python3 getmedians.py`** - Calculate median values from distributions
+- **`python3 getsrs.py`** - Extract star ratings (requires osu-tools setup)
+- **`python3 getsliders.py`** - Extract slider patterns
+- **`python3 getsliderstats.py`** - Calculate slider statistics
+
+### Quick Update Commands:
+
+```bash
+# Full update
+python3 getmapids.py
+python3 getmaps.py
+python3 getstats.py
+python3 getdists.py
+
+# Fast incremental update (new maps only)
+python3 getmapids.py --fast
+python3 getmaps.py
+python3 getstats.py
+python3 getdists.py
+```
+
+## osu-tools Setup (for Star Rating Calculations)
+
+The project includes osu-tools as a submodule for calculating star ratings. Follow these steps to set it up:
+
+### 1. Initialize and Update the Submodule
+
+```bash
+git submodule init
+git submodule update
+```
+
+### 2. Install .NET SDK
+
+osu-tools requires .NET SDK to build and run. Install .NET SDK 8.0 and .NET 5.0 runtime:
+
+```bash
+# Download and run the .NET install script
+wget https://dot.net/v1/dotnet-install.sh -O dotnet-install.sh
+chmod +x dotnet-install.sh
+
+# Install .NET SDK 8.0
+./dotnet-install.sh --channel 8.0
+
+# Install .NET 5.0 runtime (required by osu-tools)
+./dotnet-install.sh --channel 5.0 --runtime dotnet
+
+# Add to PATH (add these lines to your ~/.bashrc or ~/.profile)
+export PATH="$PATH:$HOME/.dotnet"
+export DOTNET_ROOT="$HOME/.dotnet"
+
+# Reload your shell configuration
+source ~/.bashrc
+```
+
+### 3. Build osu-tools PerformanceCalculator
+
+```bash
+cd osu-tools/PerformanceCalculator
+dotnet build -c Release
+cd ../..
+```
+
+### 4. Verify Installation
+
+Test that osu-tools is working correctly:
+
+```bash
+# Test with a beatmap file
+cd osu-tools/PerformanceCalculator
+dotnet run -- difficulty ../../maps/[beatmap_id].osu
+```
+
+You should see output showing star rating, aim rating, speed rating, and other difficulty statistics.
+
+### 5. Generate Star Ratings (Optional)
+
+Once osu-tools is set up, you can generate star ratings for all beatmaps. Note that this process can take a very long time for large beatmap collections:
+
+```bash
+# Generate star ratings using osu-tools
+# This requires creating srs_raw_nm.txt first using osu-tools batch processing
+# Consult osu-tools documentation for batch processing instructions
+python3 getsrs.py
+```
+
+**Note:** The existing `srs.json`, `srs_dt.json`, and `srs_hr.json` files contain pre-calculated star ratings. You only need to regenerate these if you add many new beatmaps or if the star rating algorithm changes.
 
 ## Troubleshooting
 
