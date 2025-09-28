@@ -368,7 +368,7 @@ def get_stats(input_file):
     times = []
     while i < len(lines) and not lines[i].startswith('[') and lines[i].strip():
         ls = lines[i].split(',')
-        times.append(int(ls[2]))
+        times.append(int(float(ls[2])))
         i += 1
     length = (times[-1] - times[0]) // 1000
 
