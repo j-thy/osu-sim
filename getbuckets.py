@@ -1,5 +1,6 @@
 import math
 import os
+from tqdm import tqdm
 
 # Calculate the buckets for a beatmap
 def get_buckets(dist_file, output_file=None):
@@ -114,20 +115,29 @@ def get_buckets_raw(dist):
 if __name__ == '__main__':
     dists_dir = 'dists'
     buckets_dir = 'buckets'
-    cnt = 0
-    # Iterate through all files in the "dists" directory
+
+    print("Scanning for .dist files...")
+
+    # First, collect all .dist files that need processing
+    dist_files_to_process = []
     for entry in os.scandir(dists_dir):
-        # If it is a file...
-        if entry.is_file():
-            # Create a .bkts file if it doesn't already exist
+        if entry.is_file() and entry.name.endswith('.dist'):
             output_file = os.path.join(buckets_dir, entry.name)
-            if os.path.exists(output_file):
-                continue
+            # Only add files that don't already have a corresponding .bkts file
+            if not os.path.exists(output_file):
+                dist_files_to_process.append((entry.path, output_file))
 
-            # Calculate the buckets for the beatmap
-            get_buckets(entry.path, output_file)
+    if not dist_files_to_process:
+        print("All .dist files already have corresponding bucket files. Nothing to process.")
+    else:
+        print(f"Found {len(dist_files_to_process)} .dist files to process")
 
-            # Print the number of beatmaps processed so far
-            cnt += 1
-            if cnt % 100 == 0:
-                print(cnt)
+        # Process all files with progress bar
+        with tqdm(total=len(dist_files_to_process), desc="Generating buckets", unit="map") as pbar:
+            for dist_path, output_path in dist_files_to_process:
+                # Calculate the buckets for the beatmap
+                get_buckets(dist_path, output_path)
+                pbar.update(1)
+
+        print(f"\nSuccessfully processed: {len(dist_files_to_process)} distribution files")
+        print(f"Bucket files saved to: {buckets_dir}/")
