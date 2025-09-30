@@ -102,6 +102,7 @@ async def get_similar_maps(ctx, map_id, page=1, filters=None):
     perpage = 10
     n = 10 * perpage
 
+    print(f'[sim] Starting similarity search for map {map_id} with filters: {filters}')
     color = discord.Color.from_rgb(255, 255, 100)
     description = 'Calculating...'
     footer = 'This should take about 10 seconds.'
@@ -111,7 +112,9 @@ async def get_similar_maps(ctx, map_id, page=1, filters=None):
 
     try:
         sim = similarity_buckets.get_similar(map_id, n, filters)
-    except:
+        print(f'[sim] Found {len(sim)} similar maps for {map_id}')
+    except Exception as e:
+        print(f'[sim] Error finding similar maps for {map_id}: {e}')
         await calc_msg.edit_original_response(embed=get_error_message())
         return
 
@@ -127,9 +130,12 @@ async def get_rating_maps(ctx, map_id, page=1, dt=False):
     perpage = 10
     n = 10 * perpage
 
+    print(f'[sr] Starting star rating search for map {map_id}, DT={dt}')
     try:
         sim = similarity_srs.get_similar(map_id, n, ['DT'] if dt else [])
-    except:
+        print(f'[sr] Found {len(sim) if sim else 0} similar maps for {map_id}')
+    except Exception as e:
+        print(f'[sr] Error finding star rating maps for {map_id}: {e}')
         await send_error_message(ctx)
         return
 
@@ -145,6 +151,7 @@ async def get_slider_maps(ctx, map_id, page=1):
     perpage = 10
     n = 10 * perpage
 
+    print(f'[slider] Starting slider similarity search for map {map_id}')
     color = discord.Color.from_rgb(255, 255, 100)
     description = 'Calculating...'
     footer = 'This should take about 10 seconds.'
@@ -154,7 +161,9 @@ async def get_slider_maps(ctx, map_id, page=1):
 
     try:
         sim = similarity_sliders.get_similar(map_id, n)
-    except:
+        print(f'[slider] Found {len(sim)} similar slider maps for {map_id}')
+    except Exception as e:
+        print(f'[slider] Error finding slider maps for {map_id}: {e}')
         await calc_msg.edit_original_response(get_error_message())
         return
 
@@ -170,10 +179,13 @@ async def get_pp_maps(ctx, min_pp=0., max_pp=2e9, mods_include='', mods_exclude=
     perpage = 10
     n = 10 * perpage
 
+    print(f'[pp] Searching for overweight maps in range {min_pp}-{max_pp}pp, mods include: {mods_include}, exclude: {mods_exclude}, filters: {filters}')
     try:
         mods_include, mods_exclude = findppmaps.simplify_mods(mods_include), findppmaps.simplify_mods(mods_exclude)
         maps = findppmaps.find_pp_maps(min_pp, max_pp, mods_include, mods_exclude, limit=n, filters=filters)
-    except:
+        print(f'[pp] Found {len(maps)} overweight maps')
+    except Exception as e:
+        print(f'[pp] Error finding overweight maps: {e}')
         await send_error_message(ctx)
         return
 
@@ -195,6 +207,7 @@ async def recommend_map(ctx, username):
     if '(' in username:
         username = username[:username.index('(')].strip()
 
+    print(f'[rec] Starting map recommendation for user: {username}')
     api.refresh_token()
 
     counter = 0
@@ -202,11 +215,14 @@ async def recommend_map(ctx, username):
     while counter < 3:
         try:
             user = api.get_user(username)
+            print(f'[rec] Found user {username} (id: {user["id"]})')
             break
-        except:
+        except Exception as e:
             counter += 1
+            print(f'[rec] Failed to fetch user {username}, attempt {counter}/3: {e}')
 
     if not user:
+        print(f'[rec] User {username} not found after 3 attempts')
         await send_error_message(ctx, f'User **{username}** not found.')
         return
 
@@ -214,11 +230,14 @@ async def recommend_map(ctx, username):
     while counter < 3:
         try:
             scores = api.get_scores(user['id'], limit=50)
+            print(f'[rec] Fetched {len(scores) if scores else 0} scores for {username}')
             break
-        except:
+        except Exception as e:
             counter += 1
+            print(f'[rec] Failed to fetch scores, attempt {counter}/3: {e}')
 
     if not scores:
+        print(f'[rec] Failed to fetch scores for {username} after 3 attempts')
         await send_error_message(ctx, f'Error fetching scores for user **{username}**. Please try again later.')
         return
 
@@ -227,18 +246,22 @@ async def recommend_map(ctx, username):
     sim = None
     while counter < 5:
         score_index = random.randrange(min(25, len(scores)))
+        print(f'[rec] Attempting to find similar maps to beatmap {scores[score_index]["beatmap"]["id"]}')
         sim = similarity_srs.get_similar(scores[score_index]['beatmap']['id'], 100, scores[score_index]['mods'])
         if sim:
+            print(f'[rec] Found {len(sim)} similar maps')
             break
 
         counter += 1
 
     if not sim:
+        print(f'[rec] Failed to find similar maps after 5 attempts')
         await send_error_message(ctx, f'Error finding map recommendations for user **{username}**. Please try again later.')
         return
 
     score_ids = set(score['beatmap']['id'] for score in scores)
 
+    print(f'[rec] Processing {len(sim)} similar maps for farm recommendations')
     farm_maps = []
     for i in range(len(sim)):
         map_id = alphanumeric(sim[i][0])
@@ -253,11 +276,13 @@ async def recommend_map(ctx, username):
         if ow > 0.15: # threshold
             farm_maps.append(i)
 
+    print(f'[rec] Found {len(farm_maps)} farm maps out of {len(sim)} similar maps')
     if not farm_maps:
         index = 0
     else:
         index = farm_maps[random.randrange(0, min(len(farm_maps), 50))]
 
+    print(f'[rec] Recommending map {sim[index][0]} for {username}')
     color = discord.Color.from_rgb(100, 255, 100)
     modstr = ' +' + ''.join(scores[score_index]['mods']) if scores[score_index]['mods'] else ''
     description = f'**{id_to_map(sim[index][0])}**{modstr}\n{file_to_link(sim[index][0])}'
@@ -266,22 +291,28 @@ async def recommend_map(ctx, username):
     await ctx.respond(embed=embed)
 
 async def get_farmer_rating(ctx, username):
+    print(f'[farmer] Starting farmer rating calculation for user: {username}')
     id = username_to_id(username)
 
     if not id:
+        print(f'[farmer] Could not find user ID for {username}')
         await send_error_message(ctx, f'Error fetching scores for user **{username}**. Please try again later.')
         return
 
+    print(f'[farmer] Found user ID {id} for {username}')
     scores = None
     counter = 0
     while counter < 3:
         try:
             scores = api.get_scores(id, limit=50) + api.get_scores(id, limit=50, offset=50)
+            print(f'[farmer] Fetched {len(scores) if scores else 0} scores for {username}')
             break
-        except:
+        except Exception as e:
             counter += 1
+            print(f'[farmer] Failed to fetch scores, attempt {counter}/3: {e}')
 
     if not scores:
+        print(f'[farmer] Failed to fetch scores for {username}')
         await send_error_message(ctx, f'Error fetching scores for user **{username}**. Please try again later.')
         return
 
@@ -301,6 +332,7 @@ async def get_farmer_rating(ctx, username):
     farm_ratings.sort(key=lambda f: f[1])
     overall = round(sum(f[1] * f[2] for f in farm_ratings) / sum(f[2] for f in farm_ratings), 2)
 
+    print(f'[farmer] Calculated overall farmer rating of {overall} for {username} from {len(farm_ratings)} scores')
     color = discord.Color.from_rgb(100, 255, 100)
     title = f'Farmer rating for {username}:'
     description = f'**{overall}**\n\n**Most farm plays:**\n' + '\n'.join(f'**{round(f[1], 2):.2f}** | {f[0]}' for f in farm_ratings[-5:][::-1]) \
@@ -414,7 +446,9 @@ active_quizzes = {}
 async def start_quiz(ctx, difficulty, first, guess_time, length, top_plays):
     ch = ctx.channel
 
+    print(f'[quiz] Starting quiz in channel {ch.id}, difficulty: {difficulty}, first: {first}, guess_time: {guess_time}, length: {length}')
     if ch.id in active_quizzes:
+        print(f'[quiz] Quiz already active in channel {ch.id}')
         return
 
     active_quizzes[ch.id] = {}
@@ -713,6 +747,7 @@ async def sim(ctx,
               filters: discord.Option(str, description='search filters', required=False),
               page: discord.Option(int, description='page', min_value=1, max_value=10, default=1, required=False)):
     # parse input
+    print(f'[command:sim] Received request from {ctx.author.name}: beatmap={beatmap}, filters={filters}, page={page}')
     try:
         if '/' in beatmap:
             beatmap = beatmap[beatmap.strip('/').rindex('/') + 1:]
@@ -748,6 +783,7 @@ async def sr(ctx,
              dt: discord.Option(bool, description='use DT star rating', default=False, required=False),
              page: discord.Option(int, description='page', min_value=1, max_value=10, default=1, required=False)):
     # parse input
+    print(f'[command:sr] Received request from {ctx.author.name}: beatmap={beatmap}, dt={dt}, page={page}')
     try:
         if '/' in beatmap:
             beatmap = beatmap[beatmap.strip('/').rindex('/') + 1:]
@@ -762,6 +798,7 @@ async def slider(ctx,
                  beatmap: discord.Option(str, description='beatmap id/link', required=True),
                  page: discord.Option(int, description='page', min_value=1, max_value=10, default=1, required=False)):
     # parse input
+    print(f'[command:slider] Received request from {ctx.author.name}: beatmap={beatmap}, page={page}')
     try:
         if '/' in beatmap:
             beatmap = beatmap[beatmap.strip('/').rindex('/') + 1:]
@@ -780,6 +817,7 @@ async def pp(ctx,
              filters: discord.Option(str, description='search filters', required=False),
              page: discord.Option(int, description='page', min_value=1, max_value=10, default=1, required=False)):
     # parse input
+    print(f'[command:pp] Received request from {ctx.author.name}: {min_pp}-{max_pp}pp, mods_include={mods_include}, mods_exclude={mods_exclude}')
     try:
         filters_list = []
 
@@ -809,6 +847,7 @@ async def rec(ctx,
               username: discord.Option(str, description='osu! username', required=False)):
     if not username:
         username = ctx.author.display_name
+    print(f'[command:rec] Received request from {ctx.author.name} for user: {username}')
     await recommend_map(ctx, username)
 
 @bot.command(description='Get a user\'s farmer rating')
@@ -816,6 +855,7 @@ async def farmer(ctx,
                  username: discord.Option(str, description='osu! username', required=False)):
     if not username:
         username = ctx.author.display_name
+    print(f'[command:farmer] Received request from {ctx.author.name} for user: {username}')
     await get_farmer_rating(ctx, username)
 
 '''
@@ -834,17 +874,31 @@ async def quiz_start(ctx,
                 guess_time: discord.Option(int, description='time for each guess (in seconds)', default=10, required=False),
                 length: discord.Option(int, description='number of questions', default=10, required=False),
                 top_plays: discord.Option(str, description='provide a list of comma-separated usernames to only use maps from those users\' top plays', required=False)):
+    print(f'[command:quiz] Received quiz start request from {ctx.author.name}')
     await start_quiz(ctx, difficulty, first, guess_time, length, top_plays)
 
 @bot.command(description='Abort a currently running quiz')
 async def quiz_abort(ctx):
+    print(f'[command:quiz_abort] Received quiz abort request from {ctx.author.name} in channel {ctx.channel.id}')
     active_quizzes.pop(ctx.channel.id)
     await ctx.respond('Quiz has been aborted.')
 
 @bot.event
 async def on_ready():
     await bot.change_presence(activity=discord.Game(name='/help'))
+    print('=' * 50)
+    print('🤖 osu-sim Discord Bot')
+    print('=' * 50)
+    print(f'Bot Name: {bot.user.name}')
+    print(f'Bot ID: {bot.user.id}')
+    print(f'Discord.py Version: {discord.__version__}')
+    print(f'Connected to {len(bot.guilds)} server(s)')
+    print(f'Debug Mode: {"ON" if DEBUG else "OFF"}')
+    print(f'Command Prefix: {C}')
+    print('=' * 50)
+    print('✅ Bot is ready and listening for commands!')
     print('When you see it!')
+    print('=' * 50)
 
 @bot.event
 async def on_message(message):
