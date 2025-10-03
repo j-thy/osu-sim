@@ -99,6 +99,83 @@ python3 bot.py &
   - Star ratings
 - Interactive quizzes and games
 
+## Commands
+
+All commands use the `.` prefix (or `,` in debug mode).
+
+### Similarity & Search Commands
+
+- **`.sim <beatmap id/link> [filters] [page]`**
+  - Find similar maps based on map structure
+  - Example: `.sim 123456 ar<9 length>60`
+
+- **`.sr <beatmap id/link> [dt] [page]`**
+  - Find similar maps based on star rating
+  - Example: `.sr 123456 dt`
+
+- **`.slider <beatmap id/link> [page]`**
+  - Find similar maps based on slider velocity/length
+  - Example: `.slider 123456`
+
+- **`.pp <min_pp> <max_pp> [mods_include] [mods_exclude] [filters] [page]`**
+  - Find overweighted maps in a PP range
+  - Example: `.pp 200 300 HDDT`
+  - Example: `.pp 100 200 -EZ ar>9`
+
+### Player Commands
+
+- **`.rec [username]`**
+  - Recommend a farm map based on user's top plays
+  - Defaults to your Discord username if not specified
+  - Example: `.rec mrekk`
+
+- **`.farmer [username]`**
+  - Calculate a user's farmer rating based on their top 100 plays
+  - Shows most and least farm plays
+  - Example: `.farmer mrekk`
+
+### Quiz Commands
+
+- **`.quiz_start [difficulty] [first] [guess_time] [length] [top_plays]`**
+  - Start an interactive beatmap background quiz
+  - `difficulty`: easy/medium/hard/impossible/iceberg (can combine)
+  - `first`: first-guess scoring (true/false)
+  - `guess_time`: seconds per question (default: 10)
+  - `length`: number of questions (default: 10)
+  - `top_plays`: comma-separated usernames to use maps from their top plays
+  - Example: `.quiz_start hard 10 15`
+  - Example: `.quiz_start easy true 15 20 mrekk,whitecat`
+
+- **`.quiz_abort`**
+  - Stop the currently running quiz in the channel
+
+### Utility Commands
+
+- **`.help`**
+  - Display command list
+
+- **`.invite`**
+  - Get the bot invite link
+
+### Available Filters
+
+For `.sim` and `.pp` commands, you can filter results using these parameters:
+- `ar`, `od`, `hp`, `cs` - Approach rate, overall difficulty, HP drain, circle size
+- `length` - Map length in seconds
+- `sr`, `star`, `stars` - Star rating
+- `aim`, `aimsr` - Aim difficulty
+- `tap`, `tapsr` - Tap/speed difficulty
+- `id` - Beatmap ID
+- `max_bpm` - Maximum BPM
+
+**Operators:** `=`, `!=`, `>`, `<`, `>=`, `<=`
+
+**Examples:**
+- `ar<9` - AR less than 9
+- `length>180` - Maps longer than 3 minutes
+- `sr>=6.5` - 6.5+ star rating
+- `ar>9.5 od>10` - Multiple filters
+
 ## Project Structure
 
 ```
