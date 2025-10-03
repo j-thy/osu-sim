@@ -24,6 +24,28 @@ def get_sr(map, mods=None):
         return srs_hr.get(map, None)
     return srs.get(map, None)
 
+def parse_sr_from_data_line(data_line):
+    """Parse star rating, aim, and speed from data line
+
+    Args:
+        data_line: Raw data line from osu-tools output
+
+    Returns:
+        Tuple of (sr, aim, speed)
+
+    Raises:
+        ValueError: If parsing fails
+    """
+    # Format: beatmap | star rating | max combo | aim difficulty | aim difficult slider count | speed difficulty | ...
+    parts = data_line.strip('\n║').split('│')
+    if len(parts) < 6:
+        raise ValueError("Insufficient data columns")
+
+    sr = float(parts[1].strip().replace(',', ''))
+    aim = float(parts[3].strip().replace(',', ''))  # aim difficulty is at index 3
+    speed = float(parts[5].strip().replace(',', ''))  # speed difficulty is at index 5
+    return (sr, aim, speed)
+
 def get_sr_file(filename, mods=None):
     """Calculate star rating for a beatmap file
 
@@ -49,14 +71,7 @@ def get_sr_file(filename, mods=None):
     data_line = get_raw_data_line(filename, mod=mod)
 
     # Parse the data line to extract sr, aim, speed
-    parts = data_line.strip('\n║').split('│')
-    if len(parts) >= 4:
-        sr = float(parts[1].strip().replace(',', ''))
-        aim = float(parts[2].strip().replace(',', ''))
-        speed = float(parts[3].strip().replace(',', ''))
-        return (sr, aim, speed)
-    else:
-        raise Exception("Could not parse star rating data from output")
+    return parse_sr_from_data_line(data_line)
 
 def get_raw_data_line(filename, mod=None, include_header=False):
     """Get the raw data line from osu-tools output for a single beatmap
@@ -265,24 +280,30 @@ if __name__ == '__main__':
 
                 # Parse and display the values
                 parts = data_line.strip('\n║').split('│')
-                if len(parts) >= 7:
-                    # Column labels: beatmap | star rating | aim rating | speed rating | max combo | approach rate | overall difficulty
+                if len(parts) >= 10:
+                    # Format columns: beatmap | star rating | max combo | aim difficulty | aim difficult slider count | speed difficulty | speed note count | slider factor | aim difficult strain count | speed difficult strain count
                     beatmap_name = parts[0].strip()
                     sr = float(parts[1].strip().replace(',', ''))
-                    aim = float(parts[2].strip().replace(',', ''))
-                    speed = float(parts[3].strip().replace(',', ''))
-                    combo = int(parts[4].strip().replace(',', ''))
-                    ar = float(parts[5].strip().replace(',', ''))
-                    od = float(parts[6].strip().replace(',', ''))
+                    combo = float(parts[2].strip().replace(',', ''))
+                    aim = float(parts[3].strip().replace(',', ''))
+                    aim_slider_count = float(parts[4].strip().replace(',', ''))
+                    speed = float(parts[5].strip().replace(',', ''))
+                    speed_note_count = float(parts[6].strip().replace(',', ''))
+                    slider_factor = float(parts[7].strip().replace(',', ''))
+                    aim_strain_count = float(parts[8].strip().replace(',', ''))
+                    speed_strain_count = float(parts[9].strip().replace(',', ''))
 
                     print(f"\nParsed values:")
                     print(f"  Beatmap: {beatmap_name}")
                     print(f"  Star rating: {sr}")
-                    print(f"  Aim rating: {aim}")
-                    print(f"  Speed rating: {speed}")
                     print(f"  Max combo: {combo}")
-                    print(f"  Approach rate: {ar}")
-                    print(f"  Overall difficulty: {od}")
+                    print(f"  Aim difficulty: {aim}")
+                    print(f"  Aim difficult slider count: {aim_slider_count}")
+                    print(f"  Speed difficulty: {speed}")
+                    print(f"  Speed note count: {speed_note_count}")
+                    print(f"  Slider factor: {slider_factor}")
+                    print(f"  Aim difficult strain count: {aim_strain_count}")
+                    print(f"  Speed difficult strain count: {speed_strain_count}")
                     print(f"\nJSON format (used in srs.json): [{sr}, {aim}, {speed}]")
             except Exception as e:
                 print(f"Error: {e}")
@@ -400,17 +421,8 @@ if __name__ == '__main__':
                     continue
 
                 # Parse star ratings from data line
-                # Format: beatmap_name│star│aim│speed│combo│ar│od
-                parts = data_line.strip('\n║').split('│')
-                if len(parts) < 4:
-                    pbar.update(1)
-                    continue
-
-                # Extract the numeric values we need: star rating, aim rating, speed rating
                 try:
-                    sr = float(parts[1].strip().replace(',', ''))
-                    aim = float(parts[2].strip().replace(',', ''))
-                    speed = float(parts[3].strip().replace(',', ''))
+                    sr, aim, speed = parse_sr_from_data_line(data_line)
                 except (ValueError, IndexError):
                     pbar.update(1)
                     continue
