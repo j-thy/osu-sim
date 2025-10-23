@@ -124,7 +124,7 @@ async def get_similar_maps(ctx, map_id, page=1, filters=None):
         return
 
     title = f'Maps similar in structure to {map_id}:'
-    elements = [f'[{id_to_map(sim[i][0])}]({file_to_link(sim[i][0])})' for i in range(len(sim))]
+    elements = [f'**{sim[i][1]:.1f}%** - [{id_to_map(sim[i][0])}]({file_to_link(sim[i][0])})' for i in range(len(sim))]
     await send_output_pages(ctx, title, elements, page, edit_msg=True)
 
 async def get_rating_maps(ctx, map_id, page=1, dt=False):
@@ -917,7 +917,7 @@ async def sim(ctx,
         filters_list = parse_filters(filters) if filters else []
 
         # Validate string filter operators
-        for filter_key, operator, value, is_string in filters_list:
+        for filter_key, operator, value, is_string, is_date in filters_list:
             if is_string and operator not in string_operators:
                 print(f'[command:sim] Error: Invalid operator {operator} for string filter {filter_key}')
                 formatted_operators = ", ".join(f"`{op}`" for op in string_operators)
@@ -982,7 +982,7 @@ async def pp(ctx,
         filters_list = parse_filters(filters) if filters else []
 
         # Validate string filter operators
-        for filter_key, operator, value, is_string in filters_list:
+        for filter_key, operator, value, is_string, is_date in filters_list:
             if is_string and operator not in string_operators:
                 print(f'[command:pp] Error: Invalid operator {operator} for string filter {filter_key}')
                 formatted_operators = ", ".join(f"`{op}`" for op in string_operators)

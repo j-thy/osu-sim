@@ -3,6 +3,7 @@ import math
 import numpy as np
 import os
 import random
+from tqdm import tqdm
 
 import calc
 from filters import apply_filter
@@ -56,6 +57,9 @@ def get_similar(id, n=50, filters=None):
             f.write(text)
         sr = getsrs.get_sr_file(temp_filename)
         os.remove(temp_filename)
+
+    # Calculate self-similarity for normalization (100% = identical map)
+    max_similarity = get_similarity(bkts, bkts)
 
     similarities = []
 
@@ -127,14 +131,20 @@ def get_similar(id, n=50, filters=None):
                 continue
 
         if not sr:
-            similarities.append((file, get_similarity(bkts, all_buckets[file])))
+            raw_sim = get_similarity(bkts, all_buckets[file])
+            # Normalize to percentage (0-100%)
+            percentage = (raw_sim / max_similarity * 100) if max_similarity > 0 else 0
+            similarities.append((file, percentage))
         else:
             key = file[:-5]
             if key not in srs:
                 continue
 
             if euclidean(srs[key][:2], sr[:2]) <= 0.5:
-                similarities.append((key, get_similarity(bkts, all_buckets[file]), euclidean(srs[key][:2], sr[:2])))
+                raw_sim = get_similarity(bkts, all_buckets[file])
+                # Normalize to percentage (0-100%)
+                percentage = (raw_sim / max_similarity * 100) if max_similarity > 0 else 0
+                similarities.append((key, percentage, euclidean(srs[key][:2], sr[:2])))
 
     similarities.sort(key=lambda s: -s[1])
     return similarities[:min(len(similarities), n)]
@@ -143,10 +153,16 @@ def get_all_buckets():
     buckets = {}
 
     bkts_dir = 'buckets'
-    for entry in os.scandir(bkts_dir):
-        if entry.is_file():
-            temp_bkts = get_buckets(entry.path)
-            buckets[entry.name] = temp_bkts
+
+    # First, collect all bucket files to know the total count
+    bucket_files = [entry for entry in os.scandir(bkts_dir) if entry.is_file()]
+
+    print(f"Loading {len(bucket_files)} bucket files...")
+
+    # Process all files with progress bar
+    for entry in tqdm(bucket_files, desc="Loading similarity buckets", unit="file"):
+        temp_bkts = get_buckets(entry.path)
+        buckets[entry.name] = temp_bkts
 
     return buckets
 
