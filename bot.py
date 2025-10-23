@@ -204,11 +204,11 @@ async def get_pp_maps(ctx, min_pp=0., max_pp=2e9, mods_include='', mods_exclude=
     elements = [f'[{id_to_map(maps[i][0])}](https://osu.ppy.sh/b/{maps[i][0]}){modcombo(i)}' for i in range(len(maps))]
     await send_output_pages(ctx, title, elements, page)
 
-async def recommend_map(ctx, username):
+async def recommend_map(ctx, username, farm=False):
     if '(' in username:
         username = username[:username.index('(')].strip()
 
-    print(f'[rec] Starting map recommendation for user: {username}')
+    print(f'[rec] Starting map recommendation for user: {username}, farm mode: {farm}')
     api.refresh_token()
 
     counter = 0
@@ -227,10 +227,12 @@ async def recommend_map(ctx, username):
         await send_error_message(ctx, f'User **{username}** not found.')
         return
 
+    # Fetch top 100 plays in one API call
     scores = None
+    counter = 0
     while counter < 3:
         try:
-            scores = api.get_scores(user['id'], limit=50)
+            scores = api.get_scores(user['id'], limit=100)
             print(f'[rec] Fetched {len(scores) if scores else 0} scores for {username}')
             break
         except Exception as e:
@@ -242,54 +244,143 @@ async def recommend_map(ctx, username):
         await send_error_message(ctx, f'Error fetching scores for user **{username}**. Please try again later.')
         return
 
-    counter = 0
-    score_index = 0
-    sim = None
-    while counter < 5:
-        score_index = random.randrange(min(25, len(scores)))
-        print(f'[rec] Attempting to find similar maps to beatmap {scores[score_index]["beatmap"]["id"]}')
-        sim = similarity_srs.get_similar(scores[score_index]['beatmap']['id'], 100, scores[score_index]['mods'])
-        if sim:
-            print(f'[rec] Found {len(sim)} similar maps')
-            break
+    if farm:
+        # Old farm mode functionality
+        counter = 0
+        score_index = 0
+        sim = None
+        while counter < 5:
+            score_index = random.randrange(min(25, len(scores)))
+            print(f'[rec:farm] Attempting to find similar maps to beatmap {scores[score_index]["beatmap"]["id"]}')
+            sim = similarity_srs.get_similar(scores[score_index]['beatmap']['id'], 100, scores[score_index]['mods'])
+            if sim:
+                print(f'[rec:farm] Found {len(sim)} similar maps')
+                break
 
-        counter += 1
+            counter += 1
 
-    if not sim:
-        print(f'[rec] Failed to find similar maps after 5 attempts')
-        await send_error_message(ctx, f'Error finding map recommendations for user **{username}**. Please try again later.')
-        return
+        if not sim:
+            print(f'[rec:farm] Failed to find similar maps after 5 attempts')
+            await send_error_message(ctx, f'Error finding map recommendations for user **{username}**. Please try again later.')
+            return
 
-    score_ids = set(score['beatmap']['id'] for score in scores)
+        score_ids = set(score['beatmap']['id'] for score in scores)
 
-    print(f'[rec] Processing {len(sim)} similar maps for farm recommendations')
-    farm_maps = []
-    for i in range(len(sim)):
-        map_id = alphanumeric(sim[i][0])
-        if not map_id or int(map_id) in score_ids:
-            continue
-        # if map_freq.get(map_id, 0) >= 150: # frequency threshold
-        #     farm_maps.append(i)
+        print(f'[rec:farm] Processing {len(sim)} similar maps for farm recommendations')
+        farm_maps = []
+        for i in range(len(sim)):
+            map_id = alphanumeric(sim[i][0])
+            if not map_id or int(map_id) in score_ids:
+                continue
 
-        # calculate overweightedness
-        mapinfo = findppmaps.get_map_info(map_id, ''.join(m for m in scores[score_index]['mods']))
-        ow = findppmaps.overweight(mapinfo) if mapinfo else 0
-        if ow > 0.15: # threshold
-            farm_maps.append(i)
+            # calculate overweightedness
+            mapinfo = findppmaps.get_map_info(map_id, ''.join(m for m in scores[score_index]['mods']))
+            ow = findppmaps.overweight(mapinfo) if mapinfo else 0
+            if ow > 0.15: # threshold
+                farm_maps.append(i)
 
-    print(f'[rec] Found {len(farm_maps)} farm maps out of {len(sim)} similar maps')
-    if not farm_maps:
-        index = 0
+        print(f'[rec:farm] Found {len(farm_maps)} farm maps out of {len(sim)} similar maps')
+        if not farm_maps:
+            index = 0
+        else:
+            index = farm_maps[random.randrange(0, min(len(farm_maps), 50))]
+
+        print(f'[rec:farm] Recommending map {sim[index][0]} for {username}')
+        color = discord.Color.from_rgb(100, 255, 100)
+        modstr = ' +' + ''.join(scores[score_index]['mods']) if scores[score_index]['mods'] else ''
+        description = f'**{id_to_map(sim[index][0])}**{modstr}\n{file_to_link(sim[index][0])}'
+        embed = discord.Embed(description=description, color=color)
+        embed.set_footer(text=f'Recommended farm map for {user["username"]}')
+        await ctx.respond(embed=embed)
     else:
-        index = farm_maps[random.randrange(0, min(len(farm_maps), 50))]
+        # New similarity-based recommendation with weighted selection
+        print(f'[rec] Using weighted selection from top 100 plays')
 
-    print(f'[rec] Recommending map {sim[index][0]} for {username}')
-    color = discord.Color.from_rgb(100, 255, 100)
-    modstr = ' +' + ''.join(scores[score_index]['mods']) if scores[score_index]['mods'] else ''
-    description = f'**{id_to_map(sim[index][0])}**{modstr}\n{file_to_link(sim[index][0])}'
-    embed = discord.Embed(description=description, color=color)
-    embed.set_footer(text=f'Recommended map for {user["username"]}')
-    await ctx.respond(embed=embed)
+        # Weighted random selection from top 100 - higher PP = higher probability
+        # Use PP values as weights
+        weights = [score['pp'] for score in scores]
+        total_weight = sum(weights)
+
+        # Select random score weighted by PP
+        rand_val = random.random() * total_weight
+        cumulative = 0
+        score_index = 0
+        for i, weight in enumerate(weights):
+            cumulative += weight
+            if rand_val <= cumulative:
+                score_index = i
+                break
+
+        selected_score = scores[score_index]
+        print(f'[rec] Selected score #{score_index + 1} (beatmap {selected_score["beatmap"]["id"]}, {selected_score["pp"]:.2f}pp)')
+
+        # Show calculating message
+        color = discord.Color.from_rgb(255, 255, 100)
+        description = 'Calculating...'
+        footer = 'Finding similar maps based on structure...'
+        embed = discord.Embed(description=description, color=color)
+        embed.set_footer(text=footer)
+        calc_msg = await ctx.respond(embed=embed)
+
+        # Get similar maps using structure-based similarity
+        try:
+            sim = similarity_buckets.get_similar(selected_score['beatmap']['id'], 100)
+            print(f'[rec] Found {len(sim)} similar maps')
+        except Exception as e:
+            print(f'[rec] Error finding similar maps: {e}')
+            await calc_msg.edit_original_response(embed=get_error_message('Error finding similar maps. Please try again later.'))
+            return
+
+        if not sim:
+            await calc_msg.edit_original_response(embed=get_error_message('Not enough similar maps found.'))
+            return
+
+        # Filter out maps user has already played
+        score_ids = set(score['beatmap']['id'] for score in scores)
+        # sim returns tuples of either (map_id, percentage) or (map_id, percentage, distance)
+        # We only need map_id and percentage
+        filtered_sim = []
+        for item in sim:
+            map_id = item[0]
+            percentage = item[1]
+            if int(map_id) not in score_ids:
+                filtered_sim.append((map_id, percentage))
+
+        if not filtered_sim:
+            await calc_msg.edit_original_response(embed=get_error_message('All similar maps have already been played.'))
+            return
+
+        print(f'[rec] Filtered to {len(filtered_sim)} unplayed similar maps')
+
+        # Weighted random selection based on similarity percentage
+        # Higher similarity = higher probability
+        weights = [percentage for _, percentage in filtered_sim]
+        total_weight = sum(weights)
+
+        if total_weight == 0:
+            # Fallback to uniform selection if all weights are 0
+            selected_index = random.randrange(len(filtered_sim))
+        else:
+            rand_val = random.random() * total_weight
+            cumulative = 0
+            selected_index = 0
+            for i, weight in enumerate(weights):
+                cumulative += weight
+                if rand_val <= cumulative:
+                    selected_index = i
+                    break
+
+        recommended_map = filtered_sim[selected_index]
+        map_id = recommended_map[0]
+        similarity_pct = recommended_map[1]
+
+        print(f'[rec] Recommending map {map_id} ({similarity_pct:.1f}% similar) for {username}')
+
+        color = discord.Color.from_rgb(100, 255, 100)
+        description = f'**{id_to_map(map_id)}**\n{file_to_link(map_id)}'
+        embed = discord.Embed(description=description, color=color)
+        embed.set_footer(text=f'Recommended map for {user["username"]} | {similarity_pct:.1f}% similar')
+        await calc_msg.edit_original_response(embed=embed)
 
 async def get_farmer_rating(ctx, username):
     print(f'[farmer] Starting farmer rating calculation for user: {username}')
@@ -844,7 +935,7 @@ async def help(ctx):
                   f'**{C}sr** `<beatmap id/link>` `[dt]` `[<page>]`\nFind similar maps (based on star rating)\n\n' \
                   f'**{C}sl**ider `<beatmap id/link>` `[<page>]`\nFind similar maps (based on sliders)\n\n' \
                   f'**{C}pp** `<min>-<max>` `[-][<mods>]` `[<page>]`\nFind overweighted maps\n\n' \
-                  f'**{C}r**ec `[<username/id>]`\nRecommend a map\n\n' \
+                  f'**{C}r**ec `[<username/id>]` `[farm]`\nRecommend a map based on top plays\n\n' \
                   f'**{C}q**uiz `[easy/medium/hard/impossible]` `[first]`\nStart the beatmap quiz\n\n' \
                   f'**{C}f**ilters\nView available search filters\n\n' \
                   f'**{C}i**nvite\nGet this bot\'s invite link\n\n' \
@@ -1000,11 +1091,12 @@ async def pp(ctx,
 
 @bot.command(description='Recommend a map')
 async def rec(ctx,
-              username: discord.Option(str, description='osu! username', required=False)):
+              username: discord.Option(str, description='osu! username', required=False),
+              farm: discord.Option(bool, description='use farm mode (star rating + overweight filtering)', default=False, required=False)):
     if not username:
         username = ctx.author.display_name
-    print(f'[command:rec] Received request from {ctx.author.name} for user: {username}')
-    await recommend_map(ctx, username)
+    print(f'[command:rec] Received request from {ctx.author.name} for user: {username}, farm: {farm}')
+    await recommend_map(ctx, username, farm)
 
 @bot.command(description='Get a user\'s farmer rating')
 async def farmer(ctx,
