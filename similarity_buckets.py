@@ -5,6 +5,7 @@ import os
 import random
 
 import calc
+from filters import apply_filter
 import getmaps
 import getbuckets
 import getsrs
@@ -67,6 +68,45 @@ def get_similar(id, n=50, filters=None):
             return getsrs.get_sr(id)[1]
         elif key in ['tap', 'tapsr']:
             return getsrs.get_sr(id)[2]
+        elif key == 'bpm':
+            # bpm is an alias for max_bpm
+            if id in stats and 'max_bpm' in stats[id]:
+                return stats[id]['max_bpm']
+        elif key in ['drain', 'dr']:
+            # drain and dr are aliases for hp
+            if id in stats and 'hp' in stats[id]:
+                return stats[id]['hp']
+        # String filters - use lookup fields
+        elif key == 'tags':
+            # Tags come from metadata.json (pre-computed tags_lookup)
+            if id in metadata and 'tags_lookup' in metadata[id]:
+                return metadata[id]['tags_lookup']
+        elif key in ['artist', 'creator', 'title', 'source']:
+            if id in stats and f'{key}_lookup' in stats[id]:
+                return stats[id][f'{key}_lookup']
+        elif key in ['difficulty', 'diff', 'version']:
+            if id in stats and 'version_lookup' in stats[id]:
+                return stats[id]['version_lookup']
+        # Status/category filter - maps status codes to string names
+        elif key in ['status', 'category']:
+            if id in metadata and 'approved' in metadata[id]:
+                status_code = metadata[id]['approved']
+                status_map = {-2: 'graveyard', -1: 'wip', 0: 'pending',
+                             1: 'ranked', 2: 'approved', 3: 'qualified', 4: 'loved'}
+                return status_map.get(status_code, '')
+        # Date filters - from metadata.json
+        elif key in ['created', 'submitted']:
+            # Return submit_date from metadata.json
+            if id in metadata and 'submit_date' in metadata[id]:
+                return metadata[id]['submit_date']
+        elif key == 'ranked':
+            # Return approved_date from metadata.json
+            if id in metadata and 'approved_date' in metadata[id]:
+                return metadata[id]['approved_date']
+        elif key == 'updated':
+            # Return last_update from metadata.json
+            if id in metadata and 'last_update' in metadata[id]:
+                return metadata[id]['last_update']
         elif id in stats and key in stats[id]:
             return stats[id][key]
         return None
@@ -77,18 +117,10 @@ def get_similar(id, n=50, filters=None):
 
         if filters:
             valid = True
-            funcs = {
-                '!=': lambda x, y: x != y,
-                '>=': lambda x, y: x >= y,
-                '<=': lambda x, y: x <= y,
-                '>': lambda x, y: x > y,
-                '<': lambda x, y: x < y,
-                '=': lambda x, y: x == y
-            }
             for fil in filters:
-                key, operator, value = fil
-
-                if not funcs[operator](get_stat(file[:-5], key), value):
+                key, operator, value, is_string, is_date = fil
+                stat_value = get_stat(file[:-5], key)
+                if not apply_filter(stat_value, operator, value, is_string, is_date):
                     valid = False
                     break
             if not valid:
@@ -122,6 +154,12 @@ all_buckets = get_all_buckets()
 srs = getsrs.get_srs()
 with open('stats.json') as fin:
     stats = json.load(fin)
+
+# Load metadata for tags
+metadata = {}
+if os.path.exists('metadata.json'):
+    with open('metadata.json') as fin:
+        metadata = json.load(fin)
 
 if __name__ == '__main__':
     import time

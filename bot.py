@@ -9,6 +9,7 @@ import time
 import traceback
 
 import api
+import calc
 #import estimaterank
 import findppmaps
 import similarity_buckets
@@ -660,6 +661,119 @@ def alphanumeric(s):
             output += c
     return output
 
+def parse_filter_value(value_str, filter_key):
+    """
+    Parse filter value, handling quoted strings and normalizing values.
+
+    For numeric filters: removes spaces and converts to float
+    For string filters: removes quotes, normalizes using lookup fields
+    For date filters: validates date format (YYYY, YYYY-MM, or YYYY-MM-DD)
+
+    Returns: (parsed_value, is_string_filter, is_date_filter)
+    """
+    # Strip outer quotes if present
+    if value_str.startswith('"') and value_str.endswith('"'):
+        value_str = value_str[1:-1]
+    elif value_str.startswith("'") and value_str.endswith("'"):
+        value_str = value_str[1:-1]
+
+    # String filters
+    string_filters = ['artist', 'creator', 'title', 'difficulty', 'diff', 'version', 'source', 'status', 'category']
+    # 'tags' - Disabled until metadata.json is complete
+    if filter_key in string_filters:
+        # Normalize the string for lookup (using same function as stats.json generation)
+        return calc.normalize_for_lookup(value_str), True, False
+
+    # Date filters
+    date_filters = ['created', 'submitted', 'ranked', 'updated']
+    if filter_key in date_filters:
+        # Validate date format (YYYY, YYYY-MM, or YYYY-MM-DD)
+        # Just keep the value as-is, validation will happen in filters.py
+        return value_str, False, True
+
+    # Numeric filters - remove spaces and convert to float
+    value_str = value_str.replace(' ', '')
+    try:
+        return float(value_str), False, False
+    except ValueError:
+        raise ValueError(f"Invalid numeric value for filter '{filter_key}': {value_str}")
+
+def parse_filters(filters_str):
+    """
+    Parse filter string into list of (key, operator, value, is_string, is_date) tuples.
+    Handles quoted strings that may contain spaces.
+
+    Returns: list of (filter_key, operator, parsed_value, is_string_filter, is_date_filter)
+    """
+    if not filters_str:
+        return []
+
+    filters_list = []
+    i = 0
+    current_filter = ""
+
+    # Split by spaces, but respect quotes
+    while i < len(filters_str):
+        if filters_str[i] in ('"', "'"):
+            # Found a quote - find the matching closing quote
+            quote_char = filters_str[i]
+            current_filter += filters_str[i]
+            i += 1
+            while i < len(filters_str) and filters_str[i] != quote_char:
+                current_filter += filters_str[i]
+                i += 1
+            if i < len(filters_str):
+                current_filter += filters_str[i]  # add closing quote
+            i += 1
+        elif filters_str[i] == ' ':
+            # Space - end current filter if we have one
+            if current_filter.strip():
+                filters_list.append(current_filter.strip())
+            current_filter = ""
+            i += 1
+        else:
+            current_filter += filters_str[i]
+            i += 1
+
+    # Add last filter if any
+    if current_filter.strip():
+        filters_list.append(current_filter.strip())
+
+    # Now parse each filter
+    parsed_filters = []
+    for filter_str in filters_list:
+        # Find operator
+        operator_found = None
+        operator_index = -1
+
+        for symbol in symbols:
+            if symbol in filter_str:
+                operator_index = filter_str.index(symbol)
+                operator_found = symbol
+                break
+
+        if not operator_found:
+            # No operator found in this token - likely a spacing issue
+            raise ValueError(f"No operator found in filter '{filter_str}'. Don't include spaces around operators (e.g. `ar>=9` not `ar >= 9`)")
+
+        filter_key = filter_str[:operator_index]
+        filter_value_str = filter_str[operator_index + len(operator_found):]
+
+        if not filter_key:
+            raise ValueError(f"No filter key found in '{filter_str}'. Filters should be in the format `key operator value` (e.g. `ar>=9` not `>=9`)")
+
+        if filter_key not in supported_filters:
+            raise ValueError(f'Filter `{filter_key}` not currently supported.')
+
+        # Parse the value
+        try:
+            parsed_value, is_string, is_date = parse_filter_value(filter_value_str, filter_key)
+            parsed_filters.append((filter_key, operator_found, parsed_value, is_string, is_date))
+        except ValueError as e:
+            raise ValueError(f"Error parsing filter value: {e}. If the value contains spaces, wrap it in quotes.")
+
+    return parsed_filters
+
 def get_map_freq(filename='mapfreq.txt'):
     map_freq = {}
 
@@ -714,8 +828,13 @@ for i in range(len(mapsets)):
 C = ',' if DEBUG else '.'
 
 # supported symbols/keywords for search filters
-symbols = ['!=', '>=', '<=', '>', '<', '=']
-supported_filters = ['ar', 'od', 'hp', 'cs', 'length', 'sr', 'star', 'stars', 'aim', 'aimsr', 'tap', 'tapsr', 'id', 'max_bpm']
+symbols = ['!=', '>=', '<=', '==', '>', '<', '=', ':']
+supported_filters = ['ar', 'od', 'hp', 'drain', 'dr', 'cs', 'length', 'sr', 'star', 'stars', 'aim', 'aimsr', 'tap', 'tapsr', 'id', 'max_bpm', 'bpm', 'artist', 'creator', 'title', 'difficulty', 'diff', 'version', 'source', 'circles', 'sliders', 'spinners', 'divisor']
+# Disabled until metadata.json is complete:
+# 'tags', 'updated', 'ranked', 'created', 'submitted', 'status', 'category'
+
+# Operators that work with string filters
+string_operators = ['=', '==', ':', '!=']
 
 @bot.command(description='View commands')
 async def help(ctx):
@@ -727,10 +846,51 @@ async def help(ctx):
                   f'**{C}pp** `<min>-<max>` `[-][<mods>]` `[<page>]`\nFind overweighted maps\n\n' \
                   f'**{C}r**ec `[<username/id>]`\nRecommend a map\n\n' \
                   f'**{C}q**uiz `[easy/medium/hard/impossible]` `[first]`\nStart the beatmap quiz\n\n' \
+                  f'**{C}f**ilters\nView available search filters\n\n' \
                   f'**{C}i**nvite\nGet this bot\'s invite link\n\n' \
                   f'**{C}h**elp\nView commands'
     embed = discord.Embed(title=title, description=description, color=color)
     embed.set_footer(text="Omit brackets. Square brackets ([]) indicate optional parameters.")
+    await ctx.respond(embed=embed)
+
+@bot.command(description='View available search filters')
+async def filters(ctx):
+    title = 'Available Search Filters'
+    color = discord.Color.from_rgb(150, 150, 150)
+    description = '**Difficulty Settings:**\n' \
+                  '`ar` - Approach Rate\n' \
+                  '`od` - Overall Difficulty\n' \
+                  '`hp`, `drain`, `dr` - HP Drain Rate\n' \
+                  '`cs` - Circle Size\n\n' \
+                  '**Star Rating:**\n' \
+                  '`sr`, `star`, `stars` - Overall star rating\n' \
+                  '`aim`, `aimsr` - Aim difficulty\n' \
+                  '`tap`, `tapsr` - Tap/speed difficulty\n\n' \
+                  '**Map Properties:**\n' \
+                  '`length` - Map length (seconds)\n' \
+                  '`bpm`, `max_bpm` - Maximum BPM\n' \
+                  '`id` - Beatmap ID\n' \
+                  '`circles` - Number of circles\n' \
+                  '`sliders` - Number of sliders\n' \
+                  '`spinners` - Number of spinners\n\n' \
+                  '**Map Metadata (strings):**\n' \
+                  '`artist` - Artist name\n' \
+                  '`creator` - Mapper name\n' \
+                  '`title` - Song title\n' \
+                  '`difficulty`, `diff`, `version` - Difficulty name\n' \
+                  '`source` - Source media (game/anime/etc.)\n\n' \
+                  '**Operators:**\n' \
+                  'Numeric: `=` `==` `:` `!=` `<` `>` `<=` `>=`\n' \
+                  'String: `=` `==` `:` `!=` only\n\n' \
+                  '**Examples:**\n' \
+                  '`.sim 123456 ar>=9`\n' \
+                  '`.sim 123456 ar>=9 length<200`\n' \
+                  '`.pp 200-300 ar==9.5 cs:4`\n' \
+                  '`.sim 123456 artist=AKINO`\n' \
+                  '`.sim 123456 title="blue bird"`\n' \
+                  "`.sim 123456 creator='pishifat'`"
+    embed = discord.Embed(title=title, description=description, color=color)
+    embed.set_footer(text="Filters are space-separated. Wrap string values with spaces in quotes (single or double). No spaces around operators.")
     await ctx.respond(embed=embed)
 
 @bot.command(description='Get invite link')
@@ -753,26 +913,25 @@ async def sim(ctx,
             beatmap = beatmap[beatmap.strip('/').rindex('/') + 1:]
         beatmap = ''.join(c for c in beatmap if '0' <= c <= '9')
 
-        filters_list = []
+        # Parse filters using new function that handles quotes
+        filters_list = parse_filters(filters) if filters else []
 
-        if filters:
-            filters_split = filters.split(' ')
-            for filter_str in filters_split:
-                for symbol in symbols:
-                    if symbol in filter_str:
-                        filter_key = filter_str[:filter_str.index(symbol)]
-                        filter_value = filter_str[filter_str.index(symbol) + len(symbol):]
-                        if filter_key in supported_filters:
-                            filters_list.append((filter_key, symbol, float(filter_value)))
-                        else:
-                            if filter_key:
-                                await send_error_message(ctx, f'Filter `{filter_key}` not currently supported.')
-                            else:
-                                await send_error_message(ctx, "Don't include spaces when using filters (e.g. `ar<9` instead of `ar < 9`)")
-                            return
-                        break
-    except:
-        await send_error_message(ctx, traceback.format_exc())
+        # Validate string filter operators
+        for filter_key, operator, value, is_string in filters_list:
+            if is_string and operator not in string_operators:
+                print(f'[command:sim] Error: Invalid operator {operator} for string filter {filter_key}')
+                formatted_operators = ", ".join(f"`{op}`" for op in string_operators)
+                await send_error_message(ctx, f'Operator `{operator}` not supported for string filter `{filter_key}`. Use one of: {formatted_operators}')
+                return
+
+    except ValueError as e:
+        print(f'[command:sim] Error parsing filters: {e}')
+        await send_error_message(ctx, str(e))
+        return
+    except Exception as e:
+        print(f'[command:sim] Unexpected error: {e}')
+        traceback.print_exc()
+        await send_error_message(ctx, 'An error occurred while processing your request.')
         return
 
     await get_similar_maps(ctx, beatmap, page, filters_list)
@@ -819,28 +978,25 @@ async def pp(ctx,
     # parse input
     print(f'[command:pp] Received request from {ctx.author.name}: {min_pp}-{max_pp}pp, mods_include={mods_include}, mods_exclude={mods_exclude}')
     try:
-        filters_list = []
+        # Parse filters using new function that handles quotes
+        filters_list = parse_filters(filters) if filters else []
 
-        if filters:
-            filters_split = filters.split(' ')
-            for filter_str in filters_split:
-                for symbol in symbols:
-                    if symbol in filter_str:
-                        filter_key = filter_str[:filter_str.index(symbol)]
-                        filter_value = filter_str[filter_str.index(symbol) + len(symbol):]
-                        if filter_key in supported_filters:
-                            filters_list.append((filter_key, symbol, float(filter_value)))
-                        else:
-                            if filter_key:
-                                await send_error_message(ctx, f'Filter `{filter_key}` not currently supported.')
-                            else:
-                                await send_error_message(ctx, "Don't include spaces when using filters (e.g. `ar<9` instead of `ar < 9`)")
-                            return
-                        break
+        # Validate string filter operators
+        for filter_key, operator, value, is_string in filters_list:
+            if is_string and operator not in string_operators:
+                print(f'[command:pp] Error: Invalid operator {operator} for string filter {filter_key}')
+                formatted_operators = ", ".join(f"`{op}`" for op in string_operators)
+                await send_error_message(ctx, f'Operator `{operator}` not supported for string filter `{filter_key}`. Use one of: {formatted_operators}')
+                return
 
         await get_pp_maps(ctx, min_pp, max_pp, mods_include, mods_exclude, page, filters_list)
-    except:
-        await send_error_message(ctx, traceback.format_exc())
+    except ValueError as e:
+        print(f'[command:pp] Error parsing filters: {e}')
+        await send_error_message(ctx, str(e))
+    except Exception as e:
+        print(f'[command:pp] Unexpected error: {e}')
+        traceback.print_exc()
+        await send_error_message(ctx, 'An error occurred while processing your request.')
 
 @bot.command(description='Recommend a map')
 async def rec(ctx,

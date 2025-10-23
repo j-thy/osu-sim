@@ -64,8 +64,8 @@ with tqdm(total=len(osu_files), desc="Extracting stats", unit="map") as pbar:
                 'error': str(e)
             })
 
-        # Update progress bar with current beatmap ID
-        pbar.set_postfix({'ID': beatmap_id, 'Failed': failed_count})
+        # Update progress bar with failed count
+        pbar.set_postfix(Failed=failed_count)
         pbar.update(1)
 
 # Write all collected statistics to a JSON file
@@ -73,8 +73,9 @@ with tqdm(total=len(osu_files), desc="Extracting stats", unit="map") as pbar:
 print(f"\nWriting stats to stats.json...")
 with open('stats.json', 'w') as fout:
     # Sort by numeric beatmap ID for natural ordering
+    # Use compact format (no indent) for faster loading and smaller file size
     sorted_stats = {k: stats[k] for k in sorted(stats.keys(), key=int)}
-    json.dump(sorted_stats, fout, indent=2)
+    json.dump(sorted_stats, fout, separators=(',', ':'))
 
 # Write failed maps to log file if any failed
 if failed_maps:

@@ -43,7 +43,11 @@ def parse_sr_from_data_line(data_line):
 
     sr = float(parts[1].strip().replace(',', ''))
     aim = float(parts[3].strip().replace(',', ''))  # aim difficulty is at index 3
-    speed = float(parts[5].strip().replace(',', ''))  # speed difficulty is at index 5
+
+    # Handle empty speed difficulty (slider-only maps or edge cases)
+    speed_str = parts[5].strip().replace(',', '')
+    speed = float(speed_str) if speed_str else 0.0  # Default to 0.0 if empty
+
     return (sr, aim, speed)
 
 def get_sr_file(filename, mods=None):
@@ -240,14 +244,12 @@ srs_hr = get_srs('srs_hr.json')
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Generate star ratings for osu! beatmaps')
-    parser.add_argument('--full-regen', action='store_true',
+    parser.add_argument('--all', action='store_true',
                        help='Fully regenerate raw files from scratch (slow)')
-    parser.add_argument('--new-gen', action='store_true',
-                       help='Only process new maps not in raw files and append them')
     parser.add_argument('--get-sr', type=str, metavar='BEATMAP_ID',
                        help='Test a single beatmap ID and print the raw output')
-    parser.add_argument('--mods', type=str, default='nm', choices=['nm', 'dt', 'hr', 'all'],
-                       help='Mod types to process: nm, dt, hr, or all (default: nm)')
+    parser.add_argument('--mods', type=str, default='all', choices=['nm', 'dt', 'hr', 'all'],
+                       help='Mod types to process: nm, dt, hr, or all (default: all)')
     parser.add_argument('--workers', type=int, default=None,
                        help='Number of parallel workers for generating raw file (default: CPU count)')
     args = parser.parse_args()
@@ -280,31 +282,38 @@ if __name__ == '__main__':
 
                 # Parse and display the values
                 parts = data_line.strip('\n║').split('│')
-                if len(parts) >= 10:
-                    # Format columns: beatmap | star rating | max combo | aim difficulty | aim difficult slider count | speed difficulty | speed note count | slider factor | aim difficult strain count | speed difficult strain count
-                    beatmap_name = parts[0].strip()
-                    sr = float(parts[1].strip().replace(',', ''))
-                    combo = float(parts[2].strip().replace(',', ''))
-                    aim = float(parts[3].strip().replace(',', ''))
-                    aim_slider_count = float(parts[4].strip().replace(',', ''))
-                    speed = float(parts[5].strip().replace(',', ''))
-                    speed_note_count = float(parts[6].strip().replace(',', ''))
-                    slider_factor = float(parts[7].strip().replace(',', ''))
-                    aim_strain_count = float(parts[8].strip().replace(',', ''))
-                    speed_strain_count = float(parts[9].strip().replace(',', ''))
+                # Use the same parsing function that the main code uses
+                sr, aim, speed = parse_sr_from_data_line(data_line)
 
-                    print(f"\nParsed values:")
-                    print(f"  Beatmap: {beatmap_name}")
-                    print(f"  Star rating: {sr}")
-                    print(f"  Max combo: {combo}")
-                    print(f"  Aim difficulty: {aim}")
+                beatmap_name = parts[0].strip()
+                combo = float(parts[2].strip().replace(',', ''))
+
+                print(f"\nParsed values (required fields):")
+                print(f"  Beatmap: {beatmap_name}")
+                print(f"  Star rating: {sr}")
+                print(f"  Max combo: {combo}")
+                print(f"  Aim difficulty: {aim}")
+                print(f"  Speed difficulty: {speed}")
+
+                # Optional: display additional fields if they exist
+                if len(parts) >= 10:
+                    def parse_optional_field(index):
+                        val = parts[index].strip().replace(',', '')
+                        return float(val) if val else 0.0
+
+                    aim_slider_count = parse_optional_field(4)
+                    speed_note_count = parse_optional_field(6)
+                    slider_factor = parse_optional_field(7)
+                    aim_strain_count = parse_optional_field(8)
+                    speed_strain_count = parse_optional_field(9)
+
                     print(f"  Aim difficult slider count: {aim_slider_count}")
-                    print(f"  Speed difficulty: {speed}")
                     print(f"  Speed note count: {speed_note_count}")
                     print(f"  Slider factor: {slider_factor}")
                     print(f"  Aim difficult strain count: {aim_strain_count}")
                     print(f"  Speed difficult strain count: {speed_strain_count}")
-                    print(f"\nJSON format (used in srs.json): [{sr}, {aim}, {speed}]")
+
+                print(f"\nJSON format (used in srs.json): [{sr}, {aim}, {speed}]")
             except Exception as e:
                 print(f"Error: {e}")
         exit(0)
@@ -329,14 +338,14 @@ if __name__ == '__main__':
         line_step = 1
 
         # Determine what to do based on arguments
-        if args.full_regen:
+        if args.all:
             # Full regeneration requested
             print(f"Full regeneration of {raw}...")
             print("This will take a while for large beatmap collections...")
             print("Using parallel processing to speed up calculation...")
             get_raw_sr_file_parallel(output_file=raw, mod=mod, workers=args.workers)
-        elif args.new_gen:
-            # Only process new maps
+        else:
+            # Default: Only process new maps
             print(f"Processing new maps not in {raw}...")
 
             # Get existing maps from raw file
@@ -374,12 +383,6 @@ if __name__ == '__main__':
                 print(f"Successfully processed: {len(results)} new beatmaps")
                 if failed:
                     print(f"Failed: {len(failed)} beatmaps")
-        else:
-            # Default: just use existing raw file
-            if not os.path.exists(raw):
-                print(f"Warning: {raw} not found. Skipping {mod.upper()} mod. Use --full-regen to generate it.")
-                continue
-            print(f"Using existing raw file {raw}")
 
         # Convert raw file to JSON
         if not os.path.exists(raw):

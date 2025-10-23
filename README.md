@@ -108,6 +108,7 @@ All commands use the `.` prefix (or `,` in debug mode).
 - **`.sim <beatmap id/link> [filters] [page]`**
   - Find similar maps based on map structure
   - Example: `.sim 123456 ar<9 length>60`
+  - Example: `.sim 123456 artist=AKINO title="blue bird"`
 
 - **`.sr <beatmap id/link> [dt] [page]`**
   - Find similar maps based on star rating
@@ -121,6 +122,7 @@ All commands use the `.` prefix (or `,` in debug mode).
   - Find overweighted maps in a PP range
   - Example: `.pp 200 300 HDDT`
   - Example: `.pp 100 200 -EZ ar>9`
+  - Example: `.pp 100 200 creator=sotarks`
 
 ### Player Commands
 
@@ -154,27 +156,53 @@ All commands use the `.` prefix (or `,` in debug mode).
 - **`.help`**
   - Display command list
 
+- **`.filters`**
+  - View available search filters and operators
+
 - **`.invite`**
   - Get the bot invite link
 
 ### Available Filters
 
 For `.sim` and `.pp` commands, you can filter results using these parameters:
-- `ar`, `od`, `hp`, `cs` - Approach rate, overall difficulty, HP drain, circle size
-- `length` - Map length in seconds
-- `sr`, `star`, `stars` - Star rating
+
+**Difficulty Settings:**
+- `ar` - Approach rate
+- `od` - Overall difficulty
+- `hp` - HP drain rate
+- `cs` - Circle size
+
+**Star Rating:**
+- `sr`, `star`, `stars` - Overall star rating
 - `aim`, `aimsr` - Aim difficulty
 - `tap`, `tapsr` - Tap/speed difficulty
-- `id` - Beatmap ID
-- `max_bpm` - Maximum BPM
 
-**Operators:** `=`, `!=`, `>`, `<`, `>=`, `<=`
+**Map Properties:**
+- `length` - Map length in seconds
+- `bpm`, `max_bpm` - Maximum BPM
+- `id` - Beatmap ID
+
+**Map Metadata (strings):**
+- `artist` - Artist name
+- `creator` - Mapper name
+- `title` - Song title
+- `difficulty`, `diff`, `version` - Difficulty name
+
+**Operators:**
+- Numeric filters: `=`, `==`, `:`, `!=`, `>`, `<`, `>=`, `<=`
+- String filters: `=`, `==`, `:`, `!=` only
 
 **Examples:**
 - `ar<9` - AR less than 9
 - `length>180` - Maps longer than 3 minutes
 - `sr>=6.5` - 6.5+ star rating
-- `ar>9.5 od>10` - Multiple filters
+- `ar==9.5 od>10` - Multiple filters (using == operator)
+- `cs:4` - Circle size equals 4 (using : operator)
+- `artist=AKINO` - Filter by artist name
+- `title="blue bird"` - Filter by song title (use quotes for values with spaces)
+- `creator='pishifat'` - Filter by mapper (single or double quotes work)
+
+**Note:** Use `.filters` command in Discord to see the full list of available filters
 
 ## Project Structure
 

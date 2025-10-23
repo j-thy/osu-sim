@@ -8,8 +8,8 @@ Usage:
     python3 getmaps.py -r            # Short form of --retry-failed
 """
 
+import argparse
 import os
-import sys
 import requests
 from tqdm import tqdm
 
@@ -18,13 +18,25 @@ def get_map(id):
     return r.text
 
 if __name__ == '__main__':
+    # Parse command line arguments
+    parser = argparse.ArgumentParser(
+        description='Download osu! beatmap files from the osu! website',
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+Examples:
+  python3 getmaps.py              # Download all maps from mapids_nodup.txt
+  python3 getmaps.py --retry-failed  # Retry previously failed downloads
+        """
+    )
+    parser.add_argument('--retry-failed', '-r', action='store_true',
+                        help='Retry previously failed downloads')
+
+    args = parser.parse_args()
+
     mapids_file = 'mapids_nodup.txt'
     maps_folder = 'maps'
 
-    # Check for --retry-failed option
-    retry_failed = '--retry-failed' in sys.argv or '-r' in sys.argv
-
-    if retry_failed:
+    if args.retry_failed:
         # Try to download previously failed maps
         if not os.path.exists('failed_map_downloads.txt'):
             print("No failed_map_downloads.txt file found. Nothing to retry.")
