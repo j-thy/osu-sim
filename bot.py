@@ -21,7 +21,8 @@ import tokens
 DEBUG = False
 
 # Configuration constants
-MAX_MAPS_PAGES = 1000  # Number of pages to fetch (10 maps per page = 10,000 maps total)
+RESULTS_PER_PAGE = 10  # Number of results to display per page
+MAX_MAPS_PAGES = 1000  # Number of pages to fetch (RESULTS_PER_PAGE * MAX_MAPS_PAGES = 10,000 maps total)
 
 bot = discord.Bot()
 
@@ -63,7 +64,7 @@ def username_to_id(username):
     return user['id']
 
 async def send_output_pages(ctx, title, elements, page, edit_msg=False):
-    perpage = 10
+    perpage = RESULTS_PER_PAGE
     if (page - 1) * perpage >= len(elements):
         page = 1
 
@@ -103,7 +104,7 @@ async def send_output_pages(ctx, title, elements, page, edit_msg=False):
         await ctx.respond(embed=make_embed(), view=PagesView(timeout=30, disable_on_timeout=True))
 
 async def get_similar_maps(ctx, map_id, page=1, filters=None):
-    perpage = 10
+    perpage = RESULTS_PER_PAGE
     n = MAX_MAPS_PAGES * perpage
 
     print(f'[sim] Starting similarity search for map {map_id} with filters: {filters}')
@@ -131,7 +132,7 @@ async def get_similar_maps(ctx, map_id, page=1, filters=None):
     await send_output_pages(ctx, title, elements, page, edit_msg=True)
 
 async def get_rating_maps(ctx, map_id, page=1, dt=False):
-    perpage = 10
+    perpage = RESULTS_PER_PAGE
     n = MAX_MAPS_PAGES * perpage
 
     print(f'[sr] Starting star rating search for map {map_id}, DT={dt}')
@@ -152,7 +153,7 @@ async def get_rating_maps(ctx, map_id, page=1, dt=False):
     await send_output_pages(ctx, title, elements, page)
 
 async def get_slider_maps(ctx, map_id, page=1):
-    perpage = 10
+    perpage = RESULTS_PER_PAGE
     n = MAX_MAPS_PAGES * perpage
 
     print(f'[slider] Starting slider similarity search for map {map_id}')
@@ -180,7 +181,7 @@ async def get_slider_maps(ctx, map_id, page=1):
     await send_output_pages(ctx, title, elements, page)
 
 async def get_pp_maps(ctx, min_pp=0., max_pp=2e9, mods_include='', mods_exclude='', page=1, filters=None):
-    perpage = 10
+    perpage = RESULTS_PER_PAGE
     n = MAX_MAPS_PAGES * perpage
 
     print(f'[pp] Searching for overweight maps in range {min_pp}-{max_pp}pp, mods include: {mods_include}, exclude: {mods_exclude}, filters: {filters}')
@@ -327,7 +328,7 @@ async def recommend_map(ctx, username, farm=False, filters=None):
 
         # Get similar maps using structure-based similarity
         try:
-            sim = similarity_buckets.get_similar(selected_score['beatmap']['id'], 10000, filters)
+            sim = similarity_buckets.get_similar(selected_score['beatmap']['id'], MAX_MAPS_PAGES * RESULTS_PER_PAGE, filters)
             print(f'[rec] Found {len(sim)} similar maps')
         except Exception as e:
             print(f'[rec] Error finding similar maps: {e}')
