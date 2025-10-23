@@ -22,7 +22,7 @@ DEBUG = False
 
 # Configuration constants
 RESULTS_PER_PAGE = 10  # Number of results to display per page
-MAX_MAPS_PAGES = 1000  # Number of pages to fetch (RESULTS_PER_PAGE * MAX_MAPS_PAGES = 10,000 maps total)
+MAX_MAPS_PAGES = 10000  # Number of pages to fetch (RESULTS_PER_PAGE * MAX_MAPS_PAGES = 100,000 maps total)
 
 bot = discord.Bot()
 
