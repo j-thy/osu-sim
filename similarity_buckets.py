@@ -11,6 +11,11 @@ import getmaps
 import getbuckets
 import getsrs
 
+# Maximum euclidean distance threshold for star rating similarity
+# Lower values = faster but more restrictive SR range
+# Higher values = slower but broader SR range
+MAX_SR_EUCLIDEAN_DISTANCE = 1.0
+
 def manhattan(a, b):
     return sum(abs(a[i] - b[i]) for i in range(len(a)))
 
@@ -140,7 +145,7 @@ def get_similar(id, n=50, filters=None):
             if key not in srs:
                 continue
 
-            if euclidean(srs[key][:2], sr[:2]) <= 0.5:
+            if euclidean(srs[key][:2], sr[:2]) <= MAX_SR_EUCLIDEAN_DISTANCE:
                 raw_sim = get_similarity(bkts, all_buckets[file])
                 # Normalize to percentage (0-100%)
                 percentage = (raw_sim / max_similarity * 100) if max_similarity > 0 else 0

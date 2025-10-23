@@ -20,6 +20,9 @@ import tokens
 # debugging
 DEBUG = False
 
+# Configuration constants
+MAX_MAPS_PAGES = 1000  # Number of pages to fetch (10 maps per page = 10,000 maps total)
+
 bot = discord.Bot()
 
 async def send_error_message(ctx, msg='Invalid input.'):
@@ -101,7 +104,7 @@ async def send_output_pages(ctx, title, elements, page, edit_msg=False):
 
 async def get_similar_maps(ctx, map_id, page=1, filters=None):
     perpage = 10
-    n = 10 * perpage
+    n = MAX_MAPS_PAGES * perpage
 
     print(f'[sim] Starting similarity search for map {map_id} with filters: {filters}')
     color = discord.Color.from_rgb(255, 255, 100)
@@ -129,7 +132,7 @@ async def get_similar_maps(ctx, map_id, page=1, filters=None):
 
 async def get_rating_maps(ctx, map_id, page=1, dt=False):
     perpage = 10
-    n = 10 * perpage
+    n = MAX_MAPS_PAGES * perpage
 
     print(f'[sr] Starting star rating search for map {map_id}, DT={dt}')
     try:
@@ -150,7 +153,7 @@ async def get_rating_maps(ctx, map_id, page=1, dt=False):
 
 async def get_slider_maps(ctx, map_id, page=1):
     perpage = 10
-    n = 10 * perpage
+    n = MAX_MAPS_PAGES * perpage
 
     print(f'[slider] Starting slider similarity search for map {map_id}')
     color = discord.Color.from_rgb(255, 255, 100)
@@ -178,7 +181,7 @@ async def get_slider_maps(ctx, map_id, page=1):
 
 async def get_pp_maps(ctx, min_pp=0., max_pp=2e9, mods_include='', mods_exclude='', page=1, filters=None):
     perpage = 10
-    n = 10 * perpage
+    n = MAX_MAPS_PAGES * perpage
 
     print(f'[pp] Searching for overweight maps in range {min_pp}-{max_pp}pp, mods include: {mods_include}, exclude: {mods_exclude}, filters: {filters}')
     try:
@@ -204,11 +207,11 @@ async def get_pp_maps(ctx, min_pp=0., max_pp=2e9, mods_include='', mods_exclude=
     elements = [f'[{id_to_map(maps[i][0])}](https://osu.ppy.sh/b/{maps[i][0]}){modcombo(i)}' for i in range(len(maps))]
     await send_output_pages(ctx, title, elements, page)
 
-async def recommend_map(ctx, username, farm=False):
+async def recommend_map(ctx, username, farm=False, filters=None):
     if '(' in username:
         username = username[:username.index('(')].strip()
 
-    print(f'[rec] Starting map recommendation for user: {username}, farm mode: {farm}')
+    print(f'[rec] Starting map recommendation for user: {username}, farm mode: {farm}, filters: {filters}')
     api.refresh_token()
 
     counter = 0
@@ -324,7 +327,7 @@ async def recommend_map(ctx, username, farm=False):
 
         # Get similar maps using structure-based similarity
         try:
-            sim = similarity_buckets.get_similar(selected_score['beatmap']['id'], 100)
+            sim = similarity_buckets.get_similar(selected_score['beatmap']['id'], 10000, filters)
             print(f'[rec] Found {len(sim)} similar maps')
         except Exception as e:
             print(f'[rec] Error finding similar maps: {e}')
@@ -934,8 +937,8 @@ async def help(ctx):
     description = f'**{C}s**im `<beatmap id/link>` `[<filters>]` `[<page>]`\nFind similar maps (based on map structure)\n\n' \
                   f'**{C}sr** `<beatmap id/link>` `[dt]` `[<page>]`\nFind similar maps (based on star rating)\n\n' \
                   f'**{C}sl**ider `<beatmap id/link>` `[<page>]`\nFind similar maps (based on sliders)\n\n' \
-                  f'**{C}pp** `<min>-<max>` `[-][<mods>]` `[<page>]`\nFind overweighted maps\n\n' \
-                  f'**{C}r**ec `[<username/id>]` `[farm]`\nRecommend a map based on top plays\n\n' \
+                  f'**{C}pp** `<min>-<max>` `[-][<mods>]` `[<filters>]` `[<page>]`\nFind overweighted maps\n\n' \
+                  f'**{C}r**ec `[<username/id>]` `[farm]` `[<filters>]`\nRecommend a map based on top plays\n\n' \
                   f'**{C}q**uiz `[easy/medium/hard/impossible]` `[first]`\nStart the beatmap quiz\n\n' \
                   f'**{C}f**ilters\nView available search filters\n\n' \
                   f'**{C}i**nvite\nGet this bot\'s invite link\n\n' \
@@ -1092,11 +1095,33 @@ async def pp(ctx,
 @bot.command(description='Recommend a map')
 async def rec(ctx,
               username: discord.Option(str, description='osu! username', required=False),
-              farm: discord.Option(bool, description='use farm mode (star rating + overweight filtering)', default=False, required=False)):
+              farm: discord.Option(bool, description='use farm mode (star rating + overweight filtering)', default=False, required=False),
+              filters: discord.Option(str, description='search filters', required=False)):
     if not username:
         username = ctx.author.display_name
-    print(f'[command:rec] Received request from {ctx.author.name} for user: {username}, farm: {farm}')
-    await recommend_map(ctx, username, farm)
+    print(f'[command:rec] Received request from {ctx.author.name} for user: {username}, farm: {farm}, filters: {filters}')
+
+    # parse input
+    try:
+        # Parse filters using new function that handles quotes
+        filters_list = parse_filters(filters) if filters else []
+
+        # Validate string filter operators
+        for filter_key, operator, value, is_string, is_date in filters_list:
+            if is_string and operator not in string_operators:
+                print(f'[command:rec] Error: Invalid operator {operator} for string filter {filter_key}')
+                formatted_operators = ", ".join(f"`{op}`" for op in string_operators)
+                await send_error_message(ctx, f'Operator `{operator}` not supported for string filter `{filter_key}`. Use one of: {formatted_operators}')
+                return
+
+        await recommend_map(ctx, username, farm, filters_list)
+    except ValueError as e:
+        print(f'[command:rec] Error parsing filters: {e}')
+        await send_error_message(ctx, str(e))
+    except Exception as e:
+        print(f'[command:rec] Unexpected error: {e}')
+        traceback.print_exc()
+        await send_error_message(ctx, 'An error occurred while processing your request.')
 
 @bot.command(description='Get a user\'s farmer rating')
 async def farmer(ctx,
