@@ -250,15 +250,12 @@ sr_keys_list = []
 sr_values_list = []
 sr_sorted_list = []  # For 1D range queries on overall_sr
 
-for key, sr_data in tqdm(srs.items(), desc="Preparing SR index", unit="map"):
+for key, sr_data in srs.items():
     sr_keys_list.append(key)
     sr_values_list.append(sr_data[:2])  # [overall_sr, aim_sr]
     sr_sorted_list.append((sr_data[0], key))  # (overall_sr, key) for range queries
 
-print("Building KD-tree for euclidean distance queries...")
 sr_tree = cKDTree(sr_values_list)
-
-print("Sorting SR list for range queries...")
 sr_sorted_list.sort()  # Sort by overall_sr for efficient bisect operations
 
 print(f"SR spatial index ready with {len(sr_keys_list)} maps.")

@@ -24,6 +24,10 @@ DEBUG = False
 RESULTS_PER_PAGE = 10  # Number of results to display per page
 MAX_MAPS_PAGES = 10000  # Number of pages to fetch (RESULTS_PER_PAGE * MAX_MAPS_PAGES = 100,000 maps total)
 
+# Recommendation weighting powers
+SCORE_SELECTION_WEIGHT_POWER = 1.0  # Power for PP weighting when selecting which score to base recommendation on (1.0 = linear)
+SIMILARITY_SELECTION_WEIGHT_POWER = 2.0  # Power for similarity weighting when selecting final map (2.0 = squared, heavily favors high similarity)
+
 bot = discord.Bot()
 
 async def send_error_message(ctx, msg='Invalid input.'):
@@ -306,8 +310,7 @@ async def recommend_map(ctx, username, farm=False, filters=None):
         print(f'[rec] Using weighted selection from top 100 plays')
 
         # Weighted random selection from top 100 - higher PP = higher probability
-        # Use PP values as weights
-        weights = [score['pp'] for score in scores]
+        weights = [score['pp'] ** SCORE_SELECTION_WEIGHT_POWER for score in scores]
         total_weight = sum(weights)
 
         # Select random score weighted by PP
@@ -367,8 +370,8 @@ async def recommend_map(ctx, username, farm=False, filters=None):
         print(f'[rec] Filtered to {len(filtered_sim)} unplayed similar maps')
 
         # Weighted random selection based on similarity percentage
-        # Higher similarity = higher probability
-        weights = [percentage for _, percentage in filtered_sim]
+        # Higher power = more bias toward high similarity (2.0 = squared, heavily favors top matches)
+        weights = [percentage ** SIMILARITY_SELECTION_WEIGHT_POWER for _, percentage in filtered_sim]
         total_weight = sum(weights)
 
         if total_weight == 0:
@@ -388,7 +391,11 @@ async def recommend_map(ctx, username, farm=False, filters=None):
         map_id = recommended_map[0]
         similarity_pct = recommended_map[1]
 
-        print(f'[rec] Recommending map {map_id} ({similarity_pct:.1f}% similar) for {username}')
+        # Calculate selection probability
+        rank = selected_index + 1  # 1-indexed rank
+        selection_prob = (weights[selected_index] / total_weight * 100) if total_weight > 0 else (100.0 / len(filtered_sim))
+
+        print(f'[rec] Recommending map {map_id} ({similarity_pct:.1f}% similar, rank #{rank}, {selection_prob:.2f}% selection chance) for {username}')
 
         color = discord.Color.from_rgb(100, 255, 100)
         description = f'**{id_to_map(map_id)}**\n{file_to_link(map_id)}'
