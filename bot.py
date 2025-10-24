@@ -118,6 +118,11 @@ async def get_similar_maps(ctx, map_id, page=1, filters=None):
     try:
         sim = similarity_buckets.get_similar(map_id, n, filters)
         print(f'[sim] Found {len(sim)} similar maps for {map_id}')
+    except ValueError as e:
+        # Filter validation error (e.g., SR range too large)
+        print(f'[sim] Filter validation error for {map_id}: {e}')
+        await calc_msg.edit_original_response(embed=get_error_message(str(e)))
+        return
     except Exception as e:
         print(f'[sim] Error finding similar maps for {map_id}: {e}')
         await calc_msg.edit_original_response(embed=get_error_message())
@@ -330,6 +335,11 @@ async def recommend_map(ctx, username, farm=False, filters=None):
         try:
             sim = similarity_buckets.get_similar(selected_score['beatmap']['id'], MAX_MAPS_PAGES * RESULTS_PER_PAGE, filters)
             print(f'[rec] Found {len(sim)} similar maps')
+        except ValueError as e:
+            # Filter validation error (e.g., SR range too large)
+            print(f'[rec] Filter validation error: {e}')
+            await calc_msg.edit_original_response(embed=get_error_message(str(e)))
+            return
         except Exception as e:
             print(f'[rec] Error finding similar maps: {e}')
             await calc_msg.edit_original_response(embed=get_error_message('Error finding similar maps. Please try again later.'))

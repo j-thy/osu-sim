@@ -241,6 +241,84 @@ def parse_date_to_range(date_str):
     return DATE_RANGES.get(date_str, (date_str, date_str))
 
 
+def extract_sr_range(filters):
+    """
+    Extract SR min and max values from a list of already-parsed filters.
+    Expands ranges according to operator semantics.
+
+    Args:
+        filters: List of (key, operator, value, is_string, is_date) tuples
+
+    Returns:
+        Tuple of (sr_min, sr_max) where either can be None if not constrained
+
+    Behavior:
+        - sr>=7: sr_min=7, sr_max=None
+        - sr>7: sr_min=7.01, sr_max=None (strict inequality, osu! SR precision is 0.01)
+        - sr<=7: sr_min=None, sr_max=7
+        - sr<7: sr_min=None, sr_max=6.99 (strict inequality)
+        - sr=7: sr_min=7, sr_max=7.99 (integer expands to [7, 8) range)
+        - sr=7.1: sr_min=7.1, sr_max=7.19 (one decimal expands by 0.1)
+        - sr=7.12: sr_min=7.12, sr_max=7.1299 (two decimals expands by 0.01)
+    """
+    if not filters:
+        return None, None
+
+    # osu! star ratings use 2 decimal place precision max
+    SR_PRECISION = 0.01
+
+    sr_min = None
+    sr_max = None
+
+    for key, operator, value, is_string, is_date in filters:
+        # Only process SR filters (overall star rating)
+        if key in ['sr', 'star', 'stars'] and not is_string and not is_date:
+            if operator == '>':
+                # Strict inequality: treat as >= value + precision
+                adjusted_value = value + SR_PRECISION
+                sr_min = adjusted_value if sr_min is None else max(sr_min, adjusted_value)
+            elif operator == '>=':
+                sr_min = value if sr_min is None else max(sr_min, value)
+            elif operator == '<':
+                # Strict inequality: treat as <= value - precision
+                adjusted_value = value - SR_PRECISION
+                sr_max = adjusted_value if sr_max is None else min(sr_max, adjusted_value)
+            elif operator == '<=':
+                sr_max = value if sr_max is None else min(sr_max, value)
+            elif operator in ['=', '==', ':']:
+                # For exact match, expand to next precision level
+                # e.g., sr=7 becomes [7, 7.99], sr=7.1 becomes [7.1, 7.19], sr=7.12 becomes [7.12, 7.1299]
+
+                # Check if value is a whole number (regardless of how it's stored as float)
+                if value == int(value):
+                    # Whole number: increment by 1.0
+                    increment = 1.0
+                else:
+                    # Has decimal part: count decimal places from string representation
+                    value_str = str(value)
+                    if '.' in value_str:
+                        # Remove trailing zeros for accurate decimal place count
+                        decimal_part = value_str.split('.')[1].rstrip('0')
+                        if decimal_part:
+                            decimal_places = len(decimal_part)
+                            increment = 10 ** (-decimal_places)
+                        else:
+                            # All zeros after decimal (e.g., 7.0) - treat as whole number
+                            increment = 1.0
+                    else:
+                        increment = 1.0
+
+                range_min = value
+                # Subtract a small epsilon to make it an exclusive upper bound [min, max)
+                # Use smaller epsilon than SR_PRECISION to avoid edge cases
+                range_max = value + increment - 0.001
+
+                sr_min = range_min if sr_min is None else max(sr_min, range_min)
+                sr_max = range_max if sr_max is None else min(sr_max, range_max)
+
+    return sr_min, sr_max
+
+
 def apply_filter(stat_value, operator, value, is_string, is_date=False):
     """
     Apply a filter operation to a stat value.

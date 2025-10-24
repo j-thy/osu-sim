@@ -1,12 +1,14 @@
+import bisect
 import json
 import math
 import numpy as np
 import os
 import random
 from tqdm import tqdm
+from scipy.spatial import cKDTree
 
 import calc
-from filters import apply_filter
+from filters import apply_filter, extract_sr_range
 import getmaps
 import getbuckets
 import getsrs
@@ -14,7 +16,12 @@ import getsrs
 # Maximum euclidean distance threshold for star rating similarity
 # Lower values = faster but more restrictive SR range
 # Higher values = slower but broader SR range
-MAX_SR_EUCLIDEAN_DISTANCE = 1.0
+# Based on analysis: euclidean distance 0.7 ≈ SR range of 1.0 star
+MAX_SR_EUCLIDEAN_DISTANCE = 0.7
+
+# Maximum allowed SR filter range (in stars)
+# Users can filter within a maximum range of 1.0 star (e.g., sr>=6, sr<=7)
+MAX_SR_FILTER_RANGE = 1.0
 
 def manhattan(a, b):
     return sum(abs(a[i] - b[i]) for i in range(len(a)))
@@ -120,36 +127,91 @@ def get_similar(id, n=50, filters=None):
             return stats[id][key]
         return None
 
-    for file in all_buckets:
-        if file.startswith(str(id)):
+    # Determine candidate selection method based on SR filters
+    if filters:
+        sr_min, sr_max = extract_sr_range(filters)
+
+        if sr_min is not None or sr_max is not None:
+            # SR filter provided: use SR range query for candidates
+            # Remove SR filters from the list since they're applied via candidate selection
+            filters = [f for f in filters if f[0] not in ['sr', 'star', 'stars']]
+
+            # Calculate final SR range bounds
+            if sr_min is not None and sr_max is not None:
+                # Both bounds provided: validate and use them
+                filter_range = sr_max - sr_min
+                if filter_range > MAX_SR_FILTER_RANGE:
+                    raise ValueError(
+                        f"SR filter range [{sr_min:.2f}, {sr_max:.2f}] is too large "
+                        f"({filter_range:.2f} stars > {MAX_SR_FILTER_RANGE:.2f} star). "
+                        f"Please use a smaller SR range (max {MAX_SR_FILTER_RANGE:.2f} star)."
+                    )
+                if filter_range < 0:
+                    raise ValueError(
+                        f"Invalid SR filter range: minimum ({sr_min:.2f}) is greater than maximum ({sr_max:.2f})."
+                    )
+                final_sr_min = sr_min
+                final_sr_max = sr_max
+
+            elif sr_min is not None:
+                # Only min provided: calculate max using MAX_SR_FILTER_RANGE
+                final_sr_min = sr_min
+                final_sr_max = sr_min + MAX_SR_FILTER_RANGE
+
+            else:  # sr_max is not None
+                # Only max provided: calculate min using MAX_SR_FILTER_RANGE
+                final_sr_max = sr_max
+                final_sr_min = sr_max - MAX_SR_FILTER_RANGE
+
+            # Use binary search to find candidates in SR range
+            # Find left boundary: first map with overall_sr >= final_sr_min
+            left_idx = bisect.bisect_left(sr_sorted_list, (final_sr_min, ''))
+            # Find right boundary: last map with overall_sr <= final_sr_max
+            right_idx = bisect.bisect_right(sr_sorted_list, (final_sr_max, '\uffff'))  # max unicode char
+
+            # Extract candidate keys
+            candidate_files = [key + '.dist' for _, key in sr_sorted_list[left_idx:right_idx]]
+        else:
+            # No SR filter: use euclidean distance
+            indices = sr_tree.query_ball_point(sr[:2], r=MAX_SR_EUCLIDEAN_DISTANCE)
+            candidate_files = [sr_keys_list[idx] + '.dist' for idx in indices]
+    else:
+        # No filters: use euclidean distance
+        indices = sr_tree.query_ball_point(sr[:2], r=MAX_SR_EUCLIDEAN_DISTANCE)
+        candidate_files = [sr_keys_list[idx] + '.dist' for idx in indices]
+
+    for file in candidate_files:
+        if file.startswith(str(id) + '.'):
             continue
 
+        # Check if file exists in all_buckets
+        if file not in all_buckets:
+            continue
+
+        candidate_key = file[:-5]
+
+        # Apply filters (SR filters already removed if used for candidate selection)
         if filters:
             valid = True
             for fil in filters:
                 key, operator, value, is_string, is_date = fil
-                stat_value = get_stat(file[:-5], key)
+                stat_value = get_stat(candidate_key, key)
                 if not apply_filter(stat_value, operator, value, is_string, is_date):
                     valid = False
                     break
             if not valid:
                 continue
 
-        if not sr:
-            raw_sim = get_similarity(bkts, all_buckets[file])
-            # Normalize to percentage (0-100%)
-            percentage = (raw_sim / max_similarity * 100) if max_similarity > 0 else 0
-            similarities.append((file, percentage))
-        else:
-            key = file[:-5]
-            if key not in srs:
-                continue
+        # Calculate similarity
+        raw_sim = get_similarity(bkts, all_buckets[file])
+        percentage = (raw_sim / max_similarity * 100) if max_similarity > 0 else 0
 
-            if euclidean(srs[key][:2], sr[:2]) <= MAX_SR_EUCLIDEAN_DISTANCE:
-                raw_sim = get_similarity(bkts, all_buckets[file])
-                # Normalize to percentage (0-100%)
-                percentage = (raw_sim / max_similarity * 100) if max_similarity > 0 else 0
-                similarities.append((key, percentage, euclidean(srs[key][:2], sr[:2])))
+        if sr:
+            # Cache euclidean distance to avoid recalculating
+            euclidean_dist = euclidean(srs[candidate_key][:2], sr[:2])
+            similarities.append((candidate_key, percentage, euclidean_dist))
+        else:
+            similarities.append((file, percentage))
 
     similarities.sort(key=lambda s: -s[1])
     return similarities[:min(len(similarities), n)]
@@ -181,6 +243,25 @@ metadata = {}
 if os.path.exists('metadata.json'):
     with open('metadata.json') as fin:
         metadata = json.load(fin)
+
+# Build spatial index on SR values for fast nearest-neighbor queries
+print(f"Building SR spatial index from {len(srs)} maps...")
+sr_keys_list = []
+sr_values_list = []
+sr_sorted_list = []  # For 1D range queries on overall_sr
+
+for key, sr_data in tqdm(srs.items(), desc="Preparing SR index", unit="map"):
+    sr_keys_list.append(key)
+    sr_values_list.append(sr_data[:2])  # [overall_sr, aim_sr]
+    sr_sorted_list.append((sr_data[0], key))  # (overall_sr, key) for range queries
+
+print("Building KD-tree for euclidean distance queries...")
+sr_tree = cKDTree(sr_values_list)
+
+print("Sorting SR list for range queries...")
+sr_sorted_list.sort()  # Sort by overall_sr for efficient bisect operations
+
+print(f"SR spatial index ready with {len(sr_keys_list)} maps.")
 
 if __name__ == '__main__':
     import time
