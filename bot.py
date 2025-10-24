@@ -337,7 +337,7 @@ async def recommend_map(ctx, username, farm=False, filters=None):
         # Get similar maps using structure-based similarity
         try:
             sim = similarity_buckets.get_similar(selected_score['beatmap']['id'], MAX_MAPS_PAGES * RESULTS_PER_PAGE, filters)
-            print(f'[rec] Found {len(sim)} similar maps')
+            initial_count = len(sim)
         except ValueError as e:
             # Filter validation error (e.g., SR range too large)
             print(f'[rec] Filter validation error: {e}')
@@ -367,7 +367,7 @@ async def recommend_map(ctx, username, farm=False, filters=None):
             await calc_msg.edit_original_response(embed=get_error_message('All similar maps have already been played.'))
             return
 
-        print(f'[rec] Filtered to {len(filtered_sim)} unplayed similar maps')
+        print(f'[rec] {initial_count} similar maps found, {len(filtered_sim)} remaining after all filters')
 
         # Weighted random selection based on similarity percentage
         # Higher power = more bias toward high similarity (2.0 = squared, heavily favors top matches)
@@ -790,8 +790,7 @@ def parse_filter_value(value_str, filter_key):
         value_str = value_str[1:-1]
 
     # String filters
-    string_filters = ['artist', 'creator', 'title', 'difficulty', 'diff', 'version', 'source', 'status', 'category']
-    # 'tags' - Disabled until metadata.json is complete
+    string_filters = ['artist', 'creator', 'title', 'difficulty', 'diff', 'version', 'source', 'tags', 'status', 'category']
     if filter_key in string_filters:
         # Normalize the string for lookup (using same function as stats.json generation)
         return calc.normalize_for_lookup(value_str), True, False
@@ -941,9 +940,7 @@ C = ',' if DEBUG else '.'
 
 # supported symbols/keywords for search filters
 symbols = ['!=', '>=', '<=', '==', '>', '<', '=', ':']
-supported_filters = ['ar', 'od', 'hp', 'drain', 'dr', 'cs', 'length', 'sr', 'star', 'stars', 'aim', 'aimsr', 'tap', 'tapsr', 'id', 'max_bpm', 'bpm', 'artist', 'creator', 'title', 'difficulty', 'diff', 'version', 'source', 'circles', 'sliders', 'spinners', 'divisor']
-# Disabled until metadata.json is complete:
-# 'tags', 'updated', 'ranked', 'created', 'submitted', 'status', 'category'
+supported_filters = ['ar', 'od', 'hp', 'drain', 'dr', 'cs', 'length', 'sr', 'star', 'stars', 'aim', 'aimsr', 'tap', 'tapsr', 'id', 'max_bpm', 'bpm', 'artist', 'creator', 'title', 'difficulty', 'diff', 'version', 'source', 'circles', 'sliders', 'spinners', 'divisor', 'tags', 'updated', 'ranked', 'created', 'submitted', 'status', 'category']
 
 # Operators that work with string filters
 string_operators = ['=', '==', ':', '!=']
@@ -977,7 +974,9 @@ async def filters(ctx):
                   '**Star Rating:**\n' \
                   '`sr`, `star`, `stars` - Overall star rating\n' \
                   '`aim`, `aimsr` - Aim difficulty\n' \
-                  '`tap`, `tapsr` - Tap/speed difficulty\n\n' \
+                  '`tap`, `tapsr` - Tap/speed difficulty\n' \
+                  '⚠️ SR range limited to 1.0 stars (e.g., `sr>=6 sr<=7`)\n' \
+                  '⚠️ `sr=8` expands to [8.0, 8.99] range automatically\n\n' \
                   '**Map Properties:**\n' \
                   '`length` - Map length (seconds)\n' \
                   '`bpm`, `max_bpm` - Maximum BPM\n' \
@@ -990,17 +989,24 @@ async def filters(ctx):
                   '`creator` - Mapper name\n' \
                   '`title` - Song title\n' \
                   '`difficulty`, `diff`, `version` - Difficulty name\n' \
-                  '`source` - Source media (game/anime/etc.)\n\n' \
+                  '`source` - Source media\n' \
+                  '`tags` - Beatmap tags\n' \
+                  '`status`, `category` - ranked/loved/approved/qualified/pending/graveyard/wip\n\n' \
+                  '**Dates:**\n' \
+                  '`ranked` - Ranking date\n' \
+                  '`updated` - Last update date\n' \
+                  '`created`, `submitted` - Upload date\n' \
+                  '⚠️ Dates auto-expand: `2024` → full year, `2024-06` → full month\n\n' \
                   '**Operators:**\n' \
                   'Numeric: `=` `==` `:` `!=` `<` `>` `<=` `>=`\n' \
-                  'String: `=` `==` `:` `!=` only\n\n' \
+                  'String: `=` `==` `:` `!=` (substring match)\n' \
+                  'Date: All operators work with YYYY, YYYY-MM, or YYYY-MM-DD\n\n' \
                   '**Examples:**\n' \
-                  '`.sim 123456 ar>=9`\n' \
-                  '`.sim 123456 ar>=9 length<200`\n' \
-                  '`.pp 200-300 ar==9.5 cs:4`\n' \
-                  '`.sim 123456 artist=AKINO`\n' \
-                  '`.sim 123456 title="blue bird"`\n' \
-                  "`.sim 123456 creator='pishifat'`"
+                  '`.sim 123456 sr=8` (searches [8.0, 8.99] range)\n' \
+                  '`.sim 123456 sr>=7 sr<=8 bpm>=180`\n' \
+                  '`.sim 123456 tags:anime status=loved`\n' \
+                  '`.sim 123456 ranked>=2024 length<300`\n' \
+                  '`.sim 123456 artist="blue bird"`'
     embed = discord.Embed(title=title, description=description, color=color)
     embed.set_footer(text="Filters are space-separated. Wrap string values with spaces in quotes (single or double). No spaces around operators.")
     await ctx.respond(embed=embed)
