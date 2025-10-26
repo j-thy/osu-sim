@@ -307,8 +307,25 @@ def get_sliders_raw(input):
     except ValueError:
         raise ValueError(f"'[TimingPoints]' section not found. Available sections: {[line for line in lines if line.startswith('[')]}")
     while i < len(lines) and not lines[i].startswith('[') and lines[i].strip():
-        time, beatLength, meter, sampleSet, sampleIndex, volume, uninherited, effects = (float(x) for x in
-                                                                                         lines[i].split(','))
+        fields = lines[i].split(',')
+
+        # Handle old format (2 fields), transitional format (7 fields), and modern format (8 fields)
+        if len(fields) == 2:
+            # Old format (2007-2009): time,beatLength
+            # In old format, all timing points are uninherited (red lines)
+            time, beatLength = float(fields[0]), float(fields[1])
+            uninherited = 1  # Old format only has red lines
+        elif len(fields) == 7:
+            # Transitional format (2010): time,beatLength,meter,sampleSet,sampleIndex,volume,uninherited
+            # Missing the 'effects' field from modern format
+            time, beatLength, meter, sampleSet, sampleIndex, volume, uninherited = (float(x) for x in fields)
+        elif len(fields) >= 8:
+            # Modern format (2011+): time,beatLength,meter,sampleSet,sampleIndex,volume,uninherited,effects
+            time, beatLength, meter, sampleSet, sampleIndex, volume, uninherited, effects = (float(x) for x in fields[:8])
+        else:
+            # Unknown format - skip this line
+            i += 1
+            continue
 
         if uninherited:
             beat_length = beatLength

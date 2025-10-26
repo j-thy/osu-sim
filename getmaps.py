@@ -14,6 +14,13 @@ import requests
 from tqdm import tqdm
 
 def get_map(id):
+    # Check if map exists locally first
+    local_file = f'maps/{id}.osu'
+    if os.path.exists(local_file):
+        with open(local_file, 'r', encoding='utf8') as f:
+            return f.read()
+
+    # Only fetch from web if not available locally
     r = requests.get(f'https://osu.ppy.sh/osu/{id}', timeout=5)
     return r.text
 
