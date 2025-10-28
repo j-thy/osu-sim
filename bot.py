@@ -107,11 +107,12 @@ async def send_output_pages(ctx, title, elements, page, edit_msg=False):
     else:
         await ctx.respond(embed=make_embed(), view=PagesView(timeout=30, disable_on_timeout=True))
 
-async def get_similar_maps(ctx, map_id, page=1, filters=None):
+async def get_similar_maps(ctx, map_id, page=1, filters=None, use_slider=False):
     perpage = RESULTS_PER_PAGE
     n = MAX_MAPS_PAGES * perpage
 
-    print(f'[sim] Starting similarity search for map {map_id} with filters: {filters}')
+    mode = 'slider' if use_slider else 'structure'
+    print(f'[sim] Starting {mode} similarity search for map {map_id} with filters: {filters}')
     color = discord.Color.from_rgb(255, 255, 100)
     description = 'Calculating...'
     footer = 'This should take about 10 seconds.'
@@ -120,7 +121,10 @@ async def get_similar_maps(ctx, map_id, page=1, filters=None):
     calc_msg = await ctx.respond(embed=embed)
 
     try:
-        sim = similarity_buckets.get_similar(map_id, n, filters)
+        if use_slider:
+            sim = similarity_buckets.get_similar_sliders(map_id, n, filters)
+        else:
+            sim = similarity_buckets.get_similar(map_id, n, filters)
         print(f'[sim] Found {len(sim)} similar maps for {map_id}')
     except ValueError as e:
         # Filter validation error (e.g., SR range too large)
@@ -129,6 +133,7 @@ async def get_similar_maps(ctx, map_id, page=1, filters=None):
         return
     except Exception as e:
         print(f'[sim] Error finding similar maps for {map_id}: {e}')
+        traceback.print_exc()
         await calc_msg.edit_original_response(embed=get_error_message())
         return
 
@@ -136,7 +141,12 @@ async def get_similar_maps(ctx, map_id, page=1, filters=None):
         await calc_msg.edit_original_response(embed=get_error_message('Not enough similar maps.'))
         return
 
-    title = f'Maps similar in structure to {map_id}:'
+    # Both structure and slider return (map_id, percentage, euclidean_dist) where higher is better
+    if use_slider:
+        title = f'Maps similar in sliders to {map_id}:'
+    else:
+        title = f'Maps similar in structure to {map_id}:'
+
     elements = [f'**{sim[i][1]:.1f}%** - [{id_to_map(sim[i][0])}]({file_to_link(sim[i][0])})' for i in range(len(sim))]
     await send_output_pages(ctx, title, elements, page, edit_msg=True)
 
@@ -217,11 +227,12 @@ async def get_pp_maps(ctx, min_pp=0., max_pp=2e9, mods_include='', mods_exclude=
     elements = [f'[{id_to_map(maps[i][0])}](https://osu.ppy.sh/b/{maps[i][0]}){modcombo(i)}' for i in range(len(maps))]
     await send_output_pages(ctx, title, elements, page)
 
-async def recommend_map(ctx, username, farm=False, filters=None):
+async def recommend_map(ctx, username, farm=False, filters=None, use_slider=False):
     if '(' in username:
         username = username[:username.index('(')].strip()
 
-    print(f'[rec] Starting map recommendation for user: {username}, farm mode: {farm}, filters: {filters}')
+    mode = 'slider' if use_slider else 'structure'
+    print(f'[rec] Starting map recommendation for user: {username}, farm mode: {farm}, mode: {mode}, filters: {filters}')
     api.refresh_token()
 
     counter = 0
@@ -329,14 +340,17 @@ async def recommend_map(ctx, username, farm=False, filters=None):
         # Show calculating message
         color = discord.Color.from_rgb(255, 255, 100)
         description = 'Calculating...'
-        footer = 'Finding similar maps based on structure...'
+        footer = f'Finding similar maps based on {mode}...'
         embed = discord.Embed(description=description, color=color)
         embed.set_footer(text=footer)
         calc_msg = await ctx.respond(embed=embed)
 
-        # Get similar maps using structure-based similarity
+        # Get similar maps using structure or slider-based similarity
         try:
-            sim = similarity_buckets.get_similar(selected_score['beatmap']['id'], MAX_MAPS_PAGES * RESULTS_PER_PAGE, filters)
+            if use_slider:
+                sim = similarity_buckets.get_similar_sliders(selected_score['beatmap']['id'], MAX_MAPS_PAGES * RESULTS_PER_PAGE, filters)
+            else:
+                sim = similarity_buckets.get_similar(selected_score['beatmap']['id'], MAX_MAPS_PAGES * RESULTS_PER_PAGE, filters)
             initial_count = len(sim)
         except ValueError as e:
             # Filter validation error (e.g., SR range too large)
@@ -355,13 +369,13 @@ async def recommend_map(ctx, username, farm=False, filters=None):
         # Filter out maps user has already played
         score_ids = set(score['beatmap']['id'] for score in scores)
         # sim returns tuples of either (map_id, percentage) or (map_id, percentage, distance)
-        # We only need map_id and percentage
+        # We only need map_id and similarity score
         filtered_sim = []
         for item in sim:
             map_id = item[0]
-            percentage = item[1]
+            similarity_score = item[1]
             if int(map_id) not in score_ids:
-                filtered_sim.append((map_id, percentage))
+                filtered_sim.append((map_id, similarity_score))
 
         if not filtered_sim:
             await calc_msg.edit_original_response(embed=get_error_message('All similar maps have already been played.'))
@@ -370,6 +384,7 @@ async def recommend_map(ctx, username, farm=False, filters=None):
         print(f'[rec] {initial_count} similar maps found, {len(filtered_sim)} remaining after all filters')
 
         # Weighted random selection based on similarity percentage
+        # Both structure and slider now return percentages where higher = more similar
         # Higher power = more bias toward high similarity (2.0 = squared, heavily favors top matches)
         weights = [percentage ** SIMILARITY_SELECTION_WEIGHT_POWER for _, percentage in filtered_sim]
         total_weight = sum(weights)
@@ -1023,9 +1038,10 @@ async def invite(ctx):
 async def sim(ctx,
               beatmap: discord.Option(str, description='beatmap id/link', required=True),
               filters: discord.Option(str, description='search filters', required=False),
+              slider: discord.Option(bool, description='use slider similarity instead of structure', default=False, required=False),
               page: discord.Option(int, description='page', min_value=1, max_value=10, default=1, required=False)):
     # parse input
-    print(f'[command:sim] Received request from {ctx.author.name}: beatmap={beatmap}, filters={filters}, page={page}')
+    print(f'[command:sim] Received request from {ctx.author.name}: beatmap={beatmap}, filters={filters}, slider={slider}, page={page}')
     try:
         if '/' in beatmap:
             beatmap = beatmap[beatmap.strip('/').rindex('/') + 1:]
@@ -1052,7 +1068,7 @@ async def sim(ctx,
         await send_error_message(ctx, 'An error occurred while processing your request.')
         return
 
-    await get_similar_maps(ctx, beatmap, page, filters_list)
+    await get_similar_maps(ctx, beatmap, page, filters_list, use_slider=slider)
 
 @bot.command(description='Find similar maps (based on star rating)')
 async def sr(ctx,
@@ -1070,12 +1086,15 @@ async def sr(ctx,
     except:
         await send_error_message(ctx)
 
-@bot.command(description='Find similar maps (based on slider velocity/length)')
+# DEPRECATED: Use /sim with slider=True instead
+# This command is maintained for backward compatibility only
+@bot.command(description='Find similar maps (based on slider velocity/length) [DEPRECATED: use /sim with slider=True]')
 async def slider(ctx,
                  beatmap: discord.Option(str, description='beatmap id/link', required=True),
                  page: discord.Option(int, description='page', min_value=1, max_value=10, default=1, required=False)):
     # parse input
-    print(f'[command:slider] Received request from {ctx.author.name}: beatmap={beatmap}, page={page}')
+    print(f'[command:slider] [DEPRECATED] Received request from {ctx.author.name}: beatmap={beatmap}, page={page}')
+    print('[command:slider] Note: This command is deprecated. Users should use /sim with slider=True instead.')
     try:
         if '/' in beatmap:
             beatmap = beatmap[beatmap.strip('/').rindex('/') + 1:]
@@ -1120,10 +1139,11 @@ async def pp(ctx,
 async def rec(ctx,
               username: discord.Option(str, description='osu! username', required=False),
               farm: discord.Option(bool, description='use farm mode (star rating + overweight filtering)', default=False, required=False),
+              slider: discord.Option(bool, description='use slider similarity instead of structure', default=False, required=False),
               filters: discord.Option(str, description='search filters', required=False)):
     if not username:
         username = ctx.author.display_name
-    print(f'[command:rec] Received request from {ctx.author.name} for user: {username}, farm: {farm}, filters: {filters}')
+    print(f'[command:rec] Received request from {ctx.author.name} for user: {username}, farm: {farm}, slider: {slider}, filters: {filters}')
 
     # parse input
     try:
@@ -1138,7 +1158,7 @@ async def rec(ctx,
                 await send_error_message(ctx, f'Operator `{operator}` not supported for string filter `{filter_key}`. Use one of: {formatted_operators}')
                 return
 
-        await recommend_map(ctx, username, farm, filters_list)
+        await recommend_map(ctx, username, farm, filters_list, use_slider=slider)
     except ValueError as e:
         print(f'[command:rec] Error parsing filters: {e}')
         await send_error_message(ctx, str(e))

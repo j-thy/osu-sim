@@ -1,10 +1,28 @@
+"""
+DEPRECATED: This module is deprecated and maintained only for backward compatibility.
+
+Slider similarity has been integrated into similarity_buckets.py with improvements:
+- KD-tree spatial indexing for faster SR filtering
+- Support for filters (sr, bpm, ar, cs, tags, etc.)
+- Consistent API with structure similarity
+
+Use similarity_buckets.get_similar_sliders() instead.
+"""
+
 import math
 import os
 import random
+import warnings
 
 import calc
 import getmaps
 import getsrs
+
+warnings.warn(
+    "similarity_sliders is deprecated. Use similarity_buckets.get_similar_sliders() instead.",
+    DeprecationWarning,
+    stacklevel=2
+)
 
 def euclidean(a, b):
     return math.sqrt(sum((a[i] - b[i]) ** 2 for i in range(len(a))))
