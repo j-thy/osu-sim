@@ -10,7 +10,7 @@ Files checked:
 - stats.json fields (hp, cs, od, ar, title, artist, creator, version, source,
                      title_lookup, artist_lookup, creator_lookup, version_lookup, source_lookup,
                      length, max_bpm, circles, sliders, spinners, divisor)
-- metadata.json fields (tags, tags_lookup, submit_date, approved_date, last_update, approved)
+- metadata.json fields (tags, tags_lookup, submit_date, approved_date, last_update, approved, mapper_id, beatmapset_id)
 - srs.json fields (sr, aim, tap)
 - srs_dt.json fields (sr, aim, tap)
 - srs_hr.json fields (sr, aim, tap)
@@ -113,6 +113,7 @@ def check_metadata_fields(beatmap_id: str, metadata_data: dict) -> dict:
         return {
             'tags': False, 'tags_lookup': False,
             'submit_date': False, 'approved_date': False, 'last_update': False, 'approved': False,
+            'mapper_id': False, 'beatmapset_id': False,
         }
 
     data = metadata_data[beatmap_id]
@@ -123,6 +124,8 @@ def check_metadata_fields(beatmap_id: str, metadata_data: dict) -> dict:
         'approved_date': 'approved_date' in data,  # Can be null, so just check existence
         'last_update': 'last_update' in data and data['last_update'] is not None,
         'approved': 'approved' in data and data['approved'] is not None,
+        'mapper_id': 'mapper_id' in data and data['mapper_id'] is not None,
+        'beatmapset_id': 'beatmapset_id' in data and data['beatmapset_id'] is not None,
     }
 
 
@@ -202,7 +205,7 @@ def calculate_summary(audit: dict) -> dict:
     stats_fields = ['hp', 'cs', 'od', 'ar', 'title', 'artist', 'creator', 'version', 'source',
                     'title_lookup', 'artist_lookup', 'creator_lookup', 'version_lookup', 'source_lookup',
                     'length', 'max_bpm', 'circles', 'sliders', 'spinners', 'divisor']
-    metadata_fields = ['tags', 'tags_lookup', 'submit_date', 'approved_date', 'last_update', 'approved']
+    metadata_fields = ['tags', 'tags_lookup', 'submit_date', 'approved_date', 'last_update', 'approved', 'mapper_id', 'beatmapset_id']
     srs_fields = ['sr', 'aim', 'tap']
 
     # Count how many beatmaps have each field

@@ -99,6 +99,8 @@ class BeatmapMetadataFetcher:
                 'approved_date': beatmapset.ranked_date.isoformat() if beatmapset.ranked_date else None,
                 'last_update': beatmapset.last_updated.isoformat() if beatmapset.last_updated else None,
                 'approved': beatmapset.status.value if beatmapset.status else 0,
+                'mapper_id': beatmapset.user_id if beatmapset.user_id else None,
+                'beatmapset_id': beatmapset.id if beatmapset.id else None,
             }
 
             return metadata
@@ -134,13 +136,27 @@ class BeatmapMetadataFetcher:
         metadata = dict(existing_metadata)  # Copy existing
         failed_ids = []
 
+        # Define required fields for metadata
+        required_fields = {'tags', 'tags_lookup', 'submit_date', 'approved_date', 'last_update', 'approved', 'mapper_id', 'beatmapset_id'}
+
         # Filter IDs to fetch
         if fetch_all:
             ids_to_fetch = list(beatmap_ids)
             print(f"\nAll mode: Re-fetching metadata for {len(ids_to_fetch)} beatmaps")
         else:
-            ids_to_fetch = [bid for bid in beatmap_ids if str(bid) not in existing_metadata]
-            print(f"\nFetching metadata for {len(ids_to_fetch)} beatmaps not in metadata.json")
+            # Fetch if beatmap is missing OR if any required field is missing
+            ids_to_fetch = []
+            for bid in beatmap_ids:
+                bid_str = str(bid)
+                if bid_str not in existing_metadata:
+                    ids_to_fetch.append(bid)
+                else:
+                    # Check if any required field is missing
+                    existing_fields = set(existing_metadata[bid_str].keys())
+                    if not required_fields.issubset(existing_fields):
+                        ids_to_fetch.append(bid)
+
+            print(f"\nFetching metadata for {len(ids_to_fetch)} beatmaps with missing fields")
 
         if not ids_to_fetch:
             print("All metadata already up to date!")
@@ -212,6 +228,8 @@ async def test_single_map(beatmap_id: int = 5312654):
             print(f"Approved Date: {metadata['approved_date']}")
             print(f"Last Update:   {metadata['last_update']}")
             print(f"Approved:      {metadata['approved']}")
+            print(f"Mapper ID:     {metadata['mapper_id']}")
+            print(f"Beatmapset ID: {metadata['beatmapset_id']}")
             print("-" * 60)
         else:
             print("\nFailed to fetch metadata for this beatmap")

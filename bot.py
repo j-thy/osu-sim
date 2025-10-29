@@ -1,24 +1,40 @@
 # https://discord.com/api/oauth2/authorize?client_id=829860591405498419&permissions=18432&scope=bot
 
+import argparse
 import asyncio
 import discord
 import json
 import math
+import os
 import random
 import time
 import traceback
 
+# Parse command-line arguments before importing similarity_buckets
+parser = argparse.ArgumentParser(description='osu-sim Discord Bot')
+parser.add_argument('--test', action='store_true', help='Test mode: load only 1000 buckets for faster startup')
+parser.add_argument('--test-limit', type=int, default=1000, metavar='N', help='Number of buckets to load in test mode (default: 1000)')
+args = parser.parse_args()
+
+# Configuration
+DEBUG = False
+TEST_MODE = args.test
+TEST_MODE_LIMIT = args.test_limit if TEST_MODE else None
+
+# Set environment variable for test mode before importing similarity_buckets
+if TEST_MODE:
+    os.environ['OSU_SIM_TEST_LIMIT'] = str(TEST_MODE_LIMIT)
+
+# Now import the similarity modules
 import api
 import calc
 #import estimaterank
 import findppmaps
+import getmaps
 import similarity_buckets
 import similarity_sliders
 import similarity_srs
 import tokens
-
-# debugging
-DEBUG = False
 
 # Configuration constants
 RESULTS_PER_PAGE = 10  # Number of results to display per page
@@ -46,6 +62,143 @@ def id_to_map(id):
 def file_to_link(file):
     id = alphanumeric(file)
     return f'https://osu.ppy.sh/b/{id}' if id else ''
+
+def get_map_info(map_id, map_text):
+    """
+    Get map metadata (artist, title, version) from stats or by parsing map_text.
+
+    Returns:
+        dict with 'artist', 'title', 'version' keys
+    """
+    map_id_str = str(map_id)
+    if map_id_str in stats:
+        return {
+            'artist': stats[map_id_str].get('artist', 'Unknown'),
+            'title': stats[map_id_str].get('title', 'Unknown'),
+            'version': stats[map_id_str].get('version', 'Unknown')
+        }
+    else:
+        # Parse from map_text
+        try:
+            lines = map_text.split('\n')
+            artist = 'Unknown'
+            title = 'Unknown'
+            version = 'Unknown'
+            for line in lines:
+                if line.startswith('Artist:'):
+                    artist = line.split(':', 1)[1].strip()
+                elif line.startswith('Title:'):
+                    title = line.split(':', 1)[1].strip()
+                elif line.startswith('Version:'):
+                    version = line.split(':', 1)[1].strip()
+            return {'artist': artist, 'title': title, 'version': version}
+        except:
+            return {'artist': 'Unknown', 'title': 'Unknown', 'version': 'Unknown'}
+
+def create_map_embed(map_id, similarity_pct=None, mode=None, rank=None, total_maps=None, username=None, source_beatmap_id=None, source_map_info=None):
+    """
+    Create a rich embed with detailed map information.
+
+    Args:
+        map_id: Beatmap ID
+        similarity_pct: Similarity percentage (optional)
+        mode: 'slider' or 'structure' (optional, affects color and label)
+        rank: Rank of this map in results (optional)
+        total_maps: Total number of candidate maps (optional)
+        username: Username for footer (optional)
+        source_beatmap_id: ID of the source beatmap (for similarity footer) (optional)
+        source_map_info: Dict with 'artist', 'title', 'version' for source map (optional, avoids refetch)
+
+    Returns:
+        discord.Embed object with map details
+    """
+    map_id_str = str(map_id)
+    map_data = stats.get(map_id_str, {})
+
+    # Get star rating
+    sr_data = similarity_buckets.srs.get(map_id_str)
+
+    # Title and URL
+    title = f"{map_data.get('artist', 'Unknown')} - {map_data.get('title', 'Unknown')}"
+    url = f'https://osu.ppy.sh/b/{map_id}'
+
+    # Color based on mode
+    color = discord.Color.from_rgb(255, 182, 193) if mode == 'slider' else discord.Color.from_rgb(135, 206, 250)
+    embed = discord.Embed(title=title, url=url, color=color)
+
+    # Difficulty name with star rating in the header
+    version = map_data.get('version', 'Unknown')
+    sr_text = f" [{sr_data[0]:.2f}★]" if sr_data else ""
+
+    # Get all values
+    cs = map_data.get('cs', 0)
+    ar = map_data.get('ar', 0)
+    od = map_data.get('od', 0)
+    hp = map_data.get('hp', 0)
+    circles = map_data.get('circles', 0)
+    sliders = map_data.get('sliders', 0)
+    spinners = map_data.get('spinners', 0)
+    total_objects = circles + sliders + spinners
+    length = map_data.get('length', 0)
+    length_min = length // 60
+    length_sec = length % 60
+    bpm = map_data.get('max_bpm', 'N/A')
+
+    # Format: Difficulty name in header, stats in value
+    #         Length, BPM, Objects on first line
+    #         CS, AR, OD, HP on second line
+    #         Circles, Sliders, Spinners on third line
+    stats_value = (
+        f"Length: `{length_min}:{length_sec:02d}` BPM: `{bpm}` Objects: `{total_objects}`\n"
+        f"CS: `{cs}` AR: `{ar}` OD: `{od}` HP: `{hp}`\n"
+        f"Circles: `{circles}` Sliders: `{sliders}` Spinners: `{spinners}`"
+    )
+    embed.add_field(name=f"🎯 {version}{sr_text}", value=stats_value, inline=False)
+
+    # Get metadata for mapper_id and beatmapset_id
+    map_metadata = similarity_buckets.metadata.get(map_id_str, {})
+    beatmapset_id = map_metadata.get('beatmapset_id')
+    mapper_id = map_metadata.get('mapper_id')
+
+    # Beatmap cover image (top right thumbnail) - use default if beatmapset_id not available
+    if beatmapset_id:
+        embed.set_thumbnail(url=f"https://assets.ppy.sh/beatmaps/{beatmapset_id}/covers/list.jpg")
+    else:
+        embed.set_thumbnail(url="https://osu.ppy.sh/images/layout/avatar-guest.png")  # default fallback
+
+    # Author (mapper) with profile picture - use default if mapper_id not available
+    creator = map_data.get('creator', 'Unknown')
+    if mapper_id:
+        embed.set_author(
+            name=f"Mapped by {creator}",
+            icon_url=f"https://a.ppy.sh/{mapper_id}",  # osu! avatar URL by user ID
+            url=f"https://osu.ppy.sh/users/{mapper_id}"
+        )
+    else:
+        embed.set_author(
+            name=f"Mapped by {creator}",
+            icon_url="https://osu.ppy.sh/images/layout/avatar-guest.png",  # default avatar
+            url=f"https://osu.ppy.sh/users/{creator}"  # fallback to username in URL
+        )
+
+    # Footer
+    footer_parts = []
+
+    # Add source map information if provided (only show similarity percentage and source map)
+    if source_beatmap_id and similarity_pct is not None:
+        if source_map_info:
+            # Use pre-fetched source map info
+            source_artist = source_map_info.get('artist', 'Unknown')
+            source_title = source_map_info.get('title', 'Unknown')
+            source_version = source_map_info.get('version', 'Unknown')
+            footer_parts.append(f'{similarity_pct:.1f}% similar to {source_artist} - {source_title} [{source_version}]')
+        else:
+            # Fallback: use beatmap ID only
+            footer_parts.append(f'{similarity_pct:.1f}% similar to beatmap {source_beatmap_id}')
+    if footer_parts:
+        embed.set_footer(text=' | '.join(footer_parts))
+
+    return embed
 
 def username_to_id(username):
     if '(' in username:
@@ -75,7 +228,7 @@ async def send_output_pages(ctx, title, elements, page, edit_msg=False):
     color = discord.Color.from_rgb(100, 255, 100)
 
     def make_embed():
-        description = '\n'.join(f'**{i+1})** {elements[i]}' for i in range((page - 1) * perpage, min(page * perpage, len(elements))))
+        description = '\n'.join(elements[i] for i in range((page - 1) * perpage, min(page * perpage, len(elements))))
         embed = discord.Embed(title=title, color=color, description=description)
         embed.set_footer(text=f'Page {page} of {(len(elements) - 1) // perpage + 1}')
         return embed
@@ -113,6 +266,10 @@ async def get_similar_maps(ctx, map_id, page=1, filters=None, use_slider=False):
 
     mode = 'slider' if use_slider else 'structure'
     print(f'[sim] Starting {mode} similarity search for map {map_id} with filters: {filters}')
+
+    # Fetch map text once
+    map_text = getmaps.get_map(map_id)
+
     color = discord.Color.from_rgb(255, 255, 100)
     description = 'Calculating...'
     footer = 'This should take about 10 seconds.'
@@ -122,9 +279,9 @@ async def get_similar_maps(ctx, map_id, page=1, filters=None, use_slider=False):
 
     try:
         if use_slider:
-            sim = similarity_buckets.get_similar_sliders(map_id, n, filters)
+            sim = similarity_buckets.get_similar_sliders(map_id, map_text, n, filters)
         else:
-            sim = similarity_buckets.get_similar(map_id, n, filters)
+            sim = similarity_buckets.get_similar(map_id, map_text, n, filters)
         print(f'[sim] Found {len(sim)} similar maps for {map_id}')
     except ValueError as e:
         # Filter validation error (e.g., SR range too large)
@@ -141,13 +298,27 @@ async def get_similar_maps(ctx, map_id, page=1, filters=None, use_slider=False):
         await calc_msg.edit_original_response(embed=get_error_message('Not enough similar maps.'))
         return
 
-    # Both structure and slider return (map_id, percentage, euclidean_dist) where higher is better
-    if use_slider:
-        title = f'Maps similar in sliders to {map_id}:'
-    else:
-        title = f'Maps similar in structure to {map_id}:'
+    # Get source map info for title
+    source_info = get_map_info(map_id, map_text)
+    sr_data = similarity_buckets.srs.get(str(map_id))
+    sr_text = f" [{sr_data[0]:.2f}★]" if sr_data else ""
+    title = f'Maps similar to {source_info["artist"]} - {source_info["title"]} [{source_info["version"]}]{sr_text}'
 
-    elements = [f'**{sim[i][1]:.1f}%** - [{id_to_map(sim[i][0])}]({file_to_link(sim[i][0])})' for i in range(len(sim))]
+    # Format elements: `XX.X%` [artist - title [diff]] [SR★]
+    elements = []
+    for i in range(len(sim)):
+        result_map_id = sim[i][0]
+        similarity = sim[i][1]
+        map_str = id_to_map(result_map_id)
+        link = file_to_link(result_map_id)
+
+        # Get star rating for this map
+        sr_data = similarity_buckets.srs.get(str(result_map_id))
+        sr_text = f" [{sr_data[0]:.2f}★]" if sr_data else ""
+
+        # Format: `XX.X%` [map_name](link) [SR★]
+        elements.append(f'`{similarity:.1f}%` [{map_str}]({link}){sr_text}')
+
     await send_output_pages(ctx, title, elements, page, edit_msg=True)
 
 async def get_rating_maps(ctx, map_id, page=1, dt=False):
@@ -335,7 +506,14 @@ async def recommend_map(ctx, username, farm=False, filters=None, use_slider=Fals
                 break
 
         selected_score = scores[score_index]
-        print(f'[rec] Selected score #{score_index + 1} (beatmap {selected_score["beatmap"]["id"]}, {selected_score["pp"]:.2f}pp)')
+        source_beatmap_id = selected_score["beatmap"]["id"]
+        print(f'[rec] Selected score #{score_index + 1} (beatmap {source_beatmap_id}, {selected_score["pp"]:.2f}pp)')
+
+        # Fetch source map once (used for both metadata and similarity calculation)
+        source_map_text = getmaps.get_map(source_beatmap_id)
+
+        # Parse metadata from the fetched map text
+        source_map_info = get_map_info(source_beatmap_id, source_map_text)
 
         # Show calculating message
         color = discord.Color.from_rgb(255, 255, 100)
@@ -346,11 +524,12 @@ async def recommend_map(ctx, username, farm=False, filters=None, use_slider=Fals
         calc_msg = await ctx.respond(embed=embed)
 
         # Get similar maps using structure or slider-based similarity
+        # Pass the fetched map text
         try:
             if use_slider:
-                sim = similarity_buckets.get_similar_sliders(selected_score['beatmap']['id'], MAX_MAPS_PAGES * RESULTS_PER_PAGE, filters)
+                sim = similarity_buckets.get_similar_sliders(source_beatmap_id, source_map_text, MAX_MAPS_PAGES * RESULTS_PER_PAGE, filters)
             else:
-                sim = similarity_buckets.get_similar(selected_score['beatmap']['id'], MAX_MAPS_PAGES * RESULTS_PER_PAGE, filters)
+                sim = similarity_buckets.get_similar(source_beatmap_id, source_map_text, MAX_MAPS_PAGES * RESULTS_PER_PAGE, filters)
             initial_count = len(sim)
         except ValueError as e:
             # Filter validation error (e.g., SR range too large)
@@ -412,10 +591,19 @@ async def recommend_map(ctx, username, farm=False, filters=None, use_slider=Fals
 
         print(f'[rec] Recommending map {map_id} ({similarity_pct:.1f}% similar, rank #{rank}, {selection_prob:.2f}% selection chance) for {username}')
 
-        color = discord.Color.from_rgb(100, 255, 100)
-        description = f'**{id_to_map(map_id)}**\n{file_to_link(map_id)}'
-        embed = discord.Embed(description=description, color=color)
-        embed.set_footer(text=f'Recommended map for {user["username"]} | {similarity_pct:.1f}% similar')
+        # Create rich embed with map details
+        mode = 'slider' if use_slider else 'structure'
+        embed = create_map_embed(
+            map_id=map_id,
+            similarity_pct=similarity_pct,
+            mode=mode,
+            rank=rank,
+            total_maps=len(filtered_sim),
+            username=user["username"],
+            source_beatmap_id=source_beatmap_id,
+            source_map_info=source_map_info
+        )
+
         await calc_msg.edit_original_response(embed=embed)
 
 async def get_farmer_rating(ctx, username):
@@ -928,8 +1116,10 @@ def get_mapsets(filename='setids_country.txt'):
 
 map_freq_country = get_map_freq('mapfreq_country.txt')
 
+print("Loading stats.json...")
 with open('stats.json', 'r') as f:
     stats = json.load(f)
+print(f"Loaded {len(stats)} beatmap stats.")
 
 # get mapsets for beatmap quiz
 mapsets = get_mapsets()

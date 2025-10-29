@@ -76,8 +76,7 @@ def get_slider_similarity(s1, s2):
 
     return similarity
 
-def get_similar(id, n=50, filters=None):
-    text = getmaps.get_map(id)
+def get_similar(id, text, n=50, filters=None):
     dist = calc.get_distribution_raw(text)
     bkts = getbuckets.get_buckets_raw(dist)
 
@@ -238,19 +237,19 @@ def get_similar(id, n=50, filters=None):
     similarities.sort(key=lambda s: -s[1])
     return similarities[:min(len(similarities), n)]
 
-def get_similar_sliders(id, n=50, filters=None):
+def get_similar_sliders(id, text, n=50, filters=None):
     """
     Find maps with similar slider characteristics.
 
     Args:
         id: Map ID to find similar maps for
+        text: .osu file content
         n: Number of results to return
         filters: Optional list of filters (same format as get_similar)
 
     Returns:
         List of (map_id, similarity_score, euclidean_dist) tuples, sorted by similarity
     """
-    text = getmaps.get_map(id)
     sldr = calc.get_sliders_raw(text)
 
     key = str(id)
@@ -415,7 +414,16 @@ def get_similar_sliders(id, n=50, filters=None):
     similarities.sort(key=lambda s: -s[1])
     return similarities[:min(len(similarities), n)]
 
-def get_all_buckets():
+def get_all_buckets(limit=None):
+    """
+    Load bucket files from the buckets directory.
+
+    Args:
+        limit: Optional limit on number of buckets to load (for testing)
+
+    Returns:
+        Dictionary of buckets
+    """
     buckets = {}
 
     bkts_dir = 'buckets'
@@ -423,7 +431,12 @@ def get_all_buckets():
     # First, collect all bucket files to know the total count
     bucket_files = [entry for entry in os.scandir(bkts_dir) if entry.is_file()]
 
-    print(f"Loading {len(bucket_files)} bucket files...")
+    # Apply limit if specified (for test mode)
+    if limit is not None:
+        bucket_files = bucket_files[:limit]
+        print(f"TEST MODE: Loading only {len(bucket_files)} bucket files...")
+    else:
+        print(f"Loading {len(bucket_files)} bucket files...")
 
     # Process all files with progress bar
     for entry in tqdm(bucket_files, desc="Loading similarity buckets", unit="file"):
@@ -432,7 +445,10 @@ def get_all_buckets():
 
     return buckets
 
-all_buckets = get_all_buckets()
+# Check if test mode is enabled (via environment variable or module attribute)
+_test_mode_limit = os.environ.get('OSU_SIM_TEST_LIMIT')
+_test_limit = int(_test_mode_limit) if _test_mode_limit else None
+all_buckets = get_all_buckets(limit=_test_limit)
 srs = getsrs.get_srs()
 with open('stats.json') as fin:
     stats = json.load(fin)
